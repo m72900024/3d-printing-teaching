@@ -58,6 +58,16 @@ function renderCards(cards) {
   return `<div class="concept-grid">${cards.map(card => `<article class="concept-card"><span class="concept-icon">${renderIcon(card.icon)}</span><h3>${card.title}</h3><p>${card.text}</p></article>`).join("")}</div>`;
 }
 
+function renderDetails(details) {
+  if (!details) return "";
+  return `<div class="detail-grid">${details.map((detail, index) => `<article class="detail-card"><div><span>${String(index + 1).padStart(2,"0")}</span><small>${detail.label}</small></div><h3>${detail.title}</h3><p>${detail.text}</p></article>`).join("")}</div>`;
+}
+
+function renderSources(sources) {
+  if (!sources) return "";
+  return `<aside class="lesson-sources"><strong>延伸資料</strong><div>${sources.map(source => `<a href="${source.url}" target="_blank" rel="noopener noreferrer">${source.label} →</a>`).join("")}</div></aside>`;
+}
+
 function renderSteps(steps) {
   if (!steps) return "";
   return `<ol class="process-steps">${steps.map((step, index) => `<li><span>${index + 1}</span>${step}</li>`).join("")}</ol>`;
@@ -114,10 +124,12 @@ content.innerHTML = renderLessonVisual(course.lessonVisual) + course.sections.ma
       ${renderSteps(section.steps)}
       ${renderLayerAnimation(section.animation)}
       ${renderCards(section.cards)}
+      ${renderDetails(section.details)}
       ${renderExamples(section.examples)}
       ${section.points ? `<ul class="lesson-points">${section.points.map(point => `<li>${point}</li>`).join("")}</ul>` : ""}
       ${section.compare ? `<div class="compare-table" role="table">${section.compareHeaders ? `<div class="compare-row compare-head" role="row">${section.compareHeaders.map(cell => `<span role="columnheader">${cell}</span>`).join("")}</div>` : ""}${section.compare.map(row => `<div class="compare-row" role="row">${row.map((cell, cellIndex) => `<span role="${cellIndex === 0 ? "rowheader" : "cell"}">${cell}</span>`).join("")}</div>`).join("")}</div>` : ""}
       ${section.callout ? `<aside class="lesson-callout"><span>!</span><p>${section.callout}</p></aside>` : ""}
+      ${renderSources(section.sources)}
     </div>
   </section>`).join("") + renderRealCase(course.realCase);
 
