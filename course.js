@@ -12,6 +12,40 @@ document.querySelector("#courseSubtitle").textContent = course.subtitle;
 document.querySelector("#courseLead").textContent = course.lead;
 document.querySelector("#courseGoals").innerHTML = course.goals.map(goal => `<li>${goal}</li>`).join("");
 
+const iconPaths = {
+  layers:'<path d="M4 8l8-4 8 4-8 4-8-4Zm0 4 8 4 8-4M4 16l8 4 8-4"/>',
+  cube:'<path d="m4 7 8-4 8 4v10l-8 4-8-4V7Zm0 0 8 4 8-4m-8 4v10"/>',
+  spark:'<path d="m12 3 1.4 4.1L17 9l-3.6 1.9L12 15l-1.4-4.1L7 9l3.6-1.9L12 3Zm6 11 .8 2.2L21 17l-2.2.8L18 20l-.8-2.2L15 17l2.2-.8L18 14Z"/>',
+  eye:'<path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.7"/>',
+  ruler:'<path d="M4 17 17 4l3 3L7 20l-3-3Zm8-8 3 3m-6 0 2 2m4-8 3 3"/>',
+  strength:'<path d="M7 8h10v8H7zM3 12h4m10 0h4M4 9v6m16-6v6"/>',
+  check:'<path d="m5 12 4 4L19 6"/>',
+  question:'<circle cx="12" cy="12" r="9"/><path d="M9.8 9a2.4 2.4 0 1 1 3.1 2.3c-.9.4-.9 1.1-.9 1.7m0 3h.01"/>',
+  repeat:'<path d="M17 3l3 3-3 3M4 10V8a2 2 0 0 1 2-2h14M7 21l-3-3 3-3m13-1v2a2 2 0 0 1-2 2H4"/>'
+};
+
+function renderIcon(name) {
+  return `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${iconPaths[name] || iconPaths.cube}</svg>`;
+}
+
+function renderCards(cards) {
+  if (!cards) return "";
+  return `<div class="concept-grid">${cards.map(card => `<article class="concept-card"><span class="concept-icon">${renderIcon(card.icon)}</span><h3>${card.title}</h3><p>${card.text}</p></article>`).join("")}</div>`;
+}
+
+function renderSteps(steps) {
+  if (!steps) return "";
+  return `<ol class="process-steps">${steps.map((step, index) => `<li><span>${index + 1}</span>${step}</li>`).join("")}</ol>`;
+}
+
+function renderLayerAnimation(type) {
+  if (type !== "layers") return "";
+  return `<div class="layer-lab" role="img" aria-label="噴嘴左右移動並逐層堆疊物件的動畫">
+    <div class="lab-caption"><strong>逐層堆疊動畫</strong><span>噴嘴畫完一層，再往上移動</span></div>
+    <div class="animated-printer"><div class="animated-head"><i></i></div><div class="animated-object">${Array.from({length:8}, (_, index) => `<i style="--layer:${index}"></i>`).join("")}</div><div class="animated-bed"></div></div>
+  </div>`;
+}
+
 const content = document.querySelector("#courseContent");
 content.innerHTML = course.sections.map((section, index) => `
   <section class="lesson-section reveal">
@@ -19,10 +53,42 @@ content.innerHTML = course.sections.map((section, index) => `
     <div>
       <h2>${section.title}</h2>
       <p>${section.body}</p>
+      ${section.image ? `<figure class="lesson-figure"><img src="${section.image}" alt="${section.imageAlt || ""}" loading="lazy"><figcaption>線材經過加熱、擠出與逐層堆疊，最後成為實體作品。</figcaption></figure>` : ""}
+      ${renderSteps(section.steps)}
+      ${renderLayerAnimation(section.animation)}
+      ${renderCards(section.cards)}
       ${section.points ? `<ul class="lesson-points">${section.points.map(point => `<li>${point}</li>`).join("")}</ul>` : ""}
-      ${section.compare ? `<div class="compare-table" role="table">${section.compare.map((row, rowIndex) => `<div class="compare-row" role="row">${row.map((cell, cellIndex) => `<span role="${cellIndex === 0 ? "rowheader" : "cell"}">${cell}</span>`).join("")}</div>`).join("")}</div>` : ""}
+      ${section.compare ? `<div class="compare-table" role="table">${section.compareHeaders ? `<div class="compare-row compare-head" role="row">${section.compareHeaders.map(cell => `<span role="columnheader">${cell}</span>`).join("")}</div>` : ""}${section.compare.map(row => `<div class="compare-row" role="row">${row.map((cell, cellIndex) => `<span role="${cellIndex === 0 ? "rowheader" : "cell"}">${cell}</span>`).join("")}</div>`).join("")}</div>` : ""}
+      ${section.callout ? `<aside class="lesson-callout"><span>!</span><p>${section.callout}</p></aside>` : ""}
     </div>
   </section>`).join("");
+
+if (course.quiz) {
+  const quiz = document.createElement("section");
+  quiz.className = "quiz-section reveal";
+  quiz.innerHTML = `<p class="quiz-eyebrow">QUICK CHECK</p><h2>三題快速檢查</h2><p class="quiz-intro">選出答案，馬上看看自己是否掌握重點。</p><div class="quiz-list">${course.quiz.map((item, questionIndex) => `<article class="quiz-card" data-question="${questionIndex}"><p><span>${questionIndex + 1}</span>${item.question}</p><div class="quiz-options">${item.options.map((option, optionIndex) => `<button type="button" data-option="${optionIndex}">${option}</button>`).join("")}</div><div class="quiz-feedback" aria-live="polite"></div></article>`).join("")}</div><p class="quiz-score" id="quizScore">已答對 0 / ${course.quiz.length} 題</p>`;
+  document.querySelector(".task-card").before(quiz);
+
+  const correctAnswers = new Set();
+  quiz.querySelectorAll(".quiz-card").forEach(card => card.addEventListener("click", event => {
+    const button = event.target.closest("button[data-option]");
+    if (!button) return;
+    const questionIndex = Number(card.dataset.question);
+    const optionIndex = Number(button.dataset.option);
+    const item = course.quiz[questionIndex];
+    card.querySelectorAll("button").forEach(option => option.classList.remove("correct", "incorrect"));
+    if (optionIndex === item.answer) {
+      button.classList.add("correct");
+      correctAnswers.add(questionIndex);
+      card.querySelector(".quiz-feedback").textContent = item.explanation;
+    } else {
+      button.classList.add("incorrect");
+      correctAnswers.delete(questionIndex);
+      card.querySelector(".quiz-feedback").textContent = "再想想看：回到上方的圖解找線索。";
+    }
+    quiz.querySelector("#quizScore").textContent = `已答對 ${correctAnswers.size} / ${course.quiz.length} 題`;
+  }));
+}
 
 document.querySelector("#taskTitle").textContent = course.task.title;
 document.querySelector("#taskText").textContent = course.task.text;
