@@ -1,6 +1,6 @@
 window.COURSES = [
   {
-    id:"01", slug:"01-introduction.html", stage:"第一次成功", stageNo:"01", duration:"12 分鐘", type:"觀念＋互動",
+    id:"01", slug:"01-introduction.html", stage:"第一次成功", stageNo:"01", duration:"15 分鐘＋延伸影片", type:"觀念＋互動",
     title:"認識 3D 列印", subtitle:"先看懂「一層一層」是怎麼回事。",
     lead:"3D 列印不是把物體一次變出來，而是把數位模型切成許多薄層，再由下而上一層層堆疊。這一課會用圖解、動畫和小測驗，帶你建立完整的第一印象。",
     goals:["說出加法製造的基本概念","描述線材從捲盤到成品的旅程","辨認 FDM 與光固化的主要差異","判斷哪些物品適合使用 3D 列印製作"],
@@ -23,8 +23,14 @@ window.COURSES = [
         {icon:"question",title:"先評估",text:"接觸食物、高溫受力、攸關人身安全或長期戶外使用。"},
         {icon:"repeat",title:"未必划算",text:"需要數萬件完全相同、形狀簡單的商品。"}
       ]},
-      {title:"生活中的 3D 列印",body:"3D 列印不只用來做玩具。工程師用它驗證設計，教師製作立體教材，醫療人員製作解剖模型，創作者也能把想法快速做成可以測試的實體。",points:["教育：地形、分子、機械結構等立體教具","工程：外殼、治具、尺寸與組裝驗證","生活：掛鉤、收納、轉接與停產零件替代品","創作：模型、道具、燈具與互動裝置"]}
+      {title:"生活中的 3D 列印",body:"3D 列印不只用來做玩具。工程師用它驗證設計，教師製作立體教材，醫療人員製作解剖模型，創作者也能把想法快速做成可以測試的實體。",points:["教育：地形、分子、機械結構等立體教具","工程：外殼、治具、尺寸與組裝驗證","生活：掛鉤、收納、轉接與停產零件替代品","創作：模型、道具、燈具與互動裝置"]},
+      {title:"真實世界案例",body:"下面三個案例都不是「為了列印而列印」，而是利用少量、客製、快速傳送與複雜形狀等優勢，解決傳統方法不方便處理的問題。",examples:[
+        {label:"太空任務",icon:"rocket",title:"NASA 把扳手「寄」到太空",body:"2014 年，NASA 將棘輪扳手的設計檔從地面傳到國際太空站。太空站的 3D 印表機用 104 層塑膠、約 4 小時完成工具。",why:"為什麼適合：太空補給可能要等數月；傳送檔案比運送每一種備用工具更快。",source:"https://www.nasa.gov/missions/station/space-station-3-d-printer-builds-ratchet-wrench-to-complete-first-phase-of-operations/",sourceLabel:"NASA 原始案例"},
+        {label:"醫療與科學",icon:"medical",title:"把解剖與分子資料變成模型",body:"NIH 3D 提供超過一萬件生物醫學 3D 資產，涵蓋分子、細胞、解剖構造、義肢與實驗設備，能用於列印及互動視覺化。",why:"為什麼適合：抽象或看不見的結構，做成立體模型後更容易觀察、比較與教學。",source:"https://3d.nih.gov/about",sourceLabel:"NIH 3D 官方介紹"},
+        {label:"博物館教育",icon:"museum",title:"把珍貴文物帶進教室",body:"Smithsonian 的 3D 教育工具讓學生旋轉、放大並操作遠方、稀有或脆弱藏品的數位模型，也能觀察細胞或細菌等尺度很小的物件。",why:"為什麼適合：模型能縮放、複製與分享，學生不必直接碰觸真正文物。",source:"https://3d.si.edu/educator-tools",sourceLabel:"Smithsonian 教育資源"}
+      ]}
     ],
+    video:{youtubeId:"f94CnlQ0eq4",title:"How does a 3D Printer work? (A1 by Bambu Lab)",channel:"Jared Owen",description:"用剖面動畫拆解 Bambu Lab A1，清楚呈現線材路徑、擠出機、熱端、噴嘴、平台與逐層成形。YouTube 可在設定中切換可用的語音軌與字幕。",watchUrl:"https://www.youtube.com/watch?v=f94CnlQ0eq4"},
     quiz:[
       {question:"3D 列印為什麼稱為加法製造？",options:["因為會把材料逐層加上去","因為列印速度會一直增加","因為一定要加入兩種材料"],answer:0,explanation:"正確！它從底部開始，只在需要的位置逐層增加材料。"},
       {question:"FDM 印表機的噴嘴主要做什麼？",options:["掃描物件顏色","熔化並擠出線材","讓模型檔案變小"],answer:1,explanation:"答對了！熱端加熱線材，再由噴嘴擠出細細的材料。"},
