@@ -75,3 +75,21 @@
 .manga-figure figcaption{display:flex;align-items:center;gap:12px;padding:13px 16px;border-top:3px solid #111814;color:#3f493f;font-size:12px;font-weight:750;line-height:1.5}
 .manga-figure figcaption span{flex:0 0 auto;padding:5px 8px;background:#111814;color:#cdf45d;font:950 9px/1 monospace;letter-spacing:.08em}
 @media(max-width:600px){.manga-figure{border-width:2px;border-radius:14px;box-shadow:6px 7px 0 #cde95f}.manga-figure figcaption{align-items:flex-start;border-top-width:2px;flex-direction:column;gap:8px}}
+
+/* Traditional manufacturing tradeoffs */
+.tradeoff-block{margin-top:48px;padding-top:42px;border-top:2px dashed #c8cec4}
+.tradeoff-heading>small{display:block;margin-bottom:8px;color:#2a8f47;font:950 10px/1 monospace;letter-spacing:.13em}
+.tradeoff-heading h3{max-width:680px;margin:0 0 12px;font-size:clamp(25px,3vw,34px);line-height:1.2}
+.tradeoff-heading p{max-width:760px!important;font-size:15px!important}
+.tradeoff-manga{margin-top:24px;box-shadow:9px 10px 0 #e6d989}
+.tradeoff-manga img{aspect-ratio:2/1}
+.tradeoff-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:28px}
+.tradeoff-grid article{position:relative;min-height:152px;padding:22px 22px 20px 62px;border:1px solid #d9ddd5;border-radius:15px;background:#fff}
+.tradeoff-grid article>span{position:absolute;left:18px;top:22px;color:#c3c9c0;font:950 23px/1 monospace}
+.tradeoff-grid small{color:#2a8f47;font-size:9px;font-weight:950;letter-spacing:.12em}
+.tradeoff-grid h4{margin:6px 0 8px;font-size:18px}
+.tradeoff-grid p{font-size:13px!important;line-height:1.65!important}
+.tradeoff-note{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:start;margin-top:14px;padding:18px 20px;border-radius:14px;background:#111814;color:#fff}
+.tradeoff-note strong{color:#cdf45d;font-size:13px}
+.tradeoff-note p{color:#c3ccc5!important;font-size:12px!important;line-height:1.7!important}
+@media(max-width:700px){.tradeoff-grid{grid-template-columns:1fr}.tradeoff-note{grid-template-columns:1fr;gap:7px}.tradeoff-manga{box-shadow:6px 7px 0 #e6d989}}

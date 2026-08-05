@@ -68,6 +68,11 @@ function renderExamples(examples) {
   return `<div class="example-grid">${examples.map(example => `<article class="example-card"><div class="example-top"><span class="example-icon">${renderIcon(example.icon)}</span><small>${example.label}</small></div><h3>${example.title}</h3><p>${example.body}</p><p class="example-why">${example.why}</p><a href="${example.source}" target="_blank" rel="noopener noreferrer">${example.sourceLabel} ↗</a></article>`).join("")}</div>`;
 }
 
+function renderTradeoff(tradeoff) {
+  if (!tradeoff) return "";
+  return `<div class="tradeoff-block"><div class="tradeoff-heading"><small>TRADITIONAL METHODS</small><h3>${tradeoff.title}</h3><p>${tradeoff.body}</p></div><figure class="manga-figure tradeoff-manga"><img src="${tradeoff.image}" alt="${tradeoff.imageAlt}" width="1600" height="800" loading="lazy" decoding="async"><figcaption><span>PAIN POINTS</span>開模與 CNC 在少量、反覆修改的原型階段，需要較多前置投入。</figcaption></figure><div class="tradeoff-grid">${tradeoff.items.map((item, index) => `<article><span>${String(index + 1).padStart(2,"0")}</span><small>${item.label}</small><h4>${item.title}</h4><p>${item.text}</p></article>`).join("")}</div><aside class="tradeoff-note"><strong>不是誰取代誰</strong><p>${tradeoff.note}</p></aside></div>`;
+}
+
 function renderLayerAnimation(type) {
   if (type !== "layers") return "";
   return `<div class="layer-lab" id="layer-animation">
@@ -85,6 +90,7 @@ content.innerHTML = course.sections.map((section, index) => `
       <h2>${section.title}</h2>
       <p>${section.body}</p>
       ${section.manga ? `<figure class="manga-figure"><img src="${section.manga.src}" alt="${section.manga.alt}" width="1600" height="757" loading="eager" decoding="async"><figcaption><span>MANGA EXPLAINER</span>${section.manga.caption}</figcaption></figure>` : ""}
+      ${renderTradeoff(section.tradeoff)}
       ${section.image ? `<figure class="lesson-figure"><img src="${section.image}" alt="${section.imageAlt || ""}" loading="lazy"><figcaption>線材經過加熱、擠出與逐層堆疊，最後成為實體作品。</figcaption></figure>` : ""}
       ${renderSteps(section.steps)}
       ${renderLayerAnimation(section.animation)}
