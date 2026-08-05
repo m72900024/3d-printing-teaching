@@ -63,6 +63,11 @@ function renderDetails(details) {
   return `<div class="detail-grid">${details.map((detail, index) => `<article class="detail-card"><div><span>${String(index + 1).padStart(2,"0")}</span><small>${detail.label}</small></div><h3>${detail.title}</h3><p>${detail.text}</p></article>`).join("")}</div>`;
 }
 
+function renderPhotoStudy(study) {
+  if (!study) return "";
+  return `<figure class="photo-study"><img src="${study.src}" alt="${study.alt}" width="1600" height="824" loading="lazy" decoding="async"><figcaption><span>實物質感比較</span>${study.caption}</figcaption><div class="photo-study-guide">${study.guides.map(guide => `<div><strong>${guide.label}</strong><p>${guide.text}</p></div>`).join("")}</div></figure>`;
+}
+
 function renderSources(sources) {
   if (!sources) return "";
   return `<aside class="lesson-sources"><strong>延伸資料</strong><div>${sources.map(source => `<a href="${source.url}" target="_blank" rel="noopener noreferrer">${source.label} →</a>`).join("")}</div></aside>`;
@@ -124,6 +129,7 @@ content.innerHTML = renderLessonVisual(course.lessonVisual) + course.sections.ma
       ${renderSteps(section.steps)}
       ${renderLayerAnimation(section.animation)}
       ${renderCards(section.cards)}
+      ${renderPhotoStudy(section.photoStudy)}
       ${renderDetails(section.details)}
       ${renderExamples(section.examples)}
       ${section.points ? `<ul class="lesson-points">${section.points.map(point => `<li>${point}</li>`).join("")}</ul>` : ""}
