@@ -10,7 +10,16 @@ document.querySelector("#courseNumber").textContent = course.id;
 document.querySelector("#courseTitle").textContent = course.title;
 document.querySelector("#courseSubtitle").textContent = course.subtitle;
 document.querySelector("#courseLead").textContent = course.lead;
-document.querySelector("#courseGoals").innerHTML = course.goals.map(goal => `<li>${goal}</li>`).join("");
+const goalIllustrations = [
+  '<svg viewBox="0 0 64 64" aria-hidden="true"><path d="m12 20 20-9 20 9-20 9-20-9Z"/><path d="m12 29 20 9 20-9M12 39l20 9 20-9"/><path class="accent" d="M32 29v19"/></svg>',
+  '<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="17" cy="24" r="10"/><circle cx="17" cy="24" r="4"/><path d="M27 24h13c6 0 8 4 8 9v4"/><path class="accent" d="M42 35h12v8H42zM46 43l2 8 2-8"/></svg>',
+  '<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 18h21v28H8zM35 18h21v28H35z"/><path class="accent" d="m14 29 5-5 5 5-5 5-5-5Zm27-5h9M41 30h9M41 36h6"/></svg>',
+  '<svg viewBox="0 0 64 64" aria-hidden="true"><path d="m10 21 15-8 15 8v18l-15 8-15-8V21Zm0 0 15 8 15-8M25 29v18"/><circle cx="47" cy="39" r="10"/><path class="accent" d="m42 39 3 3 6-7"/></svg>'
+];
+const goalsElement = document.querySelector("#courseGoals");
+goalsElement.innerHTML = course.id === "01"
+  ? course.goals.map((goal, index) => `<li class="goal-card"><div class="goal-visual">${goalIllustrations[index]}</div><div><small>0${index + 1}</small><p>${goal}</p></div></li>`).join("")
+  : course.goals.map(goal => `<li>${goal}</li>`).join("");
 if (course.id === "01") {
   const lessonOutline = document.createElement("nav");
   lessonOutline.className = "lesson-outline";
