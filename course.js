@@ -11,12 +11,18 @@ document.querySelector("#courseTitle").textContent = course.title;
 document.querySelector("#courseSubtitle").textContent = course.subtitle;
 document.querySelector("#courseLead").textContent = course.lead;
 document.querySelector("#courseGoals").innerHTML = course.goals.map(goal => `<li>${goal}</li>`).join("");
-if (course.sections.some(section => section.animation === "layers")) {
-  const animationJump = document.createElement("a");
-  animationJump.className = "lesson-jump";
-  animationJump.href = "#layer-animation";
-  animationJump.innerHTML = `<span>▶</span><strong>直接看逐層堆疊動畫</strong><small>前往第 3 段 ↓</small>`;
-  document.querySelector(".goal-box").after(animationJump);
+if (course.id === "01") {
+  const lessonOutline = document.createElement("nav");
+  lessonOutline.className = "lesson-outline";
+  lessonOutline.setAttribute("aria-label", "本課快速導覽");
+  lessonOutline.innerHTML = `<strong>本課快速導覽</strong><div>
+    <a href="#courseContent"><span>01</span>原理與流程</a>
+    <a href="#layer-animation"><span>02</span>逐層動畫</a>
+    <a href="#real-examples"><span>03</span>真實案例</a>
+    <a href="#lesson-video"><span>04</span>延伸影片</a>
+    <a href="#quick-check"><span>05</span>快速測驗</a>
+  </div>`;
+  document.querySelector(".goal-box").after(lessonOutline);
 }
 
 const iconPaths = {
@@ -64,7 +70,7 @@ function renderLayerAnimation(type) {
 
 const content = document.querySelector("#courseContent");
 content.innerHTML = course.sections.map((section, index) => `
-  <section class="lesson-section reveal">
+  <section class="lesson-section reveal"${section.examples ? ` id="real-examples"` : ""}>
     <span class="section-count">${String(index + 1).padStart(2,"0")}</span>
     <div>
       <h2>${section.title}</h2>
@@ -109,6 +115,7 @@ content.querySelectorAll(".layer-lab").forEach(lab => {
 if (course.video) {
   const videoSection = document.createElement("section");
   videoSection.className = "video-section reveal";
+  videoSection.id = "lesson-video";
   videoSection.innerHTML = `<div class="video-copy"><p class="video-eyebrow">WATCH & NOTICE</p><h2>延伸觀看：把 A1 拆開來看</h2><p>${course.video.description}</p><div class="watch-prompts"><strong>觀看時找三件事</strong><span>① 線材走哪一條路？</span><span>② 哪個零件把材料熔化？</span><span>③ 平台與噴頭如何配合移動？</span></div><a href="${course.video.watchUrl}" target="_blank" rel="noopener noreferrer">在 YouTube 開啟 ↗</a></div><div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/${course.video.youtubeId}" title="${course.video.title}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><p>${course.video.title} · ${course.video.channel}</p></div>`;
   document.querySelector(".task-card").before(videoSection);
 }
@@ -116,6 +123,7 @@ if (course.video) {
 if (course.quiz) {
   const quiz = document.createElement("section");
   quiz.className = "quiz-section reveal";
+  quiz.id = "quick-check";
   quiz.innerHTML = `<p class="quiz-eyebrow">QUICK CHECK</p><h2>三題快速檢查</h2><p class="quiz-intro">選出答案，馬上看看自己是否掌握重點。</p><div class="quiz-list">${course.quiz.map((item, questionIndex) => `<article class="quiz-card" data-question="${questionIndex}"><p><span>${questionIndex + 1}</span>${item.question}</p><div class="quiz-options">${item.options.map((option, optionIndex) => `<button type="button" data-option="${optionIndex}">${option}</button>`).join("")}</div><div class="quiz-feedback" aria-live="polite"></div></article>`).join("")}</div><p class="quiz-score" id="quizScore">已答對 0 / ${course.quiz.length} 題</p>`;
   document.querySelector(".task-card").before(quiz);
 
