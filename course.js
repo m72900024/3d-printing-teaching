@@ -11,6 +11,13 @@ document.querySelector("#courseTitle").textContent = course.title;
 document.querySelector("#courseSubtitle").textContent = course.subtitle;
 document.querySelector("#courseLead").textContent = course.lead;
 document.querySelector("#courseGoals").innerHTML = course.goals.map(goal => `<li>${goal}</li>`).join("");
+if (course.sections.some(section => section.animation === "layers")) {
+  const animationJump = document.createElement("a");
+  animationJump.className = "lesson-jump";
+  animationJump.href = "#layer-animation";
+  animationJump.innerHTML = `<span>▶</span><strong>直接看逐層堆疊動畫</strong><small>前往第 3 段 ↓</small>`;
+  document.querySelector(".goal-box").after(animationJump);
+}
 
 const iconPaths = {
   layers:'<path d="M4 8l8-4 8 4-8 4-8-4Zm0 4 8 4 8-4M4 16l8 4 8-4"/>',
@@ -40,9 +47,10 @@ function renderSteps(steps) {
 
 function renderLayerAnimation(type) {
   if (type !== "layers") return "";
-  return `<div class="layer-lab" role="img" aria-label="噴嘴左右移動並逐層堆疊物件的動畫">
-    <div class="lab-caption"><strong>逐層堆疊動畫</strong><span>噴嘴畫完一層，再往上移動</span></div>
-    <div class="animated-printer"><div class="animated-head"><i></i></div><div class="animated-object">${Array.from({length:8}, (_, index) => `<i style="--layer:${index}"></i>`).join("")}</div><div class="animated-bed"></div></div>
+  return `<div class="layer-lab" id="layer-animation">
+    <div class="lab-caption"><div><strong>逐層堆疊動畫</strong><span>噴嘴畫完一層，再往上移動</span></div><button class="animation-play" type="button" aria-pressed="false">▶ 播放動畫</button></div>
+    <p class="motion-note">你的裝置已開啟「減少動態效果」，因此動畫預設暫停。按下播放即可觀看。</p>
+    <div class="animated-printer" role="img" aria-label="噴嘴左右移動並逐層堆疊物件的動畫"><div class="animated-head"><i></i></div><div class="animated-object">${Array.from({length:8}, (_, index) => `<i style="--layer:${index}"></i>`).join("")}</div><div class="animated-bed"></div></div>
   </div>`;
 }
 
@@ -62,6 +70,13 @@ content.innerHTML = course.sections.map((section, index) => `
       ${section.callout ? `<aside class="lesson-callout"><span>!</span><p>${section.callout}</p></aside>` : ""}
     </div>
   </section>`).join("");
+
+content.querySelectorAll(".animation-play").forEach(button => button.addEventListener("click", () => {
+  const lab = button.closest(".layer-lab");
+  const isPlaying = lab.classList.toggle("playing");
+  button.setAttribute("aria-pressed", String(isPlaying));
+  button.textContent = isPlaying ? "❚❚ 暫停動畫" : "▶ 播放動畫";
+}));
 
 if (course.quiz) {
   const quiz = document.createElement("section");
