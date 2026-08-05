@@ -3,237 +3,72 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="從原理、Bambu Studio 切片到 A1／P1S 實機操作的 FDM 3D 列印入門課程。">
+  <meta name="description" content="從零開始，循序學會 FDM 3D 列印、Bambu Studio 與 A1／P1S 操作。">
   <meta name="theme-color" content="#111814">
   <title>3D 列印入門教室</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <a class="skip-link" href="#main">跳至主要內容</a>
-
   <header class="site-header">
-    <a class="brand" href="#top" aria-label="回到首頁">
-      <span class="brand-mark" aria-hidden="true">3D</span>
-      <span>列印入門教室</span>
-    </a>
-    <nav class="top-nav" aria-label="主要導覽">
-      <a href="#course">課程</a>
-      <a href="#troubleshooting">問題排除</a>
-      <a href="#checklist">檢核表</a>
-    </nav>
-    <button class="progress-pill" id="progressButton" type="button" aria-label="查看學習進度">
-      <span id="progressText">0 / 7</span>
-      <span class="progress-ring" aria-hidden="true"></span>
-    </button>
+    <a class="brand" href="#top" aria-label="回到首頁"><span class="brand-mark" aria-hidden="true">3D</span><span>列印入門教室</span></a>
+    <nav class="top-nav" aria-label="主要導覽"><a href="#path">學習路徑</a><a href="#beginner">第一次成功</a><a href="#advanced">獨立完成</a></nav>
+    <button class="progress-pill" id="progressButton" type="button" aria-label="查看學習進度"><span id="progressText">0 / 12</span><span class="progress-ring" aria-hidden="true"></span></button>
   </header>
 
   <main id="main">
-    <section class="hero" id="top">
+    <section class="hero course-hero" id="top">
       <div class="hero-copy reveal">
-        <p class="eyebrow">FDM · Bambu Studio · A1 / P1S</p>
-        <h1>把想法，<br><em>一層一層</em>印出來。</h1>
-        <p class="hero-lead">給第一次接觸 3D 列印的你：從看懂原理、完成切片，到安全啟動第一件作品。</p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="#course">開始學習 <span aria-hidden="true">→</span></a>
-          <a class="button button-ghost" href="#checklist">列印前先檢查</a>
-        </div>
-        <ul class="hero-stats" aria-label="課程資訊">
-          <li><strong>7</strong><span>個章節</span></li>
-          <li><strong>45</strong><span>分鐘入門</span></li>
-          <li><strong>10</strong><span>種問題排除</span></li>
-        </ul>
+        <p class="eyebrow">12 COURSES · STEP BY STEP</p>
+        <h1>從第一次成功，<br><em>走到獨立完成。</em></h1>
+        <p class="hero-lead">每一課都是獨立分頁。一次只學一件事、完成一個任務，再安心前往下一課。</p>
+        <div class="hero-actions"><a class="button button-primary" href="courses/01-introduction.html">從第 1 課開始 <span aria-hidden="true">→</span></a><a class="button button-ghost" href="#path">查看全部課程</a></div>
+        <ul class="hero-stats" aria-label="課程資訊"><li><strong>12</strong><span>個獨立課程</span></li><li><strong>3</strong><span>個學習階段</span></li><li><strong>1</strong><span>件結業作品</span></li></ul>
       </div>
-
       <div class="printer-stage reveal" aria-label="FDM 3D 印表機示意圖">
-        <div class="orbit orbit-one"></div>
-        <div class="orbit orbit-two"></div>
-        <div class="printer">
-          <div class="printer-top"><span></span></div>
-          <div class="printer-rail"><span class="print-head"></span></div>
-          <div class="printer-object">
-            <span class="layer l1"></span><span class="layer l2"></span><span class="layer l3"></span>
-            <span class="layer l4"></span><span class="layer l5"></span><span class="layer l6"></span>
-          </div>
-          <div class="printer-bed"></div>
-          <div class="printer-base"><span class="screen">READY</span></div>
-        </div>
-        <div class="floating-card card-temp"><span>噴嘴</span><strong>220°C</strong></div>
-        <div class="floating-card card-layer"><span>層高</span><strong>0.20 mm</strong></div>
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="printer"><div class="printer-top"><span></span></div><div class="printer-rail"><span class="print-head"></span></div><div class="printer-object"><span class="layer l1"></span><span class="layer l2"></span><span class="layer l3"></span><span class="layer l4"></span><span class="layer l5"></span><span class="layer l6"></span></div><div class="printer-bed"></div><div class="printer-base"><span class="screen">READY</span></div></div>
+        <div class="floating-card card-temp"><span>目前階段</span><strong>從零開始</strong></div><div class="floating-card card-layer"><span>學習方式</span><strong>一課一任務</strong></div>
       </div>
     </section>
 
-    <section class="journey section" id="course">
-      <div class="section-heading reveal">
-        <div>
-          <p class="eyebrow">LEARNING PATH</p>
-          <h2>七步完成第一件作品</h2>
+    <section class="path-overview section" id="path">
+      <div class="section-heading reveal"><div><p class="eyebrow">LEARNING PATH</p><h2>三個階段，逐步解鎖</h2></div><p>建議依序學習。完成按鈕會記錄在目前裝置，回到首頁就能繼續上次進度。</p></div>
+      <div class="stage-rail reveal" aria-label="三個學習階段"><span class="active">01 第一次成功</span><i></i><span>02 理解與調整</span><i></i><span>03 獨立完成</span></div>
+
+      <section class="course-stage" id="beginner">
+        <div class="stage-heading reveal"><span>STAGE 01</span><div><h2>第一次成功</h2><p>先安全完成作品，再慢慢理解為什麼。</p></div></div>
+        <div class="course-list">
+          <a class="course-link reveal" href="courses/01-introduction.html" data-course="01"><span class="course-index">01</span><div><small>6 MIN · 觀念</small><h3>認識 3D 列印</h3><p>了解 FDM 疊層原理與適合的應用。</p></div><b>開始 →</b></a>
+          <a class="course-link reveal" href="courses/02-safety.html" data-course="02"><span class="course-index">02</span><div><small>7 MIN · 安全</small><h3>安全與機器構造</h3><p>認識噴嘴、熱床、運動機構與安全範圍。</p></div><b>開始 →</b></a>
+          <a class="course-link reveal" href="courses/03-workflow.html" data-course="03"><span class="course-index">03</span><div><small>5 MIN · 全貌</small><h3>從模型到成品</h3><p>建立建模、切片、列印的完整心智地圖。</p></div><b>開始 →</b></a>
+          <a class="course-link reveal" href="courses/04-files.html" data-course="04"><span class="course-index">04</span><div><small>8 MIN · 檔案</small><h3>模型檔案與下載</h3><p>分清 STL、3MF，並正確使用模型網站。</p></div><b>開始 →</b></a>
+          <a class="course-link reveal" href="courses/05-studio.html" data-course="05"><span class="course-index">05</span><div><small>12 MIN · 軟體</small><h3>Bambu Studio 快速上手</h3><p>選機型、匯入模型並完成第一次切片。</p></div><b>開始 →</b></a>
+          <a class="course-link reveal" href="courses/06-first-print.html" data-course="06"><span class="course-index">06</span><div><small>15 MIN · 實作</small><h3>完成第一次列印</h3><p>傳送工作、觀察第一層並安全取件。</p></div><b>開始 →</b></a>
         </div>
-        <p>依照「原理 → 安裝 → 操作 → 排錯」前進。每完成一章，就留下自己的學習足跡。</p>
-      </div>
+      </section>
 
-      <div class="chapter-grid">
-        <article class="chapter-card chapter-feature reveal" data-chapter="1">
-          <div class="chapter-number">01</div>
-          <div class="chapter-icon layers-icon" aria-hidden="true"><i></i><i></i><i></i></div>
-          <p class="chapter-meta">8 MIN · 基礎觀念</p>
-          <h3>認識 3D 列印</h3>
-          <p>了解加法製造與 FDM 疊層原理，看見模型如何從薄薄的一層開始成形。</p>
-          <div class="mini-demo" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-          <button class="complete-button" type="button"><span class="check">✓</span><span class="complete-label">標記完成</span></button>
-        </article>
-
-        <article class="chapter-card reveal" data-chapter="2">
-          <div class="chapter-number">02</div>
-          <p class="chapter-meta">5 MIN · 全貌</p>
-          <h3>列印三步驟</h3>
-          <div class="three-steps" aria-label="建模、切片、列印">
-            <span>建模</span><b>→</b><span>切片</span><b>→</b><span>列印</span>
-          </div>
-          <p>先建立正確心智地圖，再進入軟體與機器操作。</p>
-          <button class="complete-button" type="button"><span class="check">✓</span><span class="complete-label">標記完成</span></button>
-        </article>
-
-        <article class="chapter-card reveal" data-chapter="3">
-          <div class="chapter-number">03</div>
-          <p class="chapter-meta">10 MIN · 軟體</p>
-          <h3>Bambu Studio 入門</h3>
-          <p>安裝、切換繁體中文、新增印表機，並學會移動、旋轉及縮放模型。</p>
-          <div class="tag-row"><span>安裝</span><span>匯入 STL</span><span>介面</span></div>
-          <button class="complete-button" type="button"><span class="check">✓</span><span class="complete-label">標記完成</span></button>
-        </article>
-
-        <article class="chapter-card reveal" data-chapter="4">
-          <div class="chapter-number">04</div>
-          <p class="chapter-meta">8 MIN · 切片</p>
-          <h3>六個關鍵參數</h3>
-          <div class="parameter-list">
-            <span>層高</span><span>外殼</span><span>填充</span><span>溫度</span><span>速度</span><span>支撐</span>
-          </div>
-          <p>從建議值出發，理解品質、速度與材料之間的取捨。</p>
-          <button class="complete-button" type="button"><span class="check">✓</span><span class="complete-label">標記完成</span></button>
-        </article>
-
-        <article class="chapter-card printer-compare-card reveal" data-chapter="5">
-          <div class="chapter-number">05</div>
-          <p class="chapter-meta">8 MIN · 實機</p>
-          <h3>A1 與 P1S 操作</h3>
-          <div class="machine-toggle" role="group" aria-label="選擇印表機">
-            <button type="button" class="active" data-machine="a1">A1</button>
-            <button type="button" data-machine="p1s">P1S</button>
-          </div>
-          <div class="machine-info" id="machineInfo">
-            <strong>開放式機身</strong>
-            <p>適合 PLA、PETG；列印時不要將手伸入噴頭移動路徑。</p>
-          </div>
-          <button class="complete-button" type="button"><span class="check">✓</span><span class="complete-label">標記完成</span></button>
-        </article>
-
-        <article class="chapter-card reveal" data-chapter="6">
-          <div class="chapter-number">06</div>
-          <p class="chapter-meta">隨時查閱 · 排錯</p>
-          <h3>看症狀找解法</h3>
-          <p>從沒黏住、拉絲、翹邊到搭橋失敗，用清楚的檢查順序找出原因。</p>
-          <a class="text-link" href="#troubleshooting">開啟問題診斷 <span aria-hidden="true">↘</span></a>
-          <button class="complete-button" type="button"><span class="check">✓</span><span class="complete-label">標記完成</span></button>
-        </article>
-
-        <article class="chapter-card reveal" data-chapter="7">
-          <div class="chapter-number">07</div>
-          <p class="chapter-meta">2 MIN · 上機前</p>
-          <h3>快速檢核表</h3>
-          <p>選對機型、平台與材料，確認切片預覽，最後觀察第一層。</p>
-          <a class="text-link" href="#checklist">開始檢查 <span aria-hidden="true">↘</span></a>
-          <button class="complete-button" type="button"><span class="check">✓</span><span class="complete-label">標記完成</span></button>
-        </article>
-      </div>
-    </section>
-
-    <section class="troubleshooting section" id="troubleshooting">
-      <div class="section-heading section-heading-light reveal">
-        <div>
-          <p class="eyebrow">TROUBLESHOOTING</p>
-          <h2>列印不如預期？<br>先看症狀。</h2>
+      <section class="course-stage stage-two">
+        <div class="stage-heading reveal"><span>STAGE 02</span><div><h2>理解與調整</h2><p>看懂切片結果，知道每個設定改變了什麼。</p></div></div>
+        <div class="course-list">
+          <a class="course-link reveal" href="courses/07-orientation.html" data-course="07"><span class="course-index">07</span><div><small>10 MIN · 判讀</small><h3>模型方向與切片預覽</h3><p>找出穩定擺法，逐層檢查列印路徑。</p></div><b>開始 →</b></a>
+          <a class="course-link reveal" href="courses/08-parameters.html" data-course="08"><span class="course-index">08</span><div><small>12 MIN · 參數</small><h3>品質、強度與時間</h3><p>理解層高、外殼、填充與速度的取捨。</p></div><b>開始 →</b></a>
+          <a class="course-link reveal" href="courses/09-support.html" data-course="09"><span class="course-index">09</span><div><small>10 MIN · 結構</small><h3>支撐與平台附著</h3><p>處理懸空、搭橋、支撐與 Brim。</p></div><b>開始 →</b></a>
         </div>
-        <p>一次只改一個參數，重新測試並記錄結果。從最常見、最容易確認的原因開始。</p>
-      </div>
+      </section>
 
-      <div class="filter-row reveal" role="group" aria-label="問題分類">
-        <button class="filter active" type="button" data-filter="all">全部</button>
-        <button class="filter" type="button" data-filter="first">第一層</button>
-        <button class="filter" type="button" data-filter="surface">表面</button>
-        <button class="filter" type="button" data-filter="support">支撐</button>
-      </div>
-
-      <div class="issue-grid">
-        <article class="issue-card reveal" data-category="first">
-          <span class="issue-visual adhesion"><i></i></span>
-          <p class="issue-code">E01 · 第一層</p><h3>模型沒有黏住</h3>
-          <p>先清潔平台，再確認平台類型、熱床溫度及首層速度。</p>
-        </article>
-        <article class="issue-card reveal" data-category="surface">
-          <span class="issue-visual stringing"><i></i><i></i><i></i></span>
-          <p class="issue-code">E02 · 表面</p><h3>模型出現拉絲</h3>
-          <p>烘乾線材，檢查噴嘴溫度，再微調回抽設定。</p>
-        </article>
-        <article class="issue-card reveal" data-category="first">
-          <span class="issue-visual warping"><i></i></span>
-          <p class="issue-code">E03 · 第一層</p><h3>底部邊角翹起</h3>
-          <p>避免冷風，清潔平台並使用邊緣（Brim）增加附著面積。</p>
-        </article>
-        <article class="issue-card reveal" data-category="surface">
-          <span class="issue-visual under"><i></i><i></i><i></i></span>
-          <p class="issue-code">E04 · 表面</p><h3>擠料量不足</h3>
-          <p>檢查線材纏繞、噴嘴堵塞與耗材設定是否正確。</p>
-        </article>
-        <article class="issue-card reveal" data-category="support">
-          <span class="issue-visual bridge"><i></i><b></b></span>
-          <p class="issue-code">E05 · 支撐</p><h3>搭橋下垂</h3>
-          <p>增加風扇、降低橋接速度，或縮短無支撐跨距。</p>
-        </article>
-        <article class="issue-card reveal" data-category="support">
-          <span class="issue-visual rough"><i></i><i></i></span>
-          <p class="issue-code">E06 · 支撐</p><h3>支撐面粗糙</h3>
-          <p>調整支撐頂部介面、間距，並重新檢查模型方向。</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="checklist-section section" id="checklist">
-      <div class="checklist-intro reveal">
-        <p class="eyebrow">READY TO PRINT?</p>
-        <h2>列印前，花兩分鐘確認。</h2>
-        <p>勾選內容會自動保存在這台裝置。全部完成，就可以放心送出列印。</p>
-        <div class="checklist-score"><strong id="checklistScore">0</strong><span>/ 10 項完成</span></div>
-      </div>
-      <div class="checklist-panel reveal">
-        <div class="checklist-bar"><span id="checklistBar"></span></div>
-        <div class="checklist" id="printChecklist">
-          <label><input type="checkbox"><span class="fake-check">✓</span><span><strong>印表機型號正確</strong><small>A1 或 P1S</small></span></label>
-          <label><input type="checkbox"><span class="fake-check">✓</span><span><strong>平台類型正確且表面乾淨</strong><small>不要用手直接摸列印區域</small></span></label>
-          <label><input type="checkbox"><span class="fake-check">✓</span><span><strong>線材種類與顏色正確</strong><small>初學建議使用 PLA</small></span></label>
-          <label><input type="checkbox"><span class="fake-check">✓</span><span><strong>模型方向合理</strong><small>讓最大平面接觸平台</small></span></label>
-          <label><input type="checkbox"><span class="fake-check">✓</span><span><strong>層高與填充已設定</strong><small>一般作品可從 0.20 mm 開始</small></span></label>
-          <label><input type="checkbox"><span class="fake-check">✓</span><span><strong>需要的支撐已開啟</strong><small>檢查懸空與橋接區域</small></span></label>
-          <label><input type="checkbox"><span class="fake-check">✓</span><span><strong>切片預覽沒有異常</strong><small>逐層檢查空洞與遺漏</small></span></label>
-          <label><input type="checkbox"><span class="fake-check">✓</span><span><strong>線材足夠完成作品</strong><small>確認預估用量</small></span></label>
-          <label><input type="checkbox"><span class="fake-check">✓</span><span><strong>已啟用自動調平</strong><small>Bambu Lab 不需 A4 紙手動調平</small></span></label>
-          <label><input type="checkbox"><span class="fake-check">✓</span><span><strong>第一層列印正常</strong><small>確認後再離開機器</small></span></label>
+      <section class="course-stage stage-three" id="advanced">
+        <div class="stage-heading reveal"><span>STAGE 03</span><div><h2>獨立完成</h2><p>選對材料、解決問題，完成自己的作品。</p></div></div>
+        <div class="course-list">
+          <a class="course-link reveal" href="courses/10-materials.html" data-course="10"><span class="course-index">10</span><div><small>10 MIN · 材料</small><h3>認識列印材料</h3><p>比較 PLA、PETG、ABS／ASA 與適用機型。</p></div><b>開始 →</b></a>
+          <a class="course-link reveal" href="courses/11-troubleshooting.html" data-course="11"><span class="course-index">11</span><div><small>15 MIN · 排錯</small><h3>系統化問題排除</h3><p>依症狀、原因與檢查順序解決失敗。</p></div><b>開始 →</b></a>
+          <a class="course-link reveal" href="courses/12-project.html" data-course="12"><span class="course-index">12</span><div><small>20 MIN · 挑戰</small><h3>維護與成果挑戰</h3><p>完成檢核、照顧機器並交出結業作品。</p></div><b>開始 →</b></a>
         </div>
-        <div class="checklist-footer">
-          <p id="readyMessage">還有 10 項需要確認</p>
-          <button id="resetChecklist" type="button">重新開始</button>
-        </div>
-      </div>
+      </section>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div><span class="brand-mark" aria-hidden="true">3D</span><strong>列印入門教室</strong></div>
-    <p>安全操作 · 理解原理 · 動手實作</p>
-    <a href="#top">回到頂端 ↑</a>
-  </footer>
-
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <footer class="site-footer"><div><span class="brand-mark" aria-hidden="true">3D</span><strong>列印入門教室</strong></div><p>安全操作 · 理解原理 · 動手實作</p><a href="#top">回到頂端 ↑</a></footer>
   <script src="app.js"></script>
 </body>
 </html>
