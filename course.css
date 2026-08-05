@@ -68,3 +68,10 @@
 @media(max-width:700px){.course-page[data-course="01"] .goal-box ul{grid-template-columns:1fr}}
 @media(max-width:420px){.course-page[data-course="01"] .goal-box{padding:22px 18px}.course-page[data-course="01"] .goal-card{grid-template-columns:92px 1fr;padding:11px;min-height:116px}.course-page[data-course="01"] .goal-visual{width:92px;height:92px}.course-page[data-course="01"] .goal-card p{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.course-page[data-course="01"] .goal-card{transition:none}.course-page[data-course="01"] .goal-card:hover{transform:none}}
+
+/* Manga explainer */
+.manga-figure{margin:30px 0 0;overflow:hidden;border:3px solid #111814;border-radius:20px;background:#fffdf5;box-shadow:9px 10px 0 #cde95f}
+.manga-figure img{display:block;width:100%;height:auto;aspect-ratio:1600/757;object-fit:cover}
+.manga-figure figcaption{display:flex;align-items:center;gap:12px;padding:13px 16px;border-top:3px solid #111814;color:#3f493f;font-size:12px;font-weight:750;line-height:1.5}
+.manga-figure figcaption span{flex:0 0 auto;padding:5px 8px;background:#111814;color:#cdf45d;font:950 9px/1 monospace;letter-spacing:.08em}
+@media(max-width:600px){.manga-figure{border-width:2px;border-radius:14px;box-shadow:6px 7px 0 #cde95f}.manga-figure figcaption{align-items:flex-start;border-top-width:2px;flex-direction:column;gap:8px}}
