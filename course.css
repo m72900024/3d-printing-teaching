@@ -101,6 +101,15 @@
 @media(max-width:700px){.tradeoff-panel-guide{grid-template-columns:repeat(2,minmax(0,1fr))}.tradeoff-grid{grid-template-columns:1fr}.tradeoff-note{grid-template-columns:1fr;gap:7px}.tradeoff-manga{box-shadow:6px 7px 0 #e6d989}}
 @media(max-width:420px){.tradeoff-panel-guide{grid-template-columns:1fr}.tradeoff-panel-guide>div{min-height:0}}
 
+/* Course 01 deep-dive cards and references */
+.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:28px}
+.detail-card{position:relative;min-height:178px;padding:22px;border:1px solid #d9dfd5;border-radius:17px;background:linear-gradient(145deg,#fff 0%,#f5f8ef 100%);box-shadow:0 10px 26px rgba(18,23,19,.05)}
+.detail-card>div{display:flex;align-items:center;gap:10px;margin-bottom:17px}.detail-card>div span{display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:#111814;color:#cdf45d;font:950 10px/1 monospace}.detail-card small{color:#2a8f47;font-size:10px;font-weight:950;letter-spacing:.11em}
+.detail-card h3{margin:0 0 9px;font-size:20px;line-height:1.25}.detail-card p{margin:0!important;color:#566158!important;font-size:13px!important;line-height:1.7!important}
+.lesson-sources{display:grid;grid-template-columns:105px 1fr;gap:15px;align-items:start;margin-top:22px;padding:16px 18px;border:1px solid #d9dfd5;border-radius:13px;background:#fff}
+.lesson-sources strong{color:#687269;font-size:10px;letter-spacing:.12em}.lesson-sources>div{display:flex;flex-wrap:wrap;gap:8px 16px}.lesson-sources a{color:#247c3d;font-size:12px;font-weight:850;text-underline-offset:4px}
+@media(max-width:700px){.detail-grid{grid-template-columns:1fr}.detail-card{min-height:0}.lesson-sources{grid-template-columns:1fr;gap:8px}.lesson-sources>div{flex-direction:column}}
+
 /* Course 04–08 illustrated case studies */
 .series-visual{margin:10px 0 64px;padding:0 0 30px;border-bottom:2px dashed #c8cec4}
 .series-visual figure{margin:0;overflow:hidden;border:3px solid #111814;border-radius:22px;background:#fffdf5;box-shadow:10px 11px 0 #cde95f}
