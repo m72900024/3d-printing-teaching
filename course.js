@@ -71,12 +71,31 @@ content.innerHTML = course.sections.map((section, index) => `
     </div>
   </section>`).join("");
 
-content.querySelectorAll(".animation-play").forEach(button => button.addEventListener("click", () => {
-  const lab = button.closest(".layer-lab");
-  const isPlaying = lab.classList.toggle("playing");
-  button.setAttribute("aria-pressed", String(isPlaying));
-  button.textContent = isPlaying ? "❚❚ 暫停動畫" : "▶ 播放動畫";
-}));
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+function runLayerCycle(lab) {
+  window.clearTimeout(lab.layerCycleTimer);
+  lab.classList.remove("cycle");
+  void lab.offsetWidth;
+  lab.classList.add("cycle");
+  lab.layerCycleTimer = window.setTimeout(() => {
+    if (lab.classList.contains("playing") || !reducedMotion.matches) runLayerCycle(lab);
+  }, 7000);
+}
+
+content.querySelectorAll(".layer-lab").forEach(lab => {
+  if (!reducedMotion.matches) runLayerCycle(lab);
+  const button = lab.querySelector(".animation-play");
+  button.addEventListener("click", () => {
+    const isPlaying = lab.classList.toggle("playing");
+    button.setAttribute("aria-pressed", String(isPlaying));
+    button.textContent = isPlaying ? "❚❚ 暫停動畫" : "▶ 播放動畫";
+    if (isPlaying) runLayerCycle(lab);
+    else {
+      window.clearTimeout(lab.layerCycleTimer);
+      lab.classList.remove("cycle");
+    }
+  });
+});
 
 if (course.quiz) {
   const quiz = document.createElement("section");
