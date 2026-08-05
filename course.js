@@ -70,7 +70,7 @@ function renderExamples(examples) {
 
 function renderTradeoff(tradeoff) {
   if (!tradeoff) return "";
-  return `<div class="tradeoff-block"><div class="tradeoff-heading"><small>TRADITIONAL METHODS</small><h3>${tradeoff.title}</h3><p>${tradeoff.body}</p></div><figure class="manga-figure tradeoff-manga"><img src="${tradeoff.image}" alt="${tradeoff.imageAlt}" width="1600" height="800" loading="lazy" decoding="async"><figcaption><span>PAIN POINTS</span>開模與 CNC 在少量、反覆修改的原型階段，需要較多前置投入。</figcaption></figure><div class="tradeoff-grid">${tradeoff.items.map((item, index) => `<article><span>${String(index + 1).padStart(2,"0")}</span><small>${item.label}</small><h4>${item.title}</h4><p>${item.text}</p></article>`).join("")}</div><aside class="tradeoff-note"><strong>不是誰取代誰</strong><p>${tradeoff.note}</p></aside></div>`;
+  return `<div class="tradeoff-block"><div class="tradeoff-heading"><small>傳統製造方法</small><h3>${tradeoff.title}</h3><p>${tradeoff.body}</p></div><figure class="manga-figure tradeoff-manga"><img src="${tradeoff.image}" alt="${tradeoff.imageAlt}" width="1600" height="800" loading="lazy" decoding="async"><figcaption><span>四格漫畫導讀</span>橘黃色是開模的前期投入與改版壓力；藍灰色是 CNC 的材料切除與加工設定。</figcaption></figure><div class="tradeoff-panel-guide">${tradeoff.guides.map(guide => `<div><strong>${guide.label}</strong><span>${guide.text}</span></div>`).join("")}</div><div class="tradeoff-grid">${tradeoff.items.map((item, index) => `<article><span>${String(index + 1).padStart(2,"0")}</span><small>${item.label}</small><h4>${item.title}</h4><p>${item.text}</p></article>`).join("")}</div><aside class="tradeoff-note"><strong>不是誰取代誰</strong><p>${tradeoff.note}</p></aside></div>`;
 }
 
 function renderLayerAnimation(type) {
