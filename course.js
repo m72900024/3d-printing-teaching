@@ -82,8 +82,27 @@ function renderLayerAnimation(type) {
   </div>`;
 }
 
+function renderLessonVisual(visual) {
+  if (!visual) return "";
+  return `<section class="series-visual reveal">
+    <figure>
+      <img src="${visual.src}" alt="${visual.alt}" width="1600" height="1024" loading="eager" decoding="async">
+      <figcaption><span>GPT 漫畫圖解</span>${visual.caption}</figcaption>
+    </figure>
+    <div class="series-guide">${visual.guides.map((guide, index) => `<div><small>0${index + 1}</small><strong>${guide[0]}</strong><p>${guide[1]}</p></div>`).join("")}</div>
+  </section>`;
+}
+
+function renderRealCase(realCase) {
+  if (!realCase) return "";
+  return `<section class="real-case-section reveal">
+    <div class="real-case-heading"><p>${realCase.eyebrow}</p><h2>${realCase.title}</h2></div>
+    <div class="real-case-copy"><p>${realCase.body}</p><aside><strong>為什麼值得看？</strong><span>${realCase.why}</span></aside><a href="${realCase.source}" target="_blank" rel="noopener noreferrer">${realCase.sourceLabel} →</a></div>
+  </section>`;
+}
+
 const content = document.querySelector("#courseContent");
-content.innerHTML = course.sections.map((section, index) => `
+content.innerHTML = renderLessonVisual(course.lessonVisual) + course.sections.map((section, index) => `
   <section class="lesson-section reveal"${section.examples ? ` id="real-examples"` : ""}>
     <span class="section-count">${String(index + 1).padStart(2,"0")}</span>
     <div>
@@ -100,7 +119,7 @@ content.innerHTML = course.sections.map((section, index) => `
       ${section.compare ? `<div class="compare-table" role="table">${section.compareHeaders ? `<div class="compare-row compare-head" role="row">${section.compareHeaders.map(cell => `<span role="columnheader">${cell}</span>`).join("")}</div>` : ""}${section.compare.map(row => `<div class="compare-row" role="row">${row.map((cell, cellIndex) => `<span role="${cellIndex === 0 ? "rowheader" : "cell"}">${cell}</span>`).join("")}</div>`).join("")}</div>` : ""}
       ${section.callout ? `<aside class="lesson-callout"><span>!</span><p>${section.callout}</p></aside>` : ""}
     </div>
-  </section>`).join("");
+  </section>`).join("") + renderRealCase(course.realCase);
 
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 function runLayerCycle(lab) {
