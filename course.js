@@ -84,6 +84,7 @@ content.innerHTML = course.sections.map((section, index) => `
     <div>
       <h2>${section.title}</h2>
       <p>${section.body}</p>
+      ${section.manga ? `<figure class="manga-figure"><img src="${section.manga.src}" alt="${section.manga.alt}" width="1600" height="757" loading="eager" decoding="async"><figcaption><span>MANGA EXPLAINER</span>${section.manga.caption}</figcaption></figure>` : ""}
       ${section.image ? `<figure class="lesson-figure"><img src="${section.image}" alt="${section.imageAlt || ""}" loading="lazy"><figcaption>線材經過加熱、擠出與逐層堆疊，最後成為實體作品。</figcaption></figure>` : ""}
       ${renderSteps(section.steps)}
       ${renderLayerAnimation(section.animation)}
