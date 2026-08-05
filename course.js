@@ -28,7 +28,10 @@ const iconPaths = {
   strength:'<path d="M7 8h10v8H7zM3 12h4m10 0h4M4 9v6m16-6v6"/>',
   check:'<path d="m5 12 4 4L19 6"/>',
   question:'<circle cx="12" cy="12" r="9"/><path d="M9.8 9a2.4 2.4 0 1 1 3.1 2.3c-.9.4-.9 1.1-.9 1.7m0 3h.01"/>',
-  repeat:'<path d="M17 3l3 3-3 3M4 10V8a2 2 0 0 1 2-2h14M7 21l-3-3 3-3m13-1v2a2 2 0 0 1-2 2H4"/>'
+  repeat:'<path d="M17 3l3 3-3 3M4 10V8a2 2 0 0 1 2-2h14M7 21l-3-3 3-3m13-1v2a2 2 0 0 1-2 2H4"/>',
+  rocket:'<path d="M14 5c2.4-2.4 5-2 5-2s.4 2.6-2 5l-4 4-4-3 5-4Zm-5 4-3 1-2 3 5 1m4-2 1 5-3 3-1-5m-3 2-2 2"/>',
+  medical:'<path d="M8 3h8v6h5v8h-5v5H8v-5H3V9h5V3Z"/>',
+  museum:'<path d="m3 9 9-5 9 5M5 10h14M6 10v8m4-8v8m4-8v8m4-8v8M3 20h18"/>'
 };
 
 function renderIcon(name) {
@@ -43,6 +46,11 @@ function renderCards(cards) {
 function renderSteps(steps) {
   if (!steps) return "";
   return `<ol class="process-steps">${steps.map((step, index) => `<li><span>${index + 1}</span>${step}</li>`).join("")}</ol>`;
+}
+
+function renderExamples(examples) {
+  if (!examples) return "";
+  return `<div class="example-grid">${examples.map(example => `<article class="example-card"><div class="example-top"><span class="example-icon">${renderIcon(example.icon)}</span><small>${example.label}</small></div><h3>${example.title}</h3><p>${example.body}</p><p class="example-why">${example.why}</p><a href="${example.source}" target="_blank" rel="noopener noreferrer">${example.sourceLabel} ↗</a></article>`).join("")}</div>`;
 }
 
 function renderLayerAnimation(type) {
@@ -65,6 +73,7 @@ content.innerHTML = course.sections.map((section, index) => `
       ${renderSteps(section.steps)}
       ${renderLayerAnimation(section.animation)}
       ${renderCards(section.cards)}
+      ${renderExamples(section.examples)}
       ${section.points ? `<ul class="lesson-points">${section.points.map(point => `<li>${point}</li>`).join("")}</ul>` : ""}
       ${section.compare ? `<div class="compare-table" role="table">${section.compareHeaders ? `<div class="compare-row compare-head" role="row">${section.compareHeaders.map(cell => `<span role="columnheader">${cell}</span>`).join("")}</div>` : ""}${section.compare.map(row => `<div class="compare-row" role="row">${row.map((cell, cellIndex) => `<span role="${cellIndex === 0 ? "rowheader" : "cell"}">${cell}</span>`).join("")}</div>`).join("")}</div>` : ""}
       ${section.callout ? `<aside class="lesson-callout"><span>!</span><p>${section.callout}</p></aside>` : ""}
@@ -96,6 +105,13 @@ content.querySelectorAll(".layer-lab").forEach(lab => {
     }
   });
 });
+
+if (course.video) {
+  const videoSection = document.createElement("section");
+  videoSection.className = "video-section reveal";
+  videoSection.innerHTML = `<div class="video-copy"><p class="video-eyebrow">WATCH & NOTICE</p><h2>延伸觀看：把 A1 拆開來看</h2><p>${course.video.description}</p><div class="watch-prompts"><strong>觀看時找三件事</strong><span>① 線材走哪一條路？</span><span>② 哪個零件把材料熔化？</span><span>③ 平台與噴頭如何配合移動？</span></div><a href="${course.video.watchUrl}" target="_blank" rel="noopener noreferrer">在 YouTube 開啟 ↗</a></div><div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/${course.video.youtubeId}" title="${course.video.title}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><p>${course.video.title} · ${course.video.channel}</p></div>`;
+  document.querySelector(".task-card").before(videoSection);
+}
 
 if (course.quiz) {
   const quiz = document.createElement("section");
