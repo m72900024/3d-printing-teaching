@@ -281,7 +281,7 @@ completeButton.addEventListener("click", () => {
   updateComplete();
 });
 
-document.querySelector("#menuButton").addEventListener("click", () => document.querySelector(".course-sidebar").classList.toggle("open"));
+window.setupCourseMenu({ document, window });
 
 const observer = new IntersectionObserver(entries => entries.forEach(entry => {
   if (entry.isIntersecting) entry.target.classList.add("visible");
