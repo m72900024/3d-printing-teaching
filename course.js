@@ -26,6 +26,11 @@ const goalArtByCourse = {
     { src: "../assets/course-03/anime/01-modeling.webp", alt: "從需求與草圖建立桌面收納盒 3D 模型" },
     { src: "../assets/course-03/anime/02-slicing.webp", alt: "切片軟體把模型翻譯成逐層列印路徑" },
     { src: "../assets/course-03/anime/03-printing.webp", alt: "安全觀察第一層並完成桌面收納盒列印" }
+  ],
+  "04": [
+    { src: "../assets/course-04/anime-v2/02-three-platforms.webp", alt: "比較 Thingiverse、Printables 與 MakerWorld 三種模型平台" },
+    { src: "../assets/course-04/anime-v2/03-file-levels.webp", alt: "分辨原始設計、模型交換檔、切片專案與機器指令" },
+    { src: "../assets/course-04/anime-v2/04-download-checklist.webp", alt: "模型偵探檢查來源、授權、尺寸、材料與機型相容性" }
   ]
 };
 const goalArt = goalArtByCourse[course.id];

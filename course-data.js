@@ -129,19 +129,21 @@ window.COURSES = [
     checkpoint:"我知道：模型檔只描述物體形狀，不能直接告訴印表機每一步怎麼走；必須先用切片軟體翻譯並檢查預覽。"
   },
   {
-    id:"04", slug:"04-files.html", stage:"第一次成功", stageNo:"01", duration:"8 分鐘", type:"檔案",
-    title:"模型檔案與下載", subtitle:"分清 STL、3MF，也尊重創作者授權。",
-    lead:"選對檔案格式能保留更多設定；看懂模型授權，則是使用網路作品前應有的基本素養。",
-    goals:["辨認 STL 與 3MF 的用途","檢查模型尺寸與單位","確認模型是否允許修改或商用"],
-    lessonVisual:{src:"../assets/course-04/manga/model-files-detective.webp",alt:"日系可愛漫畫：學生掃描博物館恐龍骨架，檢查模型檔案、尺寸與授權",caption:"下載不是按一下就列印；先查來源、格式、尺寸與授權，才是可靠的模型偵探。",guides:[["看來源","從博物館掃描到數位模型，先確認原始出處。"],["查檔案","STL 著重外形；3MF 還能保存專案資訊。"],["量尺寸","開啟後檢查單位、比例與零件是否完整。"]]},
-    realCase:{eyebrow:"OPEN ACCESS CASE",title:"把博物館藏品帶進教室",body:"Smithsonian 3D 將部分館藏製成可互動與下載的 3D 模型；標示 CC0 的開放資料可自由下載、改作與分享。可先用恐龍、雕塑或科學標本練習檢查來源與授權。",why:"真實世界的 3D 檔案不只來自模型網站，也能是研究、保存與教學資料。",source:"https://3d.si.edu/collections/openaccesshighlights",sourceLabel:"查看 Smithsonian 3D 開放模型"},
+    id:"04", slug:"04-files.html", stage:"第一次成功", stageNo:"01", duration:"18 分鐘", type:"檔案＋平台",
+    title:"模型平台與 3MF 時代", subtitle:"Thingiverse、Printables、MakerWorld：下載的不只是外形。",
+    lead:"以前常下載單一 STL，再自己決定方向、支撐與參數；現在也可能取得包含模型、顏色、平台配置與列印設定的 3MF 專案。但資訊越多，不代表可以跳過檢查。這一課要學會看懂平台、檔案層級、授權與機器相容性。",
+    goals:["比較 Thingiverse、Printables 與 MakerWorld 的下載特色","分辨原始設計、模型、切片專案與機器指令","完成來源、授權、尺寸、材料與相容性檢查"],
+    lessonVisual:{src:"../assets/course-04/anime-v2/00-platforms-overview.webp",width:1200,height:800,alt:"日本動漫風格彩色插圖：學生比較三種模型平台的下載內容，並在列印前檢查授權、尺寸、材料與機器相容性",caption:"三個平台像三間不同的模型圖書館；不論拿到 STL、3MF 或列印設定檔，最後都要通過相容性檢查站。",guides:[["選平台","先看模型來源、作者說明與社群實際成品。"],["認檔案","分清幾何模型、切片專案與機器指令。"],["再檢查","確認授權、尺寸、材料、機型並播放切片預覽。"]]},
     sections:[
-      {title:"STL 與 3MF 有什麼不同",body:"STL 主要保存物體表面幾何，通用而簡單；3MF 能保存更多資訊，例如多個零件、顏色與部分列印設定。",compare:[["STL","幾何外形","相容性高、檔案單純","不含顏色與完整設定"],["3MF","模型與專案資訊","適合保存 Bambu Studio 專案","開啟前仍要檢查來源"]]},
-      {title:"下載後先檢查",body:"不要立刻按列印。先確認模型單位、實際尺寸、零件數量、是否破面，以及作者提供的列印方向和支撐建議。"},
-      {title:"尊重授權與安全",body:"查看模型頁面的授權條款。標示不可商用的作品不能拿來販售；需要標示作者時，分享成品也應附上來源。不要下載或列印可能造成傷害的物品。"}
+      {title:"從單色 STL 到 3MF 專案",body:"STL 通常只保存三角網格外形，簡單、通用，卻不可靠地保存單位、顏色、材料與切片設定。3MF 是為積層製造設計的容器，可以保存單位、多個零件、顏色與材料；在切片軟體中，3MF 也常被用來保存平台配置與列印設定。不過，不同軟體寫入的專案資訊可能不同。",workflowVisual:{label:"STL ↔ 3MF",src:"../assets/course-04/anime-v2/01-stl-vs-3mf.webp",alt:"日本動漫風格彩色比較圖：左側 STL 只有單色三角網格外形，右側 3MF 工具箱包含多零件、顏色、材料與專案設定",caption:"STL 像只帶外形的白色模型盒；3MF 像可裝入更多製造資訊的工具箱，但工具箱裡實際有什麼仍要打開確認。",facts:[["STL","重點是表面幾何；相容性高，常需重新切片。"],["3MF","可保存單位、多零件、顏色與材料等豐富資訊。"],["記住","3MF 可以裝很多資料，不代表每個檔案都裝得一樣多。"]]},compareHeaders:["格式","主要保存","優點","下載後先看"],compare:[["STL","三角網格外形","通用、單純、容易跨軟體","單位、尺寸、方向與破面"],["3MF","模型與製造資訊容器","可含多零件、顏色、材料或專案配置","來源軟體、機型、材料與設定"]],sources:[{label:"3MF Consortium：3MF 與 STL 比較",url:"https://3mf.io/resources/faq/"}]},
+      {title:"三個模型平台，各自擅長什麼？",body:"不要把平台排成新舊或好壞。Thingiverse 像大型通用模型庫，歷史作品多；Printables 常把模型檔、作者說明、列印成果與授權放在一起；MakerWorld 則強調 3MF Print Profile、平台配置與相容機型。三者都可能同時提供 STL 與 3MF，最重要的是看清楚自己下載的內容。",workflowVisual:{label:"3 MODEL PLATFORMS",src:"../assets/course-04/anime-v2/02-three-platforms.webp",alt:"日本動漫風格彩色插圖：三個平等的模型平台站分別呈現大型模型庫、社群說明與成品、以及列印設定檔與機型相容性",caption:"平台提供的不是同一種服務：有人給你模型，有人補充列印經驗，也有人把模型與設定整理成可延續修改的專案。",facts:[["Thingiverse","大型通用模型庫；常下載模型後自行切片。"],["Printables","模型、說明、實際作品與授權資訊容易一起閱讀。"],["MakerWorld","以 3MF 列印設定檔、平台配置與相容機型為特色。"]]},compareHeaders:["平台","下載特色","適合練習","仍要確認"],compare:[["Thingiverse","STL、3MF、OBJ 等通用模型","自己安排方向與切片","作者說明、尺寸與授權"],["Printables","模型檔、說明；部分頁面另有列印檔","閱讀材料、成品與社群回饋","列印檔的機型與材料"],["MakerWorld","模型與 3MF Print Profile","查看平台、顏色與切片設定","設定檔是否適合自己的機器"]],sources:[{label:"Thingiverse 更新紀錄",url:"https://www.thingiverse.com/changelog"},{label:"Printables 模型資料庫",url:"https://www.printables.com/"},{label:"MakerWorld：Print Profile 說明",url:"https://makerworld.com/pt/faq"}]},
+      {title:"下載按鈕旁，其實有四種檔案層級",body:"副檔名不是唯一線索；還要看檔案在工作流程中扮演什麼角色。原始 CAD 可以繼續修改尺寸與參數；模型交換檔描述形狀；切片專案保存平台與設定；G-code 或機器指令則是最後交給特定設備執行的結果。",workflowVisual:{label:"4 FILE LEVELS",src:"../assets/course-04/anime-v2/03-file-levels.webp",alt:"日本動漫風格無文字流程圖：可編輯 CAD、模型交換檔、切片專案、特定印表機指令依序進入工作流程，不相容機器以紅色叉號阻擋",caption:"越接近印表機，檔案越依賴特定設備；別人的機器指令不是通用模型檔。",facts:[["可以修改","STEP、F3D 等原始設計檔保留較多設計資訊。"],["準備列印","STL／3MF 模型進入切片專案，加入平台與參數。"],["特定機器","G-code 或機器指令只能交給相容設備。"]]},details:[{label:"原始設計",title:"STEP、F3D 與參數化 CAD",text:"適合修改孔徑、尺寸與結構；不等於已完成切片。"},{label:"模型交換",title:"STL、3MF、OBJ",text:"描述可交換的幾何或製造資訊，仍需在切片軟體檢查。"},{label:"切片專案",title:"帶有平台與設定的 3MF",text:"可能包含方向、支撐、顏色與參數，但相容性依軟體而異。"},{label:"機器指令",title:"G-code 或設備專用檔",text:"與機型、韌體、尺寸和動作高度相關，不能隨便跨機器使用。"}],callout:"安全原則：來源不明或機型不符的 G-code 不直接執行。下載模型或專案後，優先在自己的切片軟體重新確認。"},
+      {title:"看到 3MF，也不能直接按列印",body:"MakerWorld 的 Print Profile 可以包含模型幾何、物件擺放、方向、速度、強度、支撐、平台黏附與顏色等設定；這能省下準備時間，但設定仍可能針對不同平台尺寸、噴嘴、材料或機型。開啟後先切換成現場設備，再重新切片和逐層預覽。",cards:[{icon:"eye",title:"先看內容",text:"辨認它是模型型 3MF，還是帶平台與參數的切片專案。"},{icon:"repeat",title:"再換設備",text:"套用現場的印表機、噴嘴、平台與材料，不照搬陌生設定。"},{icon:"layers",title:"最後預覽",text:"重新切片，播放每一層，確認支撐、孤島、時間與材料。"}],callout:"3MF 幫你帶來更多資訊，但不代表所有資訊都適合你的機器。"},
+      {title:"下載前的六項檢查",body:"不要只看縮圖漂亮就下載。可靠的模型偵探會查來源與作者、授權、尺寸單位、零件是否完整、材料與噴嘴需求，以及切片預覽和機型相容性。全部確認後，列印按鈕才真正解鎖。",workflowVisual:{label:"MODEL DETECTIVE",src:"../assets/course-04/anime-v2/04-download-checklist.webp",alt:"日本動漫風格彩色插圖：模型偵探依序檢查作者來源、授權、尺寸、零件、材料噴嘴與切片機型相容性",caption:"下載不是終點；把六個線索查完，才能知道這個檔案能不能安全、合法地在教室使用。",facts:[["來源＋授權","找到作者與原始頁面，確認修改、分享與商用條件。"],["模型＋材料","檢查單位、尺寸、零件、線材與噴嘴需求。"],["機器＋預覽","選對設備並重新切片，逐層確認路徑。"]]},details:[{label:"01",title:"來源與作者",text:"優先使用原始發布頁，記錄作者與網址。"},{label:"02",title:"授權方式",text:"確認是否能修改、分享、商用，以及是否必須標示作者。"},{label:"03",title:"尺寸與單位",text:"查看實際長寬高，不只相信縮圖比例。"},{label:"04",title:"零件與說明",text:"確認檔案是否完整，閱讀組裝、方向和支撐建議。"},{label:"05",title:"材料與噴嘴",text:"確認 PLA、PETG、TPU 等需求及噴嘴直徑。"},{label:"06",title:"機型與預覽",text:"套用現場設備，重新切片並播放逐層路徑。"}]},
+      {title:"尊重授權，也保留判斷",body:"平台上的免費下載不代表可以任意販售。看到姓名標示（BY）要附作者；禁止商用（NC）不能拿作品或成品營利；禁止改作（ND）限制修改；相同方式分享（SA）要求衍生作品沿用相同授權。若頁面沒有清楚授權，先詢問作者。",points:["分享作品時保留作者名稱與原始網址","模型、切片設定與實體成品的授權可能需要分別確認","不要下載或列印侵權、危險或不適合校園的物品"],sources:[{label:"Creative Commons：授權條款介紹",url:"https://creativecommons.org/share-your-work/cclicenses/"}]}
     ],
-    task:{title:"模型偵探",text:"找一個可列印模型，記錄來源網址、檔案格式、授權方式、建議材料與是否需要支撐。"},
-    checkpoint:"我能在下載前回答：這個模型可不可以修改、分享或販售？"
+    task:{title:"三平台模型偵探",text:"在 Thingiverse、Printables、MakerWorld 各找一個同類型模型，記錄檔案格式、作者、授權、材料建議、是否有 3MF／列印設定檔，以及能否直接套用到教室設備。最後選出最適合的版本並說明理由。"},
+    checkpoint:"我能在下載前回答：這是模型、切片專案還是機器指令？授權允許什麼？它真的適合教室的設備與材料嗎？"
   },
   {
     id:"05", slug:"05-studio.html", stage:"第一次成功", stageNo:"01", duration:"12 分鐘", type:"軟體",
