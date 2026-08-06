@@ -10,14 +10,22 @@ document.querySelector("#courseNumber").textContent = course.id;
 document.querySelector("#courseTitle").textContent = course.title;
 document.querySelector("#courseSubtitle").textContent = course.subtitle;
 document.querySelector("#courseLead").textContent = course.lead;
-const goalArt = [
-  { src: "../assets/course-01/goals/01-additive-manufacturing.webp", alt: "噴嘴由下往上逐層堆疊材料，製作立體物件" },
-  { src: "../assets/course-01/goals/02-filament-journey.webp", alt: "線材從捲盤經過擠出機與噴嘴，最後成為列印物件" },
-  { src: "../assets/course-01/goals/03-fdm-resin-comparison.webp", alt: "FDM 線材列印與光固化樹脂列印的並列比較" },
-  { src: "../assets/course-01/goals/04-printable-objects.webp", alt: "名牌、齒輪、教學模型與替換支架等適合列印的物品" }
-];
+const goalArtByCourse = {
+  "01": [
+    { src: "../assets/course-01/goals/01-additive-manufacturing.webp", alt: "噴嘴由下往上逐層堆疊材料，製作立體物件" },
+    { src: "../assets/course-01/goals/02-filament-journey.webp", alt: "線材從捲盤經過擠出機與噴嘴，最後成為列印物件" },
+    { src: "../assets/course-01/goals/03-fdm-resin-comparison.webp", alt: "FDM 線材列印與光固化樹脂列印的並列比較" },
+    { src: "../assets/course-01/goals/04-printable-objects.webp", alt: "名牌、齒輪、教學模型與替換支架等適合列印的物品" }
+  ],
+  "02": [
+    { src: "../assets/course-02/goals/01-common-parts.webp", alt: "通用 FDM 印表機的線架、線材路徑、噴頭與熱床" },
+    { src: "../assets/course-02/goals/02-motion-systems.webp", alt: "龍門式、三角洲式與 CoreXY 三種印表機機構" },
+    { src: "../assets/course-02/goals/03-pause-first.webp", alt: "列印異常時手不伸入機器並先按暫停" }
+  ]
+};
+const goalArt = goalArtByCourse[course.id];
 const goalsElement = document.querySelector("#courseGoals");
-goalsElement.innerHTML = course.id === "01"
+goalsElement.innerHTML = goalArt
   ? course.goals.map((goal, index) => `<li class="goal-card"><div class="goal-visual"><img src="${goalArt[index].src}" alt="${goalArt[index].alt}" width="640" height="640" decoding="async"></div><div><small>0${index + 1}</small><p>${goal}</p></div></li>`).join("")
   : course.goals.map(goal => `<li>${goal}</li>`).join("");
 if (course.id === "01") {
@@ -66,6 +74,11 @@ function renderDetails(details) {
 function renderPhotoStudy(study) {
   if (!study) return "";
   return `<figure class="photo-study"><img src="${study.src}" alt="${study.alt}" width="1600" height="824" loading="lazy" decoding="async"><figcaption><span>實物質感比較</span>${study.caption}</figcaption><div class="photo-study-guide">${study.guides.map(guide => `<div><strong>${guide.label}</strong><p>${guide.text}</p></div>`).join("")}</div></figure>`;
+}
+
+function renderStructureGuide(guide) {
+  if (!guide) return "";
+  return `<figure class="structure-guide" id="motion-systems"><img src="${guide.src}" alt="${guide.alt}" width="1200" height="1200" loading="lazy" decoding="async"><figcaption><span>MOTION SYSTEMS</span>${guide.caption}</figcaption><div class="structure-guide-grid">${guide.items.map((item, index) => `<article><small>0${index + 1} · ${item.english}</small><h3>${item.name}</h3><p>${item.text}</p><aside><strong>觀察重點</strong>${item.notice}</aside></article>`).join("")}</div></figure>`;
 }
 
 function renderRealPhotos(photos) {
@@ -134,6 +147,7 @@ content.innerHTML = renderLessonVisual(course.lessonVisual) + course.sections.ma
       ${renderSteps(section.steps)}
       ${renderLayerAnimation(section.animation)}
       ${renderCards(section.cards)}
+      ${renderStructureGuide(section.structureGuide)}
       ${renderRealPhotos(section.realPhotos)}
       ${renderPhotoStudy(section.photoStudy)}
       ${renderDetails(section.details)}
