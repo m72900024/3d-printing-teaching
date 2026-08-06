@@ -75,6 +75,13 @@
 @media(max-width:800px){.structure-guide-grid{grid-template-columns:1fr}.structure-guide>figcaption{align-items:flex-start;flex-direction:column}}
 @media(max-width:600px){.structure-guide{border-width:2px;border-radius:15px;box-shadow:6px 7px 0 #cde95f}.structure-guide>figcaption{border-top-width:2px}.course-page[data-course="02"] .lesson-body{padding-left:20px;padding-right:20px}}
 
+/* Course 02 layout tuning */
+@media(min-width:901px){.course-page[data-course="02"] .goal-box{max-width:900px}.course-page[data-course="02"] .goal-box ul{grid-template-columns:repeat(3,minmax(0,1fr))}.course-page[data-course="02"] .goal-card{grid-template-columns:1fr;align-content:start;gap:12px;min-height:0}.course-page[data-course="02"] .goal-visual{width:100%;height:auto;aspect-ratio:16/10}.course-page[data-course="02"] .goal-card>div:last-child{padding:0 4px 5px}}
+.course-page[data-course="02"] .lesson-section>div{min-width:0}.course-page[data-course="02"] .structure-guide>img{aspect-ratio:4/3;object-position:center 52%}.course-page[data-course="02"] .compare-table{width:100%;max-width:100%;min-width:0;overflow-x:auto}.course-page[data-course="02"] .compare-row{grid-template-columns:120px 150px 150px minmax(250px,1fr);min-width:670px}
+@media(max-width:900px){.course-page[data-course="02"] .goal-box ul{grid-template-columns:1fr}.course-page[data-course="02"] .goal-card{grid-template-columns:104px 1fr;gap:15px;min-height:128px}.course-page[data-course="02"] .goal-visual{width:104px;height:104px}.course-page[data-course="02"] .goal-card>div:last-child{align-self:center}}
+@media(max-width:600px){.course-page[data-course="02"] .structure-guide>img{aspect-ratio:1}.course-page[data-course="02"] .structure-guide-grid article{padding:17px}.course-page[data-course="02"] .compare-table{margin-right:-4px}.course-page[data-course="02"] .compare-row span{padding:11px;font-size:11px}}
+@media(max-width:420px){.course-page[data-course="02"] .goal-card{grid-template-columns:86px 1fr;gap:12px;min-height:108px}.course-page[data-course="02"] .goal-visual{width:86px;height:86px}}
+
 /* Manga explainer */
 .manga-figure{margin:30px 0 0;overflow:hidden;border:3px solid #111814;border-radius:20px;background:#fffdf5;box-shadow:9px 10px 0 #cde95f}
 .manga-figure img{display:block;width:100%;height:auto;aspect-ratio:1600/757;object-fit:cover}
