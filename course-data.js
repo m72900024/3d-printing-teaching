@@ -28,12 +28,15 @@ window.COURSES = [
       ],callout:"判讀口訣：整齊重複多半是製程特徵；突然中斷、錯位或寬窄不一，才要進一步找故障原因。",sources:[
         {label:"UltiMaker：FFF 設計與層高示例",url:"https://ultimaker.com/wp-content/uploads/2024/06/How-to-design-for-FFF-1.pdf"}
       ]},
-      {title:"FDM 與光固化有什麼不同？",body:"本課程以 FDM 為主。FDM 熔化固態線材並逐道堆疊；光固化則以光線選擇性固化槽內的液態樹脂，常見 SLA、DLP 與 MSLA 等形式。光固化通常能呈現更細小的特徵，但列印完成只是第一步，還要處理殘留樹脂、清洗、乾燥與依材料要求後固化。",compareHeaders:["方式","使用材料","表現與優點","完成後處理"],compare:[["FDM","熱塑性線材","大尺寸、功能原型與材料選擇較多","拆支撐、修邊；多數作品可直接使用"],["光固化","光敏液態樹脂","小文字、細紋與微小模型表現佳","戴合適防護清洗、乾燥並依材料要求後固化"]],details:[
+      {title:"FDM 與光固化有什麼不同？",anchor:"fdm-resin-comparison",body:"本課程以 FDM 為主。FDM 熔化固態線材並逐道堆疊；光固化則以光線選擇性固化槽內的液態樹脂，常見 SLA、DLP 與 MSLA 等形式。光固化通常能呈現更細小的特徵，但列印完成只是第一步，還要處理殘留樹脂、清洗、乾燥與依材料要求後固化。",compareHeaders:["方式","使用材料","表現與優點","完成後處理"],compare:[["FDM","熱塑性線材","大尺寸、功能原型與材料選擇較多","拆支撐、修邊；多數作品可直接使用"],["光固化","光敏液態樹脂","小文字、細紋與微小模型表現佳","戴合適防護清洗、乾燥並依材料要求後固化"]],details:[
         {label:"成形方式",title:"熔融擠出 vs. 光照固化",text:"FDM 由噴嘴畫出路徑；光固化一次形成一層中的受光區域。"},
         {label:"支撐痕跡",title:"兩者都要考慮方向",text:"FDM 要避免大懸空；光固化還要兼顧排液、吸附力與支撐接點。"},
         {label:"工作流程",title:"光固化的列印後工作較多",text:"未固化樹脂不能直接徒手接觸；零件與工作區都需依材料說明處理。"},
         {label:"怎麼選",title:"先問尺寸、細節、用途與設備",text:"大型教具或功能原型多從 FDM 開始；微小精細模型才考慮光固化。"}
-      ],callout:"安全重點：液態與未完全固化的樹脂要避免皮膚接觸，使用相容手套與眼部防護，保持有效通風；清洗溶劑要加蓋並遠離火源。兩種方法都應遵守設備、材料標籤與安全資料表。",sources:[
+      ],videoCompare:{title:"用影片看懂兩種差異",intro:"先看成品表面，再看光固化從列印到清洗、後固化的完整工作流程。影片來自外部頻道；觀看後請用上方表格整理自己的比較結論。",items:[
+        {label:"成品表面",youtubeId:"BUR6Nyt7x_g",title:"Comparing Resolution: FDM vs SLA 3D Printers",channel:"Formlabs",description:"短片直接並排比較 FDM 層紋與 SLA 的細節、表面表現。Formlabs 是 SLA 設備廠商，觀看時也要保留品牌立場。",watchUrl:"https://www.youtube.com/watch?v=BUR6Nyt7x_g",prompt:"觀察同一種細小特徵，在兩種製程中清楚度有何不同？"},
+        {label:"操作流程",youtubeId:"QsiexLabCUA",title:"光固化 3D 列印機操作示範",channel:"Teacher Xiao Huang",description:"中文示範樹脂列印、取件、清洗與後固化，適合認識為什麼光固化的列印後工作較多。",watchUrl:"https://www.youtube.com/watch?v=QsiexLabCUA",prompt:"記下成品離開機器後，還要完成哪幾個步驟？"}
+      ]},callout:"安全重點：液態與未完全固化的樹脂要避免皮膚接觸，使用相容手套與眼部防護，保持有效通風；清洗溶劑要加蓋並遠離火源。兩種方法都應遵守設備、材料標籤與安全資料表。",sources:[
         {label:"CDC／NIOSH：桌上型光固化安全圖解",url:"https://www.cdc.gov/niosh/media/pdfs/2025/01/Safe-3D-Printing.pdf"},
         {label:"Formlabs：SLA 清洗與後固化流程",url:"https://formlabs.com/post-processing/wash-cure/"}
       ]},
