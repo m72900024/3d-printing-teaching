@@ -27,7 +27,7 @@ if (course.id === "01") {
   lessonOutline.innerHTML = `<strong>本課快速導覽</strong><div>
     <a href="#courseContent"><span>01</span>原理與流程</a>
     <a href="#layer-animation"><span>02</span>逐層動畫</a>
-    <a href="#real-examples"><span>03</span>真實案例</a>
+    <a href="#real-photo-cases"><span>03</span>真實照片</a>
     <a href="#lesson-video"><span>04</span>延伸影片</a>
     <a href="#quick-check"><span>05</span>快速測驗</a>
   </div>`;
@@ -66,6 +66,11 @@ function renderDetails(details) {
 function renderPhotoStudy(study) {
   if (!study) return "";
   return `<figure class="photo-study"><img src="${study.src}" alt="${study.alt}" width="1600" height="824" loading="lazy" decoding="async"><figcaption><span>實物質感比較</span>${study.caption}</figcaption><div class="photo-study-guide">${study.guides.map(guide => `<div><strong>${guide.label}</strong><p>${guide.text}</p></div>`).join("")}</div></figure>`;
+}
+
+function renderRealPhotos(photos) {
+  if (!photos) return "";
+  return `<div class="real-photo-block" id="real-photo-cases"><div class="real-photo-heading"><small>REAL PRINTS</small><h3>這些都是真實列印成品</h3><p>從照片觀察：3D 列印的價值不只在「做得出來」，而是在少量、客製、快速修改或複雜形狀時特別有用。</p></div><div class="real-photo-grid">${photos.map(photo => `<article class="real-photo-card"><a class="real-photo-image" href="${photo.source}" target="_blank" rel="noopener noreferrer"><img src="${photo.src}" alt="${photo.alt}" width="1280" height="960" loading="lazy" decoding="async"><span>查看原始照片 ↗</span></a><div class="real-photo-copy"><small>${photo.tag}</small><h4>${photo.title}</h4><p>${photo.text}</p><a href="${photo.source}" target="_blank" rel="noopener noreferrer">${photo.credit}</a></div></article>`).join("")}</div></div>`;
 }
 
 function renderSources(sources) {
@@ -129,6 +134,7 @@ content.innerHTML = renderLessonVisual(course.lessonVisual) + course.sections.ma
       ${renderSteps(section.steps)}
       ${renderLayerAnimation(section.animation)}
       ${renderCards(section.cards)}
+      ${renderRealPhotos(section.realPhotos)}
       ${renderPhotoStudy(section.photoStudy)}
       ${renderDetails(section.details)}
       ${renderExamples(section.examples)}

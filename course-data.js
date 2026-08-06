@@ -41,6 +41,10 @@ window.COURSES = [
         {icon:"check",title:"很適合",text:"客製名牌、立體教具、外觀原型、治具，以及買不到的非安全關鍵替換零件。"},
         {icon:"question",title:"先評估",text:"接觸食物、高溫、長期日曬、承受反覆載重，或尺寸精度會影響功能。"},
         {icon:"repeat",title:"未必划算",text:"需要數萬件完全相同的簡單商品，或後處理時間比製作本身還長。"}
+      ],realPhotos:[
+        {src:"../assets/course-01/real-cases/functional-prototypes.jpg",alt:"桌面上擺放多件真實 3D 列印功能原型，包括支架與機構零件",tag:"快速試做",title:"先印原型，再修改設計",text:"功能原型能用來檢查尺寸、組裝與操作方式；發現問題時只需修改模型再印一次，不必先製作昂貴模具。",credit:"照片：Svitlana Lozova／CC BY-SA 4.0",source:"https://commons.wikimedia.org/wiki/File:3D_printing_functional_prototypes.jpg"},
+        {src:"../assets/course-01/real-cases/coffee-tamper.jpg",alt:"放在咖啡機旁的真實 3D 列印咖啡填壓器",tag:"生活客製",title:"需要一件，就做合適的一件",text:"這個咖啡填壓器示範了少量、指定尺寸的生活工具。若零件不涉及高風險，3D 列印很適合先做出來試用。",credit:"照片：Elekes Andor／CC BY-SA 4.0",source:"https://commons.wikimedia.org/wiki/File:Coffee_press_-_printed_object.jpg"},
+        {src:"../assets/course-01/real-cases/aortic-root-model.jpg",alt:"手中拿著透明的 3D 列印主動脈根部解剖模型",tag:"複雜形狀",title:"把難以觀察的構造拿在手上",text:"解剖模型可把影像資料轉成立體物件，協助溝通、教學與尺寸理解。真正醫療用途必須由專業人員依規範執行。",credit:"照片：Jan Witowski／CC BY-SA 4.0",source:"https://commons.wikimedia.org/wiki/File:3D_printed_aortic_root_with_valve.jpg"}
       ],details:[
         {label:"適合",title:"十個不同名字的桌牌",text:"每件文字都不同，不必做十套模具，修改檔案就能逐件客製。"},
         {label:"適合但要量測",title:"停產電器的旋鈕",text:"若不是安全關鍵零件，可先確認軸孔尺寸、溫度、受力與材料再試作。"},
