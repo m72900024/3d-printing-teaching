@@ -28,3 +28,4 @@ python -m http.server 4173
 
 - [版本更新摘要](CHANGELOG.md)
 - [2026-08-05 網站建置與修改細節](docs/development-log-2026-08-05.md)
+- [2026-08-06 FDM 與光固化影片補充](docs/development-log-2026-08-06.md)
