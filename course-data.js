@@ -85,11 +85,11 @@ window.COURSES = [
     lead:"不同廠牌的外觀和功能會改變，但 FDM 印表機都需要送入線材、熔化材料、控制噴頭與平台的位置。先掌握共通零件，再比較龍門式、三角洲式與 CoreXY，就能把知識帶到不同機器上。",
     goals:["辨認噴頭、熱床、線架與線材路徑","比較龍門式、三角洲式與 CoreXY 的運動方式","遇到異常時先暫停、等停止，再安全處理"],
     sections:[
-      {title:"先找出所有 FDM 都有的工作系統",body:"不要先背品牌或型號。面對任何一台 FDM 印表機，都可以沿著材料的旅程觀察：線材從線架出發，經過送料與導引，進入熱端熔化，再由噴嘴鋪到列印平台上。",details:[
-        {label:"供料",title:"線架與線材捲盤",text:"線架讓捲盤順暢轉動。線材若纏結、阻力太大或路徑被折彎，就可能造成送料不穩。"},
-        {label:"送料",title:"擠出機與導引路徑",text:"擠出機用齒輪推送線材；有些裝在噴頭上，有些裝在機架上，再經導管送到熱端。"},
-        {label:"加熱",title:"熱端、加熱塊與噴嘴",text:"熱端把線材加熱到可流動狀態，噴嘴控制擠出位置。列印中與結束後一段時間都可能燙傷。"},
-        {label:"承托",title:"熱床與列印平台",text:"平台承托第一層；熱床提供適當溫度幫助附著。平台也可能移動，因此不能只注意噴頭。"}
+      {title:"先找出所有 FDM 都有的工作系統",body:"不要先背品牌或型號。面對任何一台 FDM 印表機，都可以沿著材料的旅程觀察：線材從線架出發，經過送料與導引，進入熱端熔化，再由噴嘴鋪到列印平台上。",partGallery:[
+        {label:"供料",title:"線架與線材捲盤",src:"../assets/course-02/real-parts/01-filament-spools.webp",alt:"架上排列多捲不同顏色的 3D 列印線材",text:"線架讓捲盤順暢轉動。線材若纏結、阻力太大或路徑被折彎，就可能造成送料不穩。",look:"先找圓形捲盤，再沿著露出的線材確認它能否順暢放線。",credit:"照片：westonhighschool library／CC BY-SA 2.0",source:"https://commons.wikimedia.org/wiki/File:3D_printing_filament.jpg"},
+        {label:"送料",title:"擠出機與導引路徑",src:"../assets/course-02/real-parts/02-extruder-path.webp",alt:"真實 3D 印表機的雙噴頭、導引管與線材路徑",text:"擠出機用齒輪推送線材；有些裝在噴頭上，有些裝在機架上，再經導管送到熱端。",look:"透明導管與上方線路把材料帶到移動中的列印頭；擠出齒輪也可能藏在外殼內。",credit:"照片：John Seb Barber／CC BY 2.0",source:"https://commons.wikimedia.org/wiki/File:3d_printer_close_up.jpg"},
+        {label:"加熱",title:"熱端、加熱塊與噴嘴",src:"../assets/course-02/real-parts/03-hotend-nozzle.webp",alt:"拆下的 J-Head 熱端與金屬噴嘴實物照片",text:"熱端把線材加熱到可流動狀態，噴嘴控制擠出位置。列印中與結束後一段時間都可能燙傷。",look:"最下方的金屬尖端是噴嘴；旁邊導線連接加熱器與溫度感測元件。",credit:"照片：Brian Reifsnyder／GFDL",source:"https://commons.wikimedia.org/wiki/File:J-Head_Nozzle.jpg"},
+        {label:"承托",title:"熱床與列印平台",src:"../assets/course-02/real-parts/04-build-plate.webp",alt:"3D 印表機正在平台上列印綠色零件",text:"平台承托第一層；熱床提供適當溫度幫助附著。平台也可能移動，因此不能只注意噴頭。",look:"綠色零件下方的平面就是列印平台；第一層必須平整而且穩定黏附。",credit:"照片：Shixart1985／CC BY 2.0",source:"https://commons.wikimedia.org/wiki/File:3D_printer_working_on_green_model_parts.jpg"}
       ],callout:"觀察口訣：從捲盤沿著線材一路追到噴嘴，再看材料落在哪個平台上。無論機器外殼長什麼樣，都能先找到這四個系統。"},
       {title:"骨架不同，移動方法也不同",body:"印表機必須控制 X、Y、Z 三個方向。不同機構的差別，不是能不能列印，而是馬達、皮帶、連桿、噴頭與平台如何分工移動。",structureGuide:{src:"../assets/course-02/motion-systems.webp",alt:"三種品牌中立的 FDM 印表機機構：左為龍門式，中為三角洲式，右為 CoreXY 箱型框架",caption:"看外形只是第一步；真正的分類依據是噴頭、平台、馬達與傳動系統如何共同完成 XYZ 移動。",items:[
         {name:"龍門式",english:"CARTESIAN GANTRY",text:"以互相垂直的滑軌分配 X、Y、Z。常見形式是噴頭左右、龍門上下、平台前後移動，結構直觀、容易觀察。",notice:"觀察平台是否前後移動，以及噴頭或橫梁負責哪一軸。"},
