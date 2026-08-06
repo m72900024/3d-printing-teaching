@@ -21,6 +21,11 @@ const goalArtByCourse = {
     { src: "../assets/course-02/goals/01-common-parts.webp", alt: "通用 FDM 印表機的線架、線材路徑、噴頭與熱床" },
     { src: "../assets/course-02/goals/02-motion-systems.webp", alt: "龍門式、三角洲式與 CoreXY 三種印表機機構" },
     { src: "../assets/course-02/goals/03-pause-first.webp", alt: "列印異常時手不伸入機器並先按暫停" }
+  ],
+  "03": [
+    { src: "../assets/course-03/anime/01-modeling.webp", alt: "從需求與草圖建立桌面收納盒 3D 模型" },
+    { src: "../assets/course-03/anime/02-slicing.webp", alt: "切片軟體把模型翻譯成逐層列印路徑" },
+    { src: "../assets/course-03/anime/03-printing.webp", alt: "安全觀察第一層並完成桌面收納盒列印" }
   ]
 };
 const goalArt = goalArtByCourse[course.id];
@@ -76,6 +81,11 @@ function renderPartGallery(items) {
   return `<div class="machine-part-gallery">${items.map((item, index) => `<article class="machine-part-card"><div class="machine-part-photo"><img src="${item.src}" alt="${item.alt}" width="1200" height="800" loading="lazy" decoding="async"><span>GPT 彩色教學圖</span></div><div class="machine-part-copy"><small>${String(index + 1).padStart(2,"0")} · ${item.label}</small><h3>${item.title}</h3><p>${item.text}</p><aside><strong>圖解觀察</strong><span>${item.look}</span></aside><span class="machine-part-credit">${item.credit}</span></div></article>`).join("")}</div>`;
 }
 
+function renderWorkflowVisual(visual) {
+  if (!visual) return "";
+  return `<figure class="workflow-visual"><div class="workflow-visual-image"><img src="${visual.src}" alt="${visual.alt}" width="1200" height="800" loading="lazy" decoding="async"><span>${visual.label}</span></div><figcaption>${visual.caption}</figcaption><div class="workflow-facts">${visual.facts.map(fact => `<div><strong>${fact[0]}</strong><p>${fact[1]}</p></div>`).join("")}</div></figure>`;
+}
+
 function renderPhotoStudy(study) {
   if (!study) return "";
   return `<figure class="photo-study"><img src="${study.src}" alt="${study.alt}" width="1600" height="824" loading="lazy" decoding="async"><figcaption><span>實物質感比較</span>${study.caption}</figcaption><div class="photo-study-guide">${study.guides.map(guide => `<div><strong>${guide.label}</strong><p>${guide.text}</p></div>`).join("")}</div></figure>`;
@@ -124,7 +134,7 @@ function renderLessonVisual(visual) {
   if (!visual) return "";
   return `<section class="series-visual reveal">
     <figure>
-      <img src="${visual.src}" alt="${visual.alt}" width="1600" height="1024" loading="eager" decoding="async">
+      <img src="${visual.src}" alt="${visual.alt}" width="${visual.width || 1600}" height="${visual.height || 1024}" loading="eager" decoding="async">
       <figcaption><span>GPT 漫畫圖解</span>${visual.caption}</figcaption>
     </figure>
     <div class="series-guide">${visual.guides.map((guide, index) => `<div><small>0${index + 1}</small><strong>${guide[0]}</strong><p>${guide[1]}</p></div>`).join("")}</div>
@@ -156,6 +166,7 @@ content.innerHTML = renderLessonVisual(course.lessonVisual) + course.sections.ma
       ${renderRealPhotos(section.realPhotos)}
       ${renderPhotoStudy(section.photoStudy)}
       ${renderPartGallery(section.partGallery)}
+      ${renderWorkflowVisual(section.workflowVisual)}
       ${renderDetails(section.details)}
       ${renderExamples(section.examples)}
       ${section.points ? `<ul class="lesson-points">${section.points.map(point => `<li>${point}</li>`).join("")}</ul>` : ""}
