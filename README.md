@@ -23,3 +23,8 @@ python -m http.server 4173
 ## 發布
 
 推送到 `main` 分支後，由 GitHub Actions 自動部署到 GitHub Pages。
+
+## 修改紀錄
+
+- [版本更新摘要](CHANGELOG.md)
+- [2026-08-05 網站建置與修改細節](docs/development-log-2026-08-05.md)
