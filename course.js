@@ -73,7 +73,7 @@ function renderDetails(details) {
 
 function renderPartGallery(items) {
   if (!items) return "";
-  return `<div class="machine-part-gallery">${items.map((item, index) => `<article class="machine-part-card"><a class="machine-part-photo" href="${item.source}" target="_blank" rel="noopener noreferrer"><img src="${item.src}" alt="${item.alt}" width="900" height="600" loading="lazy" decoding="async"><span>實際設備照片 ↗</span></a><div class="machine-part-copy"><small>${String(index + 1).padStart(2,"0")} · ${item.label}</small><h3>${item.title}</h3><p>${item.text}</p><aside><strong>照片觀察</strong><span>${item.look}</span></aside><a class="machine-part-credit" href="${item.source}" target="_blank" rel="noopener noreferrer">${item.credit} ↗</a></div></article>`).join("")}</div>`;
+  return `<div class="machine-part-gallery">${items.map((item, index) => `<article class="machine-part-card"><div class="machine-part-photo"><img src="${item.src}" alt="${item.alt}" width="1200" height="800" loading="lazy" decoding="async"><span>GPT 彩色教學圖</span></div><div class="machine-part-copy"><small>${String(index + 1).padStart(2,"0")} · ${item.label}</small><h3>${item.title}</h3><p>${item.text}</p><aside><strong>圖解觀察</strong><span>${item.look}</span></aside><span class="machine-part-credit">${item.credit}</span></div></article>`).join("")}</div>`;
 }
 
 function renderPhotoStudy(study) {
