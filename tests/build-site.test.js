@@ -40,3 +40,12 @@ test("fingerprints every local stylesheet and script reference", () => {
     }
   }
 });
+
+test("refuses to use the source directory as build output", () => {
+  const rootDir = fs.mkdtempSync(path.join(os.tmpdir(), "3d-course-source-"));
+  const marker = path.join(rootDir, "keep-me.txt");
+  fs.writeFileSync(marker, "source stays intact");
+
+  assert.throws(() => buildSite({ rootDir, outputDir: rootDir }), /output directory must differ/i);
+  assert.equal(fs.readFileSync(marker, "utf8"), "source stays intact");
+});

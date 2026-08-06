@@ -192,6 +192,9 @@ function fingerprintHtmlAssets(htmlFile, outputDir) {
 function buildSite({ rootDir, outputDir }) {
   const root = path.resolve(rootDir);
   const output = path.resolve(outputDir);
+  if (output === root || root.startsWith(output + path.sep)) {
+    throw new Error("Build output directory must differ from and must not contain the source directory");
+  }
   fs.rmSync(output, { recursive: true, force: true });
   fs.mkdirSync(output, { recursive: true });
 
