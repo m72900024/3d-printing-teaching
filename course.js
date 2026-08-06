@@ -71,6 +71,11 @@ function renderDetails(details) {
   return `<div class="detail-grid">${details.map((detail, index) => `<article class="detail-card"><div><span>${String(index + 1).padStart(2,"0")}</span><small>${detail.label}</small></div><h3>${detail.title}</h3><p>${detail.text}</p></article>`).join("")}</div>`;
 }
 
+function renderPartGallery(items) {
+  if (!items) return "";
+  return `<div class="machine-part-gallery">${items.map((item, index) => `<article class="machine-part-card"><a class="machine-part-photo" href="${item.source}" target="_blank" rel="noopener noreferrer"><img src="${item.src}" alt="${item.alt}" width="900" height="600" loading="lazy" decoding="async"><span>實際設備照片 ↗</span></a><div class="machine-part-copy"><small>${String(index + 1).padStart(2,"0")} · ${item.label}</small><h3>${item.title}</h3><p>${item.text}</p><aside><strong>照片觀察</strong><span>${item.look}</span></aside><a class="machine-part-credit" href="${item.source}" target="_blank" rel="noopener noreferrer">${item.credit} ↗</a></div></article>`).join("")}</div>`;
+}
+
 function renderPhotoStudy(study) {
   if (!study) return "";
   return `<figure class="photo-study"><img src="${study.src}" alt="${study.alt}" width="1600" height="824" loading="lazy" decoding="async"><figcaption><span>實物質感比較</span>${study.caption}</figcaption><div class="photo-study-guide">${study.guides.map(guide => `<div><strong>${guide.label}</strong><p>${guide.text}</p></div>`).join("")}</div></figure>`;
@@ -150,6 +155,7 @@ content.innerHTML = renderLessonVisual(course.lessonVisual) + course.sections.ma
       ${renderStructureGuide(section.structureGuide)}
       ${renderRealPhotos(section.realPhotos)}
       ${renderPhotoStudy(section.photoStudy)}
+      ${renderPartGallery(section.partGallery)}
       ${renderDetails(section.details)}
       ${renderExamples(section.examples)}
       ${section.points ? `<ul class="lesson-points">${section.points.map(point => `<li>${point}</li>`).join("")}</ul>` : ""}
