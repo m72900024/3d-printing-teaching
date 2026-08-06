@@ -68,6 +68,11 @@ function renderPhotoStudy(study) {
   return `<figure class="photo-study"><img src="${study.src}" alt="${study.alt}" width="1600" height="824" loading="lazy" decoding="async"><figcaption><span>實物質感比較</span>${study.caption}</figcaption><div class="photo-study-guide">${study.guides.map(guide => `<div><strong>${guide.label}</strong><p>${guide.text}</p></div>`).join("")}</div></figure>`;
 }
 
+function renderVideoCompare(videoCompare) {
+  if (!videoCompare) return "";
+  return `<section class="section-video-block" aria-label="${videoCompare.title}"><div class="section-video-heading"><small>WATCH & COMPARE</small><h3>${videoCompare.title}</h3><p>${videoCompare.intro}</p></div><div class="section-video-grid">${videoCompare.items.map(video => `<article class="section-video-card"><div class="section-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/${video.youtubeId}" title="${video.title}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="section-video-copy"><small>${video.label}</small><h4>${video.title}</h4><p>${video.description}</p><aside><strong>觀看任務</strong><span>${video.prompt}</span></aside><a href="${video.watchUrl}" target="_blank" rel="noopener noreferrer">在 YouTube 開啟 ↗</a><em>${video.channel}</em></div></article>`).join("")}</div></section>`;
+}
+
 function renderSources(sources) {
   if (!sources) return "";
   return `<aside class="lesson-sources"><strong>延伸資料</strong><div>${sources.map(source => `<a href="${source.url}" target="_blank" rel="noopener noreferrer">${source.label} →</a>`).join("")}</div></aside>`;
@@ -118,7 +123,7 @@ function renderRealCase(realCase) {
 
 const content = document.querySelector("#courseContent");
 content.innerHTML = renderLessonVisual(course.lessonVisual) + course.sections.map((section, index) => `
-  <section class="lesson-section reveal"${section.examples ? ` id="real-examples"` : ""}>
+  <section class="lesson-section reveal"${section.anchor ? ` id="${section.anchor}"` : section.examples ? ` id="real-examples"` : ""}>
     <span class="section-count">${String(index + 1).padStart(2,"0")}</span>
     <div>
       <h2>${section.title}</h2>
@@ -134,6 +139,7 @@ content.innerHTML = renderLessonVisual(course.lessonVisual) + course.sections.ma
       ${renderExamples(section.examples)}
       ${section.points ? `<ul class="lesson-points">${section.points.map(point => `<li>${point}</li>`).join("")}</ul>` : ""}
       ${section.compare ? `<div class="compare-table" role="table">${section.compareHeaders ? `<div class="compare-row compare-head" role="row">${section.compareHeaders.map(cell => `<span role="columnheader">${cell}</span>`).join("")}</div>` : ""}${section.compare.map(row => `<div class="compare-row" role="row">${row.map((cell, cellIndex) => `<span role="${cellIndex === 0 ? "rowheader" : "cell"}">${cell}</span>`).join("")}</div>`).join("")}</div>` : ""}
+      ${renderVideoCompare(section.videoCompare)}
       ${section.callout ? `<aside class="lesson-callout"><span>!</span><p>${section.callout}</p></aside>` : ""}
       ${renderSources(section.sources)}
     </div>
