@@ -49,6 +49,25 @@ test("publishes the A1 first-print workflow and safety guidance", () => {
   assert.match(lesson, /wiki\.bambulab\.com\/en\/filament-acc\/acc\/print-finish-adv/);
 });
 
+test("publishes Course 06 goal and lesson illustrations with credits", () => {
+  const { outputDir } = buildTemporarySite("3d-course-a1-illustrations-");
+  const courseScript = fs.readFileSync(path.join(outputDir, "course.js"), "utf8");
+  const courseData = fs.readFileSync(path.join(outputDir, "course-data.js"), "utf8");
+  const files = [
+    "a1-preflight.webp",
+    "first-layer-four-states.webp",
+    "cooled-removal-five-steps.webp"
+  ];
+
+  for (const file of files) {
+    assert.ok(fs.existsSync(path.join(outputDir, "assets/course-06/illustrations", file)));
+    assert.match(courseScript, new RegExp(file));
+    assert.match(courseData, new RegExp(file));
+  }
+  assert.equal((courseData.match(/label:"GPT 教學圖解"/g) || []).length, 3);
+  assert.equal((courseData.match(/內容參考：Bambu Lab Wiki/g) || []).length, 3);
+});
+
 test("fingerprints every local stylesheet and script reference", () => {
   const { outputDir } = buildTemporarySite("3d-course-assets-");
 
