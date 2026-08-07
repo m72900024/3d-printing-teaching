@@ -25,6 +25,30 @@ test("publishes twelve course pages with static core content", () => {
   assert.match(last, /我能獨立完成作品/);
 });
 
+test("publishes the A1 first-print workflow and safety guidance", () => {
+  const { outputDir } = buildTemporarySite("3d-course-a1-first-print-");
+  const lesson = fs.readFileSync(path.join(outputDir, "courses/06-first-print.html"), "utf8");
+
+  for (const expected of [
+    "Bambu Lab A1",
+    "紋理 PEI 平台",
+    "0.4 mm 噴嘴",
+    "0.20 mm 標準",
+    "自動調平",
+    "正常",
+    "噴嘴過高",
+    "噴嘴過低",
+    "未黏住",
+    "等待噴頭完全停止",
+    "等待平台降溫",
+    "20 分鐘內"
+  ]) assert.match(lesson, new RegExp(expected));
+
+  assert.match(lesson, /wiki\.bambulab\.com\/en\/p1\/manual\/print-from-bambu-studio/);
+  assert.match(lesson, /wiki\.bambulab\.com\/en\/knowledge-sharing\/identify-and-fix-first-layer-issues-with-a-test-print/);
+  assert.match(lesson, /wiki\.bambulab\.com\/en\/filament-acc\/acc\/print-finish-adv/);
+});
+
 test("fingerprints every local stylesheet and script reference", () => {
   const { outputDir } = buildTemporarySite("3d-course-assets-");
 
