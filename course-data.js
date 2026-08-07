@@ -171,17 +171,19 @@ window.COURSES = [
       {
         title:"列印前檢查：先把條件固定",
         body:"第一次列印以教室指定的 Bambu Lab A1 為準。使用 PLA、0.4 mm 噴嘴、紋理 PEI 平台與 0.20 mm 標準預設；送出前確認平台空白、鋼板貼平，切片預覽沒有空中起印或超出平台。",
-        points:["印表機：Bambu Lab A1","線材：PLA","噴嘴：0.4 mm","平台：紋理 PEI 平台","列印設定：0.20 mm 標準"]
+        manga:{label:"GPT 教學圖解",src:"../assets/course-06/illustrations/a1-preflight.webp",alt:"日系教學圖：A1 第一次列印前依序確認平台、PLA 線材、0.4 mm 噴嘴與切片預覽",caption:"先把機器、平台、線材、噴嘴與切片預覽逐項對好，再把工作送到 A1。"},
+        points:["印表機：Bambu Lab A1","線材：PLA","噴嘴：0.4 mm","平台：紋理 PEI 平台","列印設定：0.20 mm 標準"],
+        sources:[{label:"內容參考：Bambu Lab Wiki｜從 Bambu Studio 列印",url:"https://wiki.bambulab.com/en/p1/manual/print-from-bambu-studio"}]
       },
       {
         title:"從 Bambu Studio 傳送到 A1",
         body:"完成切片與預覽後按下列印，核對目標機器、平台與線材，再保留自動調平並送出。不同版本的按鈕位置可能改變，因此依功能名稱核對，不靠畫面位置死記。",
-        steps:["確認目標印表機顯示為教室指定的 A1。","確認平台類型與機器上的紋理 PEI 平台一致。","確認線材為目前裝入的 PLA。","保留自動調平，送出後留在機器旁等待第一層。"],
-        sources:[{label:"Bambu Lab Wiki｜從 Bambu Studio 列印",url:"https://wiki.bambulab.com/en/p1/manual/print-from-bambu-studio"}]
+        steps:["確認目標印表機顯示為教室指定的 A1。","確認平台類型與機器上的紋理 PEI 平台一致。","確認線材為目前裝入的 PLA。","保留自動調平，送出後留在機器旁等待第一層。"]
       },
       {
         title:"第一層判讀：看見地基再離開",
         body:"第一層必須連續、平整並黏在平台上。不要只看螢幕顯示正在列印，要親眼確認線條狀態。",
+        manga:{label:"GPT 教學圖解",src:"../assets/course-06/illustrations/first-layer-four-states.webp",alt:"日系教學圖：正常、噴嘴過高、噴嘴過低與未黏住四種第一層狀況",caption:"先看線條是否相接，再看有沒有刮痕、波紋、翹起或被噴嘴拖走。"},
         compareHeaders:["狀況","看起來","代表什麼","現在怎麼做"],
         compare:[
           ["正常","線條相接、表面平整、穩定黏住","高度與附著大致正常","繼續觀察到第一層完成"],
@@ -189,7 +191,7 @@ window.COURSES = [
           ["噴嘴過低","表面刮痕、波紋或材料向兩側堆起","噴嘴過度擠壓第一層","暫停，交由教師檢查"],
           ["未黏住","線材捲起、跟著噴嘴移動或堆成亂線","平台附著失敗","立即暫停或停止"]
         ],
-        sources:[{label:"Bambu Lab Wiki｜辨認與修正第一層問題",url:"https://wiki.bambulab.com/en/knowledge-sharing/identify-and-fix-first-layer-issues-with-a-test-print"}]
+        sources:[{label:"內容參考：Bambu Lab Wiki｜辨認與修正第一層問題",url:"https://wiki.bambulab.com/en/knowledge-sharing/identify-and-fix-first-layer-issues-with-a-test-print"}]
       },
       {
         title:"異常先停，不伸手救",
@@ -199,8 +201,9 @@ window.COURSES = [
       {
         title:"完成後冷卻取件",
         body:"列印完成後等待平台降溫，再取下彈簧鋼板並輕微彎曲，讓作品自然鬆開。不要過度彎折鋼板；刮刀不是初學者的優先方法，必須使用時刀口不可朝向手掌。",
+        manga:{label:"GPT 教學圖解",src:"../assets/course-06/illustrations/cooled-removal-five-steps.webp",alt:"日系教學圖：列印完成、等待降溫、取下鋼板、彎曲取件與清潔平台五步驟",caption:"從畫面顯示完成到清潔平台，每一步都在機器停止且平台冷卻後進行。"},
         steps:["確認畫面顯示工作完成。","等待平台降溫，不急著徒手拉作品。","握住鋼板把手並取下鋼板。","輕微彎曲鋼板，讓作品自然鬆開。","移除裙邊並依教室規則清潔平台。"],
-        sources:[{label:"Bambu Lab Wiki｜列印完成後的取件與清潔",url:"https://wiki.bambulab.com/en/filament-acc/acc/print-finish-adv"}]
+        sources:[{label:"內容參考：Bambu Lab Wiki｜列印完成後的取件與清潔",url:"https://wiki.bambulab.com/en/filament-acc/acc/print-finish-adv"}]
       }
     ],
     task:{title:"A1 第一件作品",text:"使用教師指定、預估 20 分鐘內完成的小型 PLA 模型，以 A1、0.4 mm 噴嘴、紋理 PEI 平台與 0.20 mm 標準設定完成列印。記錄預估時間、實際時間、第一層觀察結果，以及取件前平台是否已冷卻。"},

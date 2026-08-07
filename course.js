@@ -31,6 +31,11 @@ const goalArtByCourse = {
     { src: "../assets/course-04/anime-v2/02-three-platforms.webp", alt: "比較 Thingiverse、Printables 與 MakerWorld 三種模型平台" },
     { src: "../assets/course-04/anime-v2/03-file-levels.webp", alt: "分辨原始設計、模型交換檔、切片專案與機器指令" },
     { src: "../assets/course-04/anime-v2/04-download-checklist.webp", alt: "模型偵探檢查來源、授權、尺寸、材料與機型相容性" }
+  ],
+  "06": [
+    { src: "../assets/course-06/illustrations/a1-preflight.webp", alt: "A1 第一次列印前依序確認平台、PLA 線材、0.4 mm 噴嘴與切片預覽" },
+    { src: "../assets/course-06/illustrations/first-layer-four-states.webp", alt: "正常、噴嘴過高、噴嘴過低與未黏住四種第一層狀況對照" },
+    { src: "../assets/course-06/illustrations/cooled-removal-five-steps.webp", alt: "列印完成、等待降溫、取下鋼板、彎曲取件與清潔平台五步驟" }
   ]
 };
 const goalArt = goalArtByCourse[course.id];
@@ -161,7 +166,7 @@ content.innerHTML = renderLessonVisual(course.lessonVisual) + course.sections.ma
     <div>
       <h2>${section.title}</h2>
       <p>${section.body}</p>
-      ${section.manga ? `<figure class="manga-figure"><img src="${section.manga.src}" alt="${section.manga.alt}" width="1600" height="757" loading="eager" decoding="async"><figcaption><span>MANGA EXPLAINER</span>${section.manga.caption}</figcaption></figure>` : ""}
+      ${section.manga ? `<figure class="manga-figure"><img src="${section.manga.src}" alt="${section.manga.alt}" width="1600" height="757" loading="eager" decoding="async"><figcaption><span>${section.manga.label || "MANGA EXPLAINER"}</span>${section.manga.caption}</figcaption></figure>` : ""}
       ${renderTradeoff(section.tradeoff)}
       ${section.image ? `<figure class="lesson-figure"><img src="${section.image}" alt="${section.imageAlt || ""}" loading="lazy"><figcaption>線材經過加熱、擠出與逐層堆疊，最後成為實體作品。</figcaption></figure>` : ""}
       ${renderSteps(section.steps)}
