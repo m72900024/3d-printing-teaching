@@ -14,8 +14,12 @@ const PUBLIC_ENTRIES = [
   "course-data.js",
   "course-menu.js",
   "course.js",
+  "advanced-course-data.js",
+  "advanced-app.js",
+  "advanced.css",
   "assets",
-  "courses"
+  "courses",
+  "advanced"
 ];
 
 function escapeHtml(value) {
@@ -27,11 +31,11 @@ function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
-function loadCourses(rootDir) {
-  const source = fs.readFileSync(path.join(rootDir, "course-data.js"), "utf8");
+function loadCourses(rootDir, dataFile = "course-data.js") {
+  const source = fs.readFileSync(path.join(rootDir, dataFile), "utf8");
   const context = { window: {} };
-  vm.runInNewContext(source, context, { filename: "course-data.js" });
-  if (!Array.isArray(context.window.COURSES)) throw new Error("course-data.js did not define window.COURSES");
+  vm.runInNewContext(source, context, { filename: dataFile });
+  if (!Array.isArray(context.window.COURSES)) throw new Error(dataFile + " did not define window.COURSES");
   return context.window.COURSES;
 }
 
@@ -75,6 +79,13 @@ function renderSources(sources) {
   }).join("") + "</div></aside>";
 }
 
+function renderManga(manga) {
+  if (!manga) return "";
+  return '<figure class="manga-figure static-lesson-manga">' +
+    '<img src="' + escapeHtml(manga.src) + '" alt="' + escapeHtml(manga.alt) + '" loading="lazy">' +
+    '<figcaption><span>' + escapeHtml(manga.label || "GPT 教學圖解") + "</span>" + escapeHtml(manga.caption) + "</figcaption></figure>";
+}
+
 function renderSection(section, index) {
   const supplements = [
     section.tradeoff ? [section.tradeoff] : null,
@@ -92,6 +103,7 @@ function renderSection(section, index) {
     '<span class="section-count">' + String(index + 1).padStart(2, "0") + "</span>" +
     "<div><h2>" + escapeHtml(section.title) + "</h2>" +
     (section.body ? "<p>" + escapeHtml(section.body) + "</p>" : "") +
+    renderManga(section.manga) +
     renderTextList(section.steps, "process-steps static-process-steps") +
     supplements +
     renderTextList(section.points, "lesson-points") +
@@ -128,7 +140,9 @@ function replacePagination(html, id, course, label) {
   return html.replace(pattern, '<a id="' + id + '" href="' + escapeHtml(course.href) + '"><small>' + escapeHtml(course.kicker) + "</small><strong>" + escapeHtml(label) + "</strong></a>");
 }
 
-function injectCourse(html, course, courses) {
+function injectCourse(html, course, courses, options = {}) {
+  const homeHref = options.homeHref || "../index.html";
+  const homeLabel = options.homeLabel || "課程首頁";
   html = replaceElement(html, "courseStage", "STAGE " + escapeHtml(course.stageNo) + " · " + escapeHtml(course.stage));
   html = replaceElement(html, "courseMeta", escapeHtml(course.duration) + " · " + escapeHtml(course.type));
   html = replaceElement(html, "courseNumber", escapeHtml(course.id));
@@ -147,10 +161,10 @@ function injectCourse(html, course, courses) {
   const next = courses[currentIndex + 1];
   html = replacePagination(html, "prevCourse", previous
     ? { href: previous.slug, kicker: "上一課" }
-    : { href: "../index.html", kicker: "返回" }, previous ? "← " + previous.title : "← 課程首頁");
+    : { href: homeHref, kicker: "返回" }, previous ? "← " + previous.title : "← " + homeLabel);
   html = replacePagination(html, "nextCourse", next
     ? { href: next.slug, kicker: "下一課" }
-    : { href: "../index.html", kicker: "完成" }, next ? next.title + " →" : "回到課程首頁 ✓");
+    : { href: homeHref, kicker: "完成" }, next ? next.title + " →" : "回到" + homeLabel + " ✓");
   return html;
 }
 
@@ -211,15 +225,24 @@ function buildSite({ rootDir, outputDir }) {
     fs.writeFileSync(htmlFile, injectCourse(html, course, courses));
   }
 
+  const advancedDataFile = path.join(root, "advanced-course-data.js");
+  const advancedCourses = fs.existsSync(advancedDataFile) ? loadCourses(root, "advanced-course-data.js") : [];
+  for (const course of advancedCourses) {
+    const htmlFile = path.join(output, "advanced", course.slug);
+    if (!fs.existsSync(htmlFile)) throw new Error("Missing advanced course page for " + course.id + ": " + course.slug);
+    const html = fs.readFileSync(htmlFile, "utf8");
+    fs.writeFileSync(htmlFile, injectCourse(html, course, advancedCourses, { homeHref: "index.html", homeLabel: "進階課程首頁" }));
+  }
+
   const htmlFiles = listFiles(output, file => file.endsWith(".html"));
   for (const htmlFile of htmlFiles) fingerprintHtmlAssets(htmlFile, output);
-  return { courseCount: courses.length, htmlCount: htmlFiles.length };
+  return { courseCount: courses.length, advancedCourseCount: advancedCourses.length, htmlCount: htmlFiles.length };
 }
 
 if (require.main === module) {
   const rootDir = path.resolve(__dirname, "..");
   const result = buildSite({ rootDir, outputDir: path.join(rootDir, "_site") });
-  process.stdout.write("Built " + result.courseCount + " courses across " + result.htmlCount + " HTML pages.\n");
+  process.stdout.write("Built " + result.courseCount + " beginner and " + result.advancedCourseCount + " advanced courses across " + result.htmlCount + " HTML pages.\n");
 }
 
 module.exports = { buildSite };
