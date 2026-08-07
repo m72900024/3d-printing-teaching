@@ -12,31 +12,47 @@
   <a class="skip-link" href="#main">跳至主要內容</a>
   <header class="site-header">
     <a class="brand" href="#top" aria-label="回到首頁"><span class="brand-mark" aria-hidden="true">3D</span><span>列印入門教室</span></a>
-    <nav class="top-nav" aria-label="主要導覽"><a href="#path">學習路徑</a><a href="#beginner">第一次成功</a><a href="#advanced">獨立完成</a></nav>
+    <nav class="top-nav" aria-label="主要導覽"><a href="#beginner-courses">初階課程</a><a href="#advanced-courses">進階課程</a><a href="#about">網站介紹</a></nav>
     <button class="progress-pill" id="progressButton" type="button" aria-label="查看學習進度"><span id="progressText">0 / 12</span><span class="progress-ring" aria-hidden="true"></span></button>
   </header>
 
   <main id="main">
     <section class="hero course-hero" id="top">
       <div class="hero-copy reveal">
-        <p class="eyebrow">12 COURSES · STEP BY STEP</p>
-        <h1>從第一次成功，<br><em>走到獨立完成。</em></h1>
-        <p class="hero-lead">每一課都是獨立分頁。一次只學一件事、完成一個任務，再安心前往下一課。</p>
-        <div class="hero-actions"><a class="button button-primary" href="courses/01-introduction.html">從第 1 課開始 <span aria-hidden="true">→</span></a><a class="button button-ghost" href="#path">查看全部課程</a></div>
-        <ul class="hero-stats" aria-label="課程資訊"><li><strong>12</strong><span>個獨立課程</span></li><li><strong>3</strong><span>個學習階段</span></li><li><strong>1</strong><span>件結業作品</span></li></ul>
+        <p class="eyebrow">3D PRINTING · FROM ZERO</p>
+        <h1>從零開始，<br><em>完成第一件作品。</em></h1>
+        <p class="hero-lead">用繁體中文一步步認識 FDM 3D 印表機，從安全操作、Bambu Studio 切片到 A1 實際列印，建立真正能獨立完成作品的基礎。</p>
+        <div class="hero-actions"><a class="button button-primary" href="#beginner-courses">查看初階課程 <span aria-hidden="true">→</span></a><a class="button button-ghost" href="#about">認識這個網站</a></div>
+        <ul class="hero-stats" aria-label="課程資訊"><li><strong>12</strong><span>堂初階課程</span></li><li><strong>2</strong><span>種學習層級</span></li><li><strong>1</strong><span>件結業作品</span></li></ul>
       </div>
-      <div class="printer-stage reveal" aria-label="FDM 3D 印表機示意圖">
-        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-        <div class="printer"><div class="printer-top"><span></span></div><div class="printer-rail"><span class="print-head"></span></div><div class="printer-object"><span class="layer l1"></span><span class="layer l2"></span><span class="layer l3"></span><span class="layer l4"></span><span class="layer l5"></span><span class="layer l6"></span></div><div class="printer-bed"></div><div class="printer-base"><span class="screen">READY</span></div></div>
-        <div class="floating-card card-temp"><span>目前階段</span><strong>從零開始</strong></div><div class="floating-card card-layer"><span>學習方式</span><strong>一課一任務</strong></div>
+      <figure class="anime-printer-stage reveal">
+        <img src="assets/homepage/anime-3d-printing-classroom.webp" alt="動漫風教學場景：學習者在安全距離觀察桌上型 FDM 3D 印表機製作作品">
+        <figcaption><strong>看懂機器，也親手完成作品</strong><span>從線材、噴嘴與平台開始建立正確操作觀念。</span></figcaption>
+      </figure>
+    </section>
+
+    <section class="site-about section" id="about">
+      <div class="section-heading reveal"><div><p class="eyebrow">ABOUT THIS CLASSROOM</p><h2>這是一間給初學者的<br>3D 列印教室</h2></div><p>不用先會建模，也不用背下所有參數。每一課只處理一個明確任務，讓你從看懂機器一路走到安全完成作品。</p></div>
+      <div class="about-grid">
+        <article class="about-card reveal"><span>SAFE</span><h3>安全操作</h3><p>先辨認高溫與運動區域，再學會平台、線材、噴嘴與取件的正確順序。</p></article>
+        <article class="about-card reveal"><span>SLICE</span><h3>Bambu Studio 切片</h3><p>從匯入模型、選擇機型到逐層預覽，知道送出列印前究竟要檢查什麼。</p></article>
+        <article class="about-card reveal"><span>MAKE</span><h3>實作與排錯</h3><p>觀察第一層、理解參數取捨，並依症狀一步步找出失敗原因。</p></article>
+      </div>
+    </section>
+
+    <section class="course-levels section" aria-labelledby="courseLevelsTitle">
+      <div class="section-heading reveal"><div><p class="eyebrow">CHOOSE YOUR PATH</p><h2 id="courseLevelsTitle">選擇學習層級</h2></div><p>先完成 12 堂初階課程，建立安全操作與獨立列印能力；進階內容會在課綱完成後另行開放。</p></div>
+      <div class="course-level-grid">
+        <a class="course-level-card course-level-beginner reveal" id="beginner-courses" href="#path"><span class="level-status">現在可以開始</span><small>BEGINNER</small><h3>初階課程</h3><strong>12 堂課</strong><p>從原理、安全、切片到第一次列印，最後完成維護、排錯與成果挑戰。</p><b>查看完整課程 <span aria-hidden="true">→</span></b></a>
+        <article class="course-level-card course-level-advanced reveal" id="advanced-courses"><span class="level-status">規劃中</span><small>ADVANCED</small><h3>進階課程</h3><strong>深入實驗與最佳化</strong><p>預計涵蓋設備校正、材料調校、設計最佳化與系統化實驗。</p><b>課綱完成後開放</b></article>
       </div>
     </section>
 
     <section class="path-overview section" id="path">
-      <div class="section-heading reveal"><div><p class="eyebrow">LEARNING PATH</p><h2>三個階段，逐步解鎖</h2></div><p>建議依序學習。完成按鈕會記錄在目前裝置，回到首頁就能繼續上次進度。</p></div>
+      <div class="section-heading reveal"><div><p class="eyebrow">12 BEGINNER COURSES</p><h2>初階課程：三個階段，逐步解鎖</h2></div><p>建議依序學習。完成按鈕會記錄在目前裝置，回到首頁就能繼續上次進度。</p></div>
       <div class="stage-rail reveal" aria-label="三個學習階段"><span class="active">01 第一次成功</span><i></i><span>02 理解與調整</span><i></i><span>03 獨立完成</span></div>
 
-      <section class="course-stage" id="beginner">
+      <section class="course-stage" id="beginner-stage-one">
         <div class="stage-heading reveal"><span>STAGE 01</span><div><h2>第一次成功</h2><p>先安全完成作品，再慢慢理解為什麼。</p></div></div>
         <div class="course-list">
           <a class="course-link reveal" href="courses/01-introduction.html" data-course="01"><span class="course-index">01</span><div><small>15 MIN＋VIDEO · 觀念＋互動</small><h3>認識 3D 列印</h3><p>用圖解、動畫、真實案例與影片看懂 FDM。</p></div><b>開始 →</b></a>
@@ -57,7 +73,7 @@
         </div>
       </section>
 
-      <section class="course-stage stage-three" id="advanced">
+      <section class="course-stage stage-three" id="beginner-stage-three">
         <div class="stage-heading reveal"><span>STAGE 03</span><div><h2>獨立完成</h2><p>選對材料、解決問題，完成自己的作品。</p></div></div>
         <div class="course-list">
           <a class="course-link reveal" href="courses/10-materials.html" data-course="10"><span class="course-index">10</span><div><small>10 MIN · 材料</small><h3>認識列印材料</h3><p>比較 PLA、PETG、ABS／ASA 與適用機型。</p></div><b>開始 →</b></a>
