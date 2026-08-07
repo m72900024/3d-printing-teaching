@@ -85,8 +85,9 @@ h1 em { color: var(--green-dark); font-style: normal; }
 .course-level-beginner { background: linear-gradient(145deg,#c9f5ff,#fff 62%); transition: transform .22s, box-shadow .22s; }
 .course-level-beginner::after { content: "12"; }
 .course-level-beginner:hover { transform: translate(-3px,-3px); box-shadow: 11px 11px 0 var(--ink); }
-.course-level-advanced { border-style: dashed; border-color: #725fa8; background: linear-gradient(145deg,#eee9ff,#fff 68%); box-shadow: none; color: #322d45; }
+.course-level-advanced { border-color: #725fa8; background: linear-gradient(145deg,#eee9ff,#fff 68%); box-shadow: 8px 8px 0 #725fa8; color: #322d45; transition: transform .22s, box-shadow .22s; }
 .course-level-advanced::after { content: "+"; }
+.course-level-advanced:hover { transform: translate(-3px,-3px); box-shadow: 11px 11px 0 #725fa8; }
 .level-status { align-self: flex-start; padding: 7px 11px; border-radius: 99px; background: var(--coral); color: #fff; font-size: 11px; font-weight: 900; }
 .course-level-advanced .level-status { background: #725fa8; }
 .course-level-card small { margin-top: 28px; color: #167d91; font-weight: 950; letter-spacing: .15em; }

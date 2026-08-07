@@ -98,7 +98,7 @@ test("publishes illustrated lessons 08 through 12 with credits", () => {
   assert.match(courseCss, /\.course-page:is\(\[data-course="08"\],\[data-course="09"\],\[data-course="10"\],\[data-course="11"\],\[data-course="12"\]\) \.goal-visual img\{display:block;width:100%;height:100%;object-fit:cover\}/);
 });
 
-test("publishes the anime homepage with beginner and planned advanced paths", () => {
+test("publishes the anime homepage with beginner and active advanced paths", () => {
   const { outputDir } = buildTemporarySite("3d-course-homepage-levels-");
   const home = fs.readFileSync(path.join(outputDir, "index.html"), "utf8");
   const styles = fs.readFileSync(path.join(outputDir, "styles.css"), "utf8");
@@ -110,8 +110,9 @@ test("publishes the anime homepage with beginner and planned advanced paths", ()
   assert.match(home, /<strong>12<\/strong><span>堂初階課程<\/span>/);
   assert.match(home, /id="beginner-courses"/);
   assert.match(home, /初階課程[\s\S]*12 堂課/);
-  assert.match(home, /id="advanced-courses"[\s\S]*規劃中/);
-  assert.doesNotMatch(home, /href="[^"]*advanced[^"]*\.html"/);
+  assert.match(home, /id="advanced-courses"[\s\S]*2 堂課已開放/);
+  assert.match(home, /href="advanced\/index\.html"/);
+  assert.match(home, /線材乾燥[\s\S]*品質診斷[\s\S]*熱蠕變／熱堆積/);
   assert.match(home, /id="about"/);
   assert.match(home, /安全操作/);
   assert.match(home, /Bambu Studio/);
