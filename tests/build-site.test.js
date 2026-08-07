@@ -65,8 +65,9 @@ test("publishes Course 06 goal and lesson illustrations with credits", () => {
     assert.match(courseScript, new RegExp(file));
     assert.match(courseData, new RegExp(file));
   }
-  assert.equal((courseData.match(/label:"GPT 教學圖解"/g) || []).length, 3);
-  assert.equal((courseData.match(/內容參考：Bambu Lab Wiki/g) || []).length, 3);
+  const course06Data = courseData.slice(courseData.indexOf('id:"06"'), courseData.indexOf('id:"07"'));
+  assert.equal((course06Data.match(/label:"GPT 教學圖解"/g) || []).length, 3);
+  assert.equal((course06Data.match(/內容參考：Bambu Lab Wiki/g) || []).length, 3);
   assert.match(courseCss, /\.course-page\[data-course="06"\] \.goal-visual img\{display:block;width:100%;height:100%;object-fit:cover\}/);
 });
 
