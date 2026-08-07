@@ -121,6 +121,34 @@ test("publishes the anime homepage with beginner and planned advanced paths", ()
   assert.match(styles, /#beginner-courses,#advanced-courses,#about\{scroll-margin-top:/);
 });
 
+test("publishes two advanced courses with static art and Bambu Wiki sources", () => {
+  const { outputDir, result } = buildTemporarySite("3d-course-advanced-path-");
+  const overview = fs.readFileSync(path.join(outputDir, "advanced/index.html"), "utf8");
+  const drying = fs.readFileSync(path.join(outputDir, "advanced/01-filament-drying.html"), "utf8");
+  const quality = fs.readFileSync(path.join(outputDir, "advanced/02-quality-diagnostics.html"), "utf8");
+
+  assert.equal(result.advancedCourseCount, 2);
+  assert.equal(result.htmlCount, 16);
+  assert.match(overview, /A01[\s\S]*線材乾燥與保存/);
+  assert.match(overview, /A02[\s\S]*品質問題診斷/);
+  assert.match(drying, /A1／A1 mini[^。]*不可使用[^。]*熱床乾燥/);
+  assert.match(quality, /熱蠕變／熱堆積/);
+  assert.match(quality, /A1[\s\S]*P1S/);
+  assert.match(drying, /three-d-advanced-course-chapters/);
+  assert.match(quality, /data-course-total="2"/);
+  assert.equal((drying.match(/GPT 教學圖解/g) || []).length, 5);
+  assert.equal((quality.match(/GPT 教學圖解/g) || []).length, 5);
+  assert.equal((drying.match(/內容參考：Bambu Lab Wiki/g) || []).length, 5);
+  assert.equal((quality.match(/內容參考：Bambu Lab Wiki/g) || []).length, 5);
+
+  for (const [folder, files] of Object.entries({
+    "advanced-a01": ["dry-vs-damp.webp", "moisture-risk.webp", "drying-decision.webp", "drying-methods.webp", "storage-workflow.webp"],
+    "advanced-a02": ["diagnostic-loop.webp", "extrusion-symptoms.webp", "warping-layer-cracks.webp", "bridge-seam-surface.webp", "a1-p1s-heat-creep.webp"]
+  })) for (const file of files) {
+    assert.ok(fs.existsSync(path.join(outputDir, "assets", folder, "illustrations", file)));
+  }
+});
+
 test("fingerprints every local stylesheet and script reference", () => {
   const { outputDir } = buildTemporarySite("3d-course-assets-");
 
