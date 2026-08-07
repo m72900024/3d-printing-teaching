@@ -70,6 +70,33 @@ test("publishes Course 06 goal and lesson illustrations with credits", () => {
   assert.match(courseCss, /\.course-page\[data-course="06"\] \.goal-visual img\{display:block;width:100%;height:100%;object-fit:cover\}/);
 });
 
+test("publishes illustrated lessons 08 through 12 with credits", () => {
+  const { outputDir } = buildTemporarySite("3d-course-advanced-illustrations-");
+  const courseScript = fs.readFileSync(path.join(outputDir, "course.js"), "utf8");
+  const courseData = fs.readFileSync(path.join(outputDir, "course-data.js"), "utf8");
+  const courseCss = fs.readFileSync(path.join(outputDir, "course.css"), "utf8");
+  const illustratedCourses = {
+    "08": ["layer-height-comparison.webp", "walls-vs-infill.webp", "one-variable-experiment.webp"],
+    "09": ["orientation-bridge-support.webp", "normal-vs-tree-support.webp", "adhesion-aids.webp"],
+    "10": ["material-use-cases.webp", "printer-material-match.webp", "moisture-storage-drying.webp"],
+    "11": ["symptom-map.webp", "five-step-troubleshooting.webp", "fault-paths.webp"],
+    "12": ["routine-maintenance.webp", "ten-point-preflight.webp", "capstone-workflow.webp"]
+  };
+
+  for (const [courseId, files] of Object.entries(illustratedCourses)) {
+    for (const file of files) {
+      assert.ok(fs.existsSync(path.join(outputDir, `assets/course-${courseId}/illustrations`, file)));
+      assert.match(courseScript, new RegExp(file));
+      assert.match(courseData, new RegExp(file));
+    }
+  }
+
+  const advancedLessons = courseData.slice(courseData.indexOf('id:"08"'));
+  assert.equal((advancedLessons.match(/label:"GPT 教學圖解"/g) || []).length, 15);
+  assert.equal((advancedLessons.match(/內容參考：Bambu Lab Wiki/g) || []).length, 15);
+  assert.match(courseCss, /\.course-page:is\(\[data-course="08"\],\[data-course="09"\],\[data-course="10"\],\[data-course="11"\],\[data-course="12"\]\) \.goal-visual img\{display:block;width:100%;height:100%;object-fit:cover\}/);
+});
+
 test("fingerprints every local stylesheet and script reference", () => {
   const { outputDir } = buildTemporarySite("3d-course-assets-");
 
