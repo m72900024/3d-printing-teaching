@@ -53,6 +53,7 @@ test("publishes Course 06 goal and lesson illustrations with credits", () => {
   const { outputDir } = buildTemporarySite("3d-course-a1-illustrations-");
   const courseScript = fs.readFileSync(path.join(outputDir, "course.js"), "utf8");
   const courseData = fs.readFileSync(path.join(outputDir, "course-data.js"), "utf8");
+  const courseCss = fs.readFileSync(path.join(outputDir, "course.css"), "utf8");
   const files = [
     "a1-preflight.webp",
     "first-layer-four-states.webp",
@@ -66,6 +67,7 @@ test("publishes Course 06 goal and lesson illustrations with credits", () => {
   }
   assert.equal((courseData.match(/label:"GPT 教學圖解"/g) || []).length, 3);
   assert.equal((courseData.match(/內容參考：Bambu Lab Wiki/g) || []).length, 3);
+  assert.match(courseCss, /\.course-page\[data-course="06"\] \.goal-visual img\{display:block;width:100%;height:100%;object-fit:cover\}/);
 });
 
 test("fingerprints every local stylesheet and script reference", () => {
