@@ -63,7 +63,7 @@ const goalArtByCourse = {
     { src: "../assets/course-12/illustrations/capstone-workflow.webp", alt: "規劃、切片、列印、記錄與分享的結業作品流程" }
   ]
 };
-const goalArt = goalArtByCourse[course.id];
+const goalArt = course.goalArt || goalArtByCourse[course.id];
 const goalsElement = document.querySelector("#courseGoals");
 goalsElement.innerHTML = goalArt
   ? course.goals.map((goal, index) => `<li class="goal-card"><div class="goal-visual"><img src="${goalArt[index].src}" alt="${goalArt[index].alt}" width="640" height="640" decoding="async"></div><div><small>0${index + 1}</small><p>${goal}</p></div></li>`).join("")
@@ -286,11 +286,12 @@ const next = courses[currentIndex + 1];
 const prevLink = document.querySelector("#prevCourse");
 const nextLink = document.querySelector("#nextCourse");
 if (prev) { prevLink.href = prev.slug; prevLink.innerHTML = `<small>上一課</small><strong>← ${prev.title}</strong>`; }
-else { prevLink.href = "../index.html"; prevLink.innerHTML = `<small>返回</small><strong>← 課程首頁</strong>`; }
+else { prevLink.href = document.body.dataset.track === "advanced" ? "index.html" : "../index.html"; prevLink.innerHTML = `<small>返回</small><strong>← ${document.body.dataset.track === "advanced" ? "進階課程首頁" : "課程首頁"}</strong>`; }
 if (next) { nextLink.href = next.slug; nextLink.innerHTML = `<small>下一課</small><strong>${next.title} →</strong>`; }
-else { nextLink.href = "../index.html"; nextLink.innerHTML = `<small>完成</small><strong>回到課程首頁 ✓</strong>`; }
+else { nextLink.href = document.body.dataset.track === "advanced" ? "index.html" : "../index.html"; nextLink.innerHTML = `<small>完成</small><strong>回到${document.body.dataset.track === "advanced" ? "進階" : ""}課程首頁 ✓</strong>`; }
 
-const storageKey = "three-d-course-chapters";
+const storageKey = document.body.dataset.progressKey || "three-d-course-chapters";
+const courseTotal = Number(document.body.dataset.courseTotal || courses.length);
 let completed;
 try {
   const saved = JSON.parse(localStorage.getItem(storageKey) || "[]");
@@ -303,7 +304,7 @@ function updateComplete() {
   const isComplete = completed.has(course.id);
   completeButton.classList.toggle("completed", isComplete);
   completeButton.innerHTML = isComplete ? "✓ 本課已完成" : "完成本課";
-  document.querySelector("#lessonProgress").textContent = `${completed.size} / 12`;
+  document.querySelector("#lessonProgress").textContent = `${completed.size} / ${courseTotal}`;
 }
 completeButton.addEventListener("click", () => {
   if (completed.has(course.id)) completed.delete(course.id); else completed.add(course.id);

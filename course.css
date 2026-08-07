@@ -116,6 +116,11 @@
 .manga-figure figcaption span{flex:0 0 auto;padding:5px 8px;background:#111814;color:#cdf45d;font:950 9px/1 monospace;letter-spacing:.08em}
 @media(max-width:600px){.manga-figure{border-width:2px;border-radius:14px;box-shadow:6px 7px 0 #cde95f}.manga-figure figcaption{align-items:flex-start;border-top-width:2px;flex-direction:column;gap:8px}}
 
+/* Advanced track illustrated learning outcomes */
+.course-page[data-track="advanced"] .goal-box{max-width:1180px;padding:27px 28px 28px}.course-page[data-track="advanced"] .goal-box ul{grid-template-columns:repeat(5,minmax(0,1fr));gap:11px;margin-top:19px}.course-page[data-track="advanced"] .goal-card{display:grid;grid-template-columns:1fr;align-content:start;gap:12px;min-height:0;padding:13px;border:1px solid #ded9ed;border-radius:17px;background:#f8f6ff}.course-page[data-track="advanced"] .goal-card::before{display:none}.course-page[data-track="advanced"] .goal-visual{width:100%;height:auto;overflow:hidden;aspect-ratio:3/2;border-radius:14px;background:#eeeaf8}.course-page[data-track="advanced"] .goal-visual img{display:block;width:100%;height:100%;object-fit:cover}.course-page[data-track="advanced"] .goal-card p{margin:0;color:#302b3b;font-size:12px;font-weight:850;line-height:1.5}
+@media(max-width:980px){.course-page[data-track="advanced"] .goal-box ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.course-page[data-track="advanced"] .goal-box ul{grid-template-columns:1fr}.course-page[data-track="advanced"] .goal-card{grid-template-columns:104px 1fr}.course-page[data-track="advanced"] .goal-visual{width:104px;height:104px}}
+
 /* Traditional manufacturing tradeoffs */
 .tradeoff-block{margin-top:48px;padding-top:42px;border-top:2px dashed #c8cec4}
 .tradeoff-heading>small{display:block;margin-bottom:8px;color:#2a8f47;font:950 10px/1 monospace;letter-spacing:.13em}
