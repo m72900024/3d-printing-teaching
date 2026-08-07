@@ -15,6 +15,7 @@
 - Label all fifteen section figures `GPT 教學圖解`.
 - Add at least fifteen `內容參考：Bambu Lab Wiki` source labels across courses 08–12.
 - Do not download, hotlink, or recreate Bambu Lab Wiki images; use official pages only as content references.
+- All visible in-image copy must use correct Traditional Chinese only; reject Japanese, Simplified Chinese, English headings, illegible pseudo-text, and misspelled labels.
 - Preserve existing course data architecture and unrelated assets.
 - Verify at 1354×868 and 390×844 with no horizontal overflow.
 
