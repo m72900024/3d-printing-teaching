@@ -105,6 +105,7 @@ test("publishes the anime homepage with beginner and planned advanced paths", ()
   assert.match(home, /href="#beginner-courses">初階課程/);
   assert.match(home, /href="#advanced-courses">進階課程/);
   assert.match(home, /href="#about">網站介紹/);
+  assert.match(home, /從零開始學，<br><em class="hero-title-line">完成第一件作品<\/em>/);
   assert.match(home, /<strong>12<\/strong><span>堂初階課程<\/span>/);
   assert.match(home, /id="beginner-courses"/);
   assert.match(home, /初階課程[\s\S]*12 堂課/);
