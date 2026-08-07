@@ -101,6 +101,7 @@ test("publishes illustrated lessons 08 through 12 with credits", () => {
 test("publishes the anime homepage with beginner and planned advanced paths", () => {
   const { outputDir } = buildTemporarySite("3d-course-homepage-levels-");
   const home = fs.readFileSync(path.join(outputDir, "index.html"), "utf8");
+  const styles = fs.readFileSync(path.join(outputDir, "styles.css"), "utf8");
 
   assert.match(home, /href="#beginner-courses">初階課程/);
   assert.match(home, /href="#advanced-courses">進階課程/);
@@ -117,6 +118,7 @@ test("publishes the anime homepage with beginner and planned advanced paths", ()
   assert.match(home, /assets\/homepage\/anime-3d-printing-classroom\.webp/);
   assert.match(home, /alt="[^\"]*3D 印表機[^\"]*"/);
   assert.ok(fs.existsSync(path.join(outputDir, "assets/homepage/anime-3d-printing-classroom.webp")));
+  assert.match(styles, /#beginner-courses,#advanced-courses,#about\{scroll-margin-top:/);
 });
 
 test("fingerprints every local stylesheet and script reference", () => {

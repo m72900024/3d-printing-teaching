@@ -16,6 +16,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+#beginner-courses,#advanced-courses,#about{scroll-margin-top:96px}
 body {
   margin: 0;
   background: var(--paper);
