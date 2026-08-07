@@ -25,6 +25,79 @@ test("publishes twelve course pages with static core content", () => {
   assert.match(last, /我能獨立完成作品/);
 });
 
+test("publishes the A1 first-print workflow and safety guidance", () => {
+  const { outputDir } = buildTemporarySite("3d-course-a1-first-print-");
+  const lesson = fs.readFileSync(path.join(outputDir, "courses/06-first-print.html"), "utf8");
+
+  for (const expected of [
+    "Bambu Lab A1",
+    "紋理 PEI 平台",
+    "0.4 mm 噴嘴",
+    "0.20 mm 標準",
+    "自動調平",
+    "正常",
+    "噴嘴過高",
+    "噴嘴過低",
+    "未黏住",
+    "等待噴頭完全停止",
+    "等待平台降溫",
+    "20 分鐘內"
+  ]) assert.match(lesson, new RegExp(expected));
+
+  assert.match(lesson, /wiki\.bambulab\.com\/en\/p1\/manual\/print-from-bambu-studio/);
+  assert.match(lesson, /wiki\.bambulab\.com\/en\/knowledge-sharing\/identify-and-fix-first-layer-issues-with-a-test-print/);
+  assert.match(lesson, /wiki\.bambulab\.com\/en\/filament-acc\/acc\/print-finish-adv/);
+});
+
+test("publishes Course 06 goal and lesson illustrations with credits", () => {
+  const { outputDir } = buildTemporarySite("3d-course-a1-illustrations-");
+  const courseScript = fs.readFileSync(path.join(outputDir, "course.js"), "utf8");
+  const courseData = fs.readFileSync(path.join(outputDir, "course-data.js"), "utf8");
+  const courseCss = fs.readFileSync(path.join(outputDir, "course.css"), "utf8");
+  const files = [
+    "a1-preflight.webp",
+    "first-layer-four-states.webp",
+    "cooled-removal-five-steps.webp"
+  ];
+
+  for (const file of files) {
+    assert.ok(fs.existsSync(path.join(outputDir, "assets/course-06/illustrations", file)));
+    assert.match(courseScript, new RegExp(file));
+    assert.match(courseData, new RegExp(file));
+  }
+  const course06Data = courseData.slice(courseData.indexOf('id:"06"'), courseData.indexOf('id:"07"'));
+  assert.equal((course06Data.match(/label:"GPT 教學圖解"/g) || []).length, 3);
+  assert.equal((course06Data.match(/內容參考：Bambu Lab Wiki/g) || []).length, 3);
+  assert.match(courseCss, /\.course-page\[data-course="06"\] \.goal-visual img\{display:block;width:100%;height:100%;object-fit:cover\}/);
+});
+
+test("publishes illustrated lessons 08 through 12 with credits", () => {
+  const { outputDir } = buildTemporarySite("3d-course-advanced-illustrations-");
+  const courseScript = fs.readFileSync(path.join(outputDir, "course.js"), "utf8");
+  const courseData = fs.readFileSync(path.join(outputDir, "course-data.js"), "utf8");
+  const courseCss = fs.readFileSync(path.join(outputDir, "course.css"), "utf8");
+  const illustratedCourses = {
+    "08": ["layer-height-comparison.webp", "walls-vs-infill.webp", "one-variable-experiment.webp"],
+    "09": ["orientation-bridge-support.webp", "normal-vs-tree-support.webp", "adhesion-aids.webp"],
+    "10": ["material-use-cases.webp", "printer-material-match.webp", "moisture-storage-drying.webp"],
+    "11": ["symptom-map.webp", "five-step-troubleshooting.webp", "fault-paths.webp"],
+    "12": ["routine-maintenance.webp", "ten-point-preflight.webp", "capstone-workflow.webp"]
+  };
+
+  for (const [courseId, files] of Object.entries(illustratedCourses)) {
+    for (const file of files) {
+      assert.ok(fs.existsSync(path.join(outputDir, `assets/course-${courseId}/illustrations`, file)));
+      assert.match(courseScript, new RegExp(file));
+      assert.match(courseData, new RegExp(file));
+    }
+  }
+
+  const advancedLessons = courseData.slice(courseData.indexOf('id:"08"'));
+  assert.equal((advancedLessons.match(/label:"GPT 教學圖解"/g) || []).length, 15);
+  assert.equal((advancedLessons.match(/內容參考：Bambu Lab Wiki/g) || []).length, 15);
+  assert.match(courseCss, /\.course-page:is\(\[data-course="08"\],\[data-course="09"\],\[data-course="10"\],\[data-course="11"\],\[data-course="12"\]\) \.goal-visual img\{display:block;width:100%;height:100%;object-fit:cover\}/);
+});
+
 test("fingerprints every local stylesheet and script reference", () => {
   const { outputDir } = buildTemporarySite("3d-course-assets-");
 

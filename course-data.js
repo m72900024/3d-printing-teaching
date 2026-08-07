@@ -162,18 +162,52 @@ window.COURSES = [
   },
   {
     id:"06", slug:"06-first-print.html", stage:"第一次成功", stageNo:"01", duration:"15 分鐘", type:"實作",
-    title:"完成第一次列印", subtitle:"傳送、觀察第一層，安全取下作品。",
-    lead:"這一課的目標只有一個：用穩定的預設值，安全完成第一件小作品。成功之後再研究參數。",
-    goals:["將正確工作傳送到指定印表機","辨認正常與異常的第一層","等待平台冷卻後安全取件"],
-    lessonVisual:{src:"../assets/course-06/manga/first-print-first-layer.webp",alt:"日系可愛漫畫：學生觀察平整第一層、暫停失敗亂線，並冷卻後取下測試小船",caption:"第一層是整件作品的地基：先留下來觀察，異常就暫停，完成後等平台冷卻再取件。",guides:[["平整連續","線條彼此相接、穩穩黏住平台。"],["亂線就停","線材被拖走或纏成一團時立即暫停。"],["冷卻取件","列印完成不急著拔，降溫後更容易安全取下。"]]},
-    realCase:{eyebrow:"BENCHMARK CASE",title:"3DBenchy：一艘會說出問題的小船",body:"3DBenchy 是專為測試與比較 3D 印表機而設計的模型。船身包含橋接、懸空、圓孔、斜面與尺寸特徵，可用同一件作品觀察多種列印表現。",why:"第一件作品不只要「印成功」，也可以學著從表面、船艙與煙囪讀出機器狀態。",source:"https://www.3dbenchy.com/wp-content/uploads/2015/04/3DBenchy_Broschure_3DBenchy.com_.pdf",sourceLabel:"查看 3DBenchy 官方說明"},
+    title:"完成第一次列印", subtitle:"用 A1 傳送、觀察第一層，安全取下作品。",
+    lead:"這一課只做一件事：使用教室指定的 Bambu Lab A1 與穩定預設，安全完成第一件小作品。先確認第一層成功，再研究其他參數。",
+    goals:["核對 A1、平台、線材與預設後送出工作","辨認四種第一層狀況並安全停止","等待平台冷卻後安全取件"],
+    lessonVisual:{src:"../assets/course-06/manga/first-print-first-layer.webp",alt:"日系可愛漫畫：學生觀察 A1 的平整第一層、暫停失敗亂線，並冷卻後取下作品",caption:"第一層是整件作品的地基：留在 A1 旁親眼確認，異常先停，完成後等平台冷卻再取件。",guides:[["平整連續","線條彼此相接、穩穩黏住紋理 PEI 平台。"],["異常先停","線材被拖走或纏成一團時，先暫停並等待噴頭停止。"],["冷卻取件","列印完成不急著拔，平台降溫後再彎曲鋼板取件。"]]},
+    realCase:{eyebrow:"BENCHMARK CASE",title:"3DBenchy：一艘會說出問題的小船",body:"3DBenchy 是專為測試與比較 3D 印表機而設計的模型。船身包含橋接、懸空、圓孔、斜面與尺寸特徵，可用同一件作品觀察多種列印表現。",why:"3DBenchy 適合在第一次短模型成功後作為延伸判讀，不與課堂 20 分鐘內的首件作品混用。",source:"https://www.3dbenchy.com/wp-content/uploads/2015/04/3DBenchy_Broschure_3DBenchy.com_.pdf",sourceLabel:"查看 3DBenchy 官方說明"},
     sections:[
-      {title:"送出前最後確認",body:"再次核對印表機名稱、平台與線材。確認平台上沒有舊作品或工具，選擇需要的自動調平後再送出。"},
-      {title:"留在旁邊看第一層",body:"正常第一層應連續、平整並牢固貼合；如果線材被噴嘴拖著走、完全沒有黏住或明顯堆成一團，應立即暫停。",points:["不要剛按下列印就離開","異常先暫停，再找原因","不要徒手靠近移動中的噴頭"]},
-      {title:"完成與取件",body:"列印結束後等待平台降溫。取下可彎曲平台時避免過度彎折作品；清除裙邊或支撐時注意工具方向，不要朝向手掌。"}
+      {
+        title:"列印前檢查：先把條件固定",
+        body:"第一次列印以教室指定的 Bambu Lab A1 為準。使用 PLA、0.4 mm 噴嘴、紋理 PEI 平台與 0.20 mm 標準預設；送出前確認平台空白、鋼板貼平，切片預覽沒有空中起印或超出平台。",
+        manga:{label:"GPT 教學圖解",src:"../assets/course-06/illustrations/a1-preflight.webp",alt:"日系教學圖：A1 第一次列印前依序確認平台、PLA 線材、0.4 mm 噴嘴與切片預覽",caption:"先把機器、平台、線材、噴嘴與切片預覽逐項對好，再把工作送到 A1。"},
+        points:["印表機：Bambu Lab A1","線材：PLA","噴嘴：0.4 mm","平台：紋理 PEI 平台","列印設定：0.20 mm 標準"],
+        sources:[{label:"內容參考：Bambu Lab Wiki｜從 Bambu Studio 列印",url:"https://wiki.bambulab.com/en/p1/manual/print-from-bambu-studio"}]
+      },
+      {
+        title:"從 Bambu Studio 傳送到 A1",
+        body:"完成切片與預覽後按下列印，核對目標機器、平台與線材，再保留自動調平並送出。不同版本的按鈕位置可能改變，因此依功能名稱核對，不靠畫面位置死記。",
+        steps:["確認目標印表機顯示為教室指定的 A1。","確認平台類型與機器上的紋理 PEI 平台一致。","確認線材為目前裝入的 PLA。","保留自動調平，送出後留在機器旁等待第一層。"]
+      },
+      {
+        title:"第一層判讀：看見地基再離開",
+        body:"第一層必須連續、平整並黏在平台上。不要只看螢幕顯示正在列印，要親眼確認線條狀態。",
+        manga:{label:"GPT 教學圖解",src:"../assets/course-06/illustrations/first-layer-four-states.webp",alt:"日系教學圖：正常、噴嘴過高、噴嘴過低與未黏住四種第一層狀況",caption:"先看線條是否相接，再看有沒有刮痕、波紋、翹起或被噴嘴拖走。"},
+        compareHeaders:["狀況","看起來","代表什麼","現在怎麼做"],
+        compare:[
+          ["正常","線條相接、表面平整、穩定黏住","高度與附著大致正常","繼續觀察到第一層完成"],
+          ["噴嘴過高","線條分開、圓角鬆散、容易被拖走","線材沒有被適度壓在平台上","暫停，交由教師檢查"],
+          ["噴嘴過低","表面刮痕、波紋或材料向兩側堆起","噴嘴過度擠壓第一層","暫停，交由教師檢查"],
+          ["未黏住","線材捲起、跟著噴嘴移動或堆成亂線","平台附著失敗","立即暫停或停止"]
+        ],
+        sources:[{label:"內容參考：Bambu Lab Wiki｜辨認與修正第一層問題",url:"https://wiki.bambulab.com/en/knowledge-sharing/identify-and-fix-first-layer-issues-with-a-test-print"}]
+      },
+      {
+        title:"異常先停，不伸手救",
+        body:"發現亂線、拖料或作品鬆脫時，先在 A1 或 Bambu Studio 按暫停；若作品已無法繼續，再停止工作。等待噴頭完全停止，並確認高溫與移動風險後才由教師處理。",
+        callout:"暫停不等於噴嘴與平台已冷卻。不要徒手靠近移動中的噴頭，也不要直接在熱床上拉扯纏料；無法判斷時交由教師處理。"
+      },
+      {
+        title:"完成後冷卻取件",
+        body:"列印完成後等待平台降溫，再取下彈簧鋼板並輕微彎曲，讓作品自然鬆開。不要過度彎折鋼板；刮刀不是初學者的優先方法，必須使用時刀口不可朝向手掌。",
+        manga:{label:"GPT 教學圖解",src:"../assets/course-06/illustrations/cooled-removal-five-steps.webp",alt:"日系教學圖：列印完成、等待降溫、取下鋼板、彎曲取件與清潔平台五步驟",caption:"從畫面顯示完成到清潔平台，每一步都在機器停止且平台冷卻後進行。"},
+        steps:["確認畫面顯示工作完成。","等待平台降溫，不急著徒手拉作品。","握住鋼板把手並取下鋼板。","輕微彎曲鋼板，讓作品自然鬆開。","移除裙邊並依教室規則清潔平台。"],
+        sources:[{label:"內容參考：Bambu Lab Wiki｜列印完成後的取件與清潔",url:"https://wiki.bambulab.com/en/filament-acc/acc/print-finish-adv"}]
+      }
     ],
-    task:{title:"第一件作品",text:"使用 PLA 和 0.20 mm 標準設定，完成一個 20 分鐘內的小模型。記錄預估時間、實際時間和第一層觀察結果。"},
-    checkpoint:"我已親眼確認第一層正常，而且知道出現異常時如何安全暫停。"
+    task:{title:"A1 第一件作品",text:"使用教師指定、預估 20 分鐘內完成的小型 PLA 模型，以 A1、0.4 mm 噴嘴、紋理 PEI 平台與 0.20 mm 標準設定完成列印。記錄預估時間、實際時間、第一層觀察結果，以及取件前平台是否已冷卻。"},
+    checkpoint:"我已親眼確認第一層正常，能說出異常時先暫停、等待噴頭完全停止、交由教師處理的順序，並在平台降溫後取件。"
   },
   {
     id:"07", slug:"07-orientation.html", stage:"理解與調整", stageNo:"02", duration:"10 分鐘", type:"判讀",
@@ -198,9 +232,9 @@ window.COURSES = [
     lessonVisual:{src:"../assets/course-08/manga/parameter-tradeoffs.webp",alt:"日系可愛漫畫：學生比較層高、外殼、填充、時間與材料的取捨",caption:"參數像調音量：不是全部拉滿，而是依作品用途找到剛好的平衡。",guides:[["層高","越細通常越精緻，也會增加層數與時間。"],["牆與填充","功能件先重視外殼，再依需求增加填充。"],["一次改一項","保留切片結果，才能知道差異從哪裡來。"]]},
     realCase:{eyebrow:"PARAMETER CASE",title:"想變強，不一定要把填充拉到 100%",body:"Prusa 的切片說明指出，零件強度主要常由外圍牆層決定，而不是單靠填充密度。課堂可固定模型與方向，只比較增加牆層或提高填充後的時間、材料與預估重量。",why:"這個實驗能打破「數值越高越好」的直覺，讓參數回到作品用途。",source:"https://help.prusa3d.com/article/infill_42?product=sl1",sourceLabel:"閱讀 Prusa 的填充說明"},
     sections:[
-      {title:"層高：精細或快速",body:"較小層高能呈現更多垂直細節，但層數增加、列印時間也變長。一般作品可從 0.20 mm 開始，展示模型再視需要降低。"},
-      {title:"外殼與填充：強度怎麼來",body:"增加牆層往往比盲目提高填充更有效。裝飾品可使用較低填充；受力零件要同時考慮牆層、填充形狀與模型方向。"},
-      {title:"溫度與速度：穩定優先",body:"直接使用正確線材預設通常比自行猜測可靠。需要調整時，一次只改一項並保留測試紀錄，否則很難知道是哪個變因造成差異。"}
+      {title:"層高：精細、均衡或快速",body:"層高決定每一層的厚度。0.12 mm 通常能呈現較細的斜面與曲面，但層數和時間增加；0.20 mm 適合多數課堂作品；0.28 mm 可加快不重視細節的草模。實際可用範圍仍要配合噴嘴、機型與官方預設。",manga:{label:"GPT 教學圖解",src:"../assets/course-08/illustrations/layer-height-comparison.webp",alt:"繁體中文教學圖：以精細、均衡、快速三種層高比較同一個模型",caption:"同一模型只改層高，觀察表面層紋、層數與預估時間；不是越細越好，而是依用途取捨。"},compareHeaders:["層高示例","適合情境","表面細節","列印時間"],compare:[["0.12 mm","展示件、細緻曲面","較細","較長"],["0.20 mm","一般課堂作品","均衡","中等"],["0.28 mm","快速草模、大型簡單件","層紋較明顯","較短"]],sources:[{label:"內容參考：Bambu Lab Wiki｜層高",url:"https://wiki.bambulab.com/en/software/bambu-studio/layer-height"}]},
+      {title:"外殼與填充：先看受力路徑",body:"外殼形成零件的連續外圍，填充支撐內部與上層。提高填充會增加材料與時間，卻不一定比增加合理外殼更有效；功能件還要同時考慮模型方向、接合處與負載位置。",manga:{label:"GPT 教學圖解",src:"../assets/course-08/illustrations/walls-vs-infill.webp",alt:"繁體中文教學圖：比較外殼優先、平衡配置與高填充的零件剖面",caption:"先確認力從哪裡進入零件，再決定外殼與填充；高填充不是唯一答案。"},points:["裝飾件：先滿足外觀與穩定列印","功能件：優先檢查受力方向與外殼","高填充：同步增加材料、重量與時間","薄弱接合：可能需要重新設計或改變方向"],sources:[{label:"內容參考：Bambu Lab Wiki｜切片參數表",url:"https://wiki.bambulab.com/en/software/bambu-studio/parameter-table"}]},
+      {title:"參數實驗：一次只改一項",body:"先固定模型、方向、機器、線材與平台，複製一份切片設定，再只改一個參數。記錄層數、預估時間、材料量與預覽差異，才能知道結果由哪個變因造成。",manga:{label:"GPT 教學圖解",src:"../assets/course-08/illustrations/one-variable-experiment.webp",alt:"繁體中文教學圖：固定條件、只改一項並比較切片結果",caption:"把沒有要研究的條件鎖定，只改一個參數，再用相同欄位比較結果。"},steps:["固定模型、方向、機型、線材與平台。","複製設定，只選一個要研究的參數。","完成兩次切片並查看逐層預覽。","記錄層數、時間、材料與預覽差異。"],callout:"溫度與速度先使用正確的官方線材預設。沒有明確測試目的時，不同時修改多個進階參數。",sources:[{label:"內容參考：Bambu Lab Wiki｜建立自訂預設",url:"https://wiki.bambulab.com/en/software/bambu-studio/preset"}]}
     ],
     task:{title:"參數實驗",text:"將同一個小模型分別用 0.20 mm 與較細層高切片，記錄預估時間與層數，不必實際列印兩次。"},
     checkpoint:"我能先說明作品用途，再選擇層高、外殼與填充，而不是把數值全部調高。"
@@ -211,9 +245,9 @@ window.COURSES = [
     lead:"支撐能承托懸空，但也會增加時間、材料與後處理。平台附著則決定作品能不能穩穩完成。",
     goals:["判斷何時需要支撐或橋接","選擇一般支撐或樹狀支撐","依模型風險使用 Skirt、Brim 或 Raft"],
     sections:[
-      {title:"支撐是暫時結構",body:"支撐只在列印時承托懸空，完成後需要拆除。它會在接觸面留下痕跡，因此優先透過模型方向減少支撐，再決定支撐類型。"},
-      {title:"橋接不等於懸空",body:"橋接是線材跨越兩個有支點的區域；懸空則可能只有一側有支點。短橋可透過風扇和速度完成，長距離仍需要支撐。"},
-      {title:"三種平台輔助",body:"Skirt 用來確認出料；Brim 增加模型周圍接觸面，適合細腳或容易翹邊的作品；Raft 會製作完整底座，材料與後處理成本最高。"}
+      {title:"先改方向，再判斷橋接與支撐",body:"先找更大的接觸面，讓重要表面避開支撐。橋接的兩端都有支點；懸空可能只有一側相連。短距橋接可用冷卻與橋接設定完成，長距離或單側懸空則需要支撐或重新定向。",manga:{label:"GPT 教學圖解",src:"../assets/course-09/illustrations/orientation-bridge-support.webp",alt:"繁體中文教學圖：比較改變方向、短距橋接與需要支撐",caption:"順序是改變方向、確認兩端支點，再決定是否需要臨時支撐。"},compareHeaders:["選擇","辨認方式","優點","注意"],compare:[["改變方向","更大的平面可貼床","可直接減少支撐","重新檢查受力與重要表面"],["短距橋接","線材跨在兩個支點之間","不一定需要支撐","距離、冷卻與材料會影響結果"],["加入支撐","長懸空或只有一側連接","承托空中區域","增加材料、時間與接觸痕跡"]],sources:[{label:"內容參考：Bambu Lab Wiki｜自動定向",url:"https://wiki.bambulab.com/en/software/bambu-studio/auto-orientation"}]},
+      {title:"一般支撐或樹狀支撐",body:"一般支撐適合承托較平整、範圍大的區域；樹狀支撐以分枝接觸局部曲面，常能減少部分材料與接觸點。兩者都要在完成後拆除，選擇時要一起考慮可接近性與重要表面。",manga:{label:"GPT 教學圖解",src:"../assets/course-09/illustrations/normal-vs-tree-support.webp",alt:"繁體中文教學圖：一般支撐、樹狀支撐與拆除後接觸面比較",caption:"支撐的價值是成功承托，代價是材料、時間、拆除工作與接觸痕跡。"},points:["大面積平底懸空：可先比較一般支撐","曲面與局部懸空：可比較樹狀支撐","狹窄內部：先確認完成後是否能拆除","重要外觀面：盡量不要成為支撐接觸面"],sources:[{label:"內容參考：Bambu Lab Wiki｜懸空減速",url:"https://wiki.bambulab.com/en/software/bambu-studio/slow-down-for-overhang"}]},
+      {title:"裙邊、帽沿與底筏",body:"Skirt（裙邊）與模型分離，用來確認出料；Brim（帽沿）直接連到模型底部周圍，增加接觸面；Raft（底筏）在模型下建立完整底座，材料、時間與後處理成本最高。",manga:{label:"GPT 教學圖解",src:"../assets/course-09/illustrations/adhesion-aids.webp",alt:"繁體中文教學圖：裙邊、帽沿與底筏的接觸範圍比較",caption:"先看風險：只需確認出料用裙邊，細腳或翹邊風險用帽沿，底筏留給難以解決的特殊情況。"},compareHeaders:["方式","是否接觸模型","主要用途","成本"],compare:[["Skirt 裙邊","否","確認出料與流量穩定","低"],["Brim 帽沿","是，連接底部邊緣","增加細腳與邊角接觸面","中"],["Raft 底筏","是，完整墊在模型下","處理高風險附著情境","高"]],sources:[{label:"內容參考：Bambu Lab Wiki｜帽沿",url:"https://wiki.bambulab.com/en/software/bambu-studio/auto-brim"}]}
     ],
     task:{title:"支撐偵探",text:"找一個含有手臂或屋簷的模型，分別用原方向與旋轉方向切片，比較支撐用量與接觸面。"},
     checkpoint:"我會先改變模型方向，再決定是否增加支撐，而不是一開始就全部開啟。"
@@ -224,9 +258,9 @@ window.COURSES = [
     lead:"不同線材的耐熱、韌性與列印難度不同。初學從 PLA 開始，等能穩定操作後再擴充材料。",
     goals:["比較 PLA、PETG、ABS／ASA","依用途與機型選擇材料","理解乾燥、通風與材料預設的重要性"],
     sections:[
-      {title:"初學首選 PLA",body:"PLA 容易列印、氣味較低且外觀表現好，適合模型、教具與一般室內作品，但不適合長時間高溫或戶外日曬。"},
-      {title:"PETG 與工程材料",body:"PETG 較耐衝擊、耐水，但容易拉絲；ABS／ASA 需要更穩定的高溫環境與通風，較適合封閉式 P1S，不建議直接在開放式 A1 教學環境中使用。",compare:[["PLA","容易","模型、教具","A1／P1S"],["PETG","中等","耐水、功能件","A1／P1S"],["ABS／ASA","較難","耐熱、戶外件","以 P1S 為主"]]},
-      {title:"線材也需要保存",body:"吸濕後可能出現爆裂聲、拉絲與粗糙表面。線材不用時密封保存並放入乾燥劑；切片時選擇與實際材料相符的預設。"}
+      {title:"先看用途，再比較材料",body:"PLA 容易列印且外觀表現穩定，適合教具與室內模型；PETG 常用於耐水、較有韌性的功能件；ASA 適合戶外耐候需求，但需要更嚴謹的機器、溫度與通風條件。材料沒有單一排名，必須回到作品環境。",manga:{label:"GPT 教學圖解",src:"../assets/course-10/illustrations/material-use-cases.webp",alt:"繁體中文教學圖：PLA 室內模型、PETG 耐水功能件與 ASA 戶外耐候件",caption:"先回答作品要放在哪裡、會遇到水或日曬嗎，再從材料特性選擇。"},compareHeaders:["材料","初學難度","典型用途","限制"],compare:[["PLA","較低","室內模型、教具、名牌","不適合長期高溫與日曬"],["PETG","中等","耐水容器、掛鉤、功能件","可能拉絲，需正確預設"],["ABS／ASA","較高","耐熱或戶外耐候件","需要穩定高溫環境與有效通風"]],sources:[{label:"內容參考：Bambu Lab Wiki｜線材相容表",url:"https://wiki.bambulab.com/en/general/filament-guide-material-table"}]},
+      {title:"機型、環境與材料要配對",body:"開放式 A1 適合課堂以 PLA、PETG 建立穩定流程；ABS／ASA 等高溫材料以具外殼的機型與教師管理為主，但外殼不等於通風。選材前同時核對印表機、噴嘴、平台、膠材與通風要求。",manga:{label:"GPT 教學圖解",src:"../assets/course-10/illustrations/printer-material-match.webp",alt:"繁體中文教學圖：A1 開放環境、P1S 封閉環境與材料預設核對",caption:"機器能加熱不代表環境一定適合；封閉機器仍需依材料要求安排有效通風。"},points:["A1 課堂起點：PLA，再延伸 PETG","P1S 外殼：有助溫度穩定，但不能取代通風","平台與噴嘴：依官方材料相容表核對","切片預設：必須與實際線材種類一致"],callout:"學生不自行嘗試未知或高溫工程材料。ABS／ASA 與其他需特殊通風的材料，由教師依場地規範決定是否使用。",sources:[{label:"內容參考：Bambu Lab Wiki｜ABS／ASA／PC 使用指南",url:"https://wiki.bambulab.com/en/filament/abs_asa_pc"}]},
+      {title:"辨認受潮、密封保存、依建議乾燥",body:"線材吸濕後可能出現爆裂聲、氣泡、拉絲、流量不穩與粗糙表面。不用時將線材密封並搭配乾燥劑；需要乾燥時，依材料與製造商建議選擇正確設備、溫度與時間，不使用食物烤箱猜測。",manga:{label:"GPT 教學圖解",src:"../assets/course-10/illustrations/moisture-storage-drying.webp",alt:"繁體中文教學圖：線材受潮症狀、密封保存與依建議乾燥",caption:"先辨認受潮線索，平時密封保存；需要乾燥時查對該材料的官方條件。"},steps:["聽是否有異常爆裂聲並觀察氣泡、拉絲與粗糙表面。","排除錯誤預設、堵塞與進料不順等其他原因。","不用的線材放入密封盒或密封袋並搭配乾燥劑。","乾燥前查詢線材種類、線軸耐熱與官方溫度時間。"],sources:[{label:"內容參考：Bambu Lab Wiki｜線材乾燥建議",url:"https://wiki.bambulab.com/en/filament-acc/filament/dry-filament"}]}
     ],
     task:{title:"材料選擇",text:"替「室內姓名牌、戶外標示牌、浴室掛鉤」各選一種材料，寫下選擇理由與建議機型。"},
     checkpoint:"我不會只依顏色選線材；會先考慮用途、環境、機型與列印難度。"
@@ -237,9 +271,9 @@ window.COURSES = [
     lead:"排錯不是亂調參數。記錄症狀、從最常見原因開始、一次只改一個變因，才能真正找到答案。",
     goals:["依第一層、表面與結構分類問題","建立固定的檢查順序","保留測試紀錄並避免同時修改多個參數"],
     sections:[
-      {title:"第一層問題",body:"沒有黏住或翹邊時，依序檢查平台是否乾淨、平台類型是否正確、材料與熱床預設、模型接觸面及環境風。Bambu Lab 使用自動調平，不沿用舊機器的 A4 紙手動調平流程。",points:["模型被拖走：先暫停並清潔平台","邊角翹起：避免冷風並考慮 Brim","首層不連續：確認出料與線材路徑"]},
-      {title:"表面與出料問題",body:"拉絲先檢查線材是否受潮，再看溫度與回抽；擠料不足先檢查線材是否纏繞、進料是否順暢與噴嘴是否堵塞。"},
-      {title:"結構與支撐問題",body:"搭橋下垂可縮短跨距、增加冷卻或降低橋接速度；支撐面粗糙則調整模型方向、支撐介面與間距。先用小型測試件驗證。"}
+      {title:"先把症狀放進正確分類",body:"先不要急著改設定。把現象分成第一層、表面／出料、結構／支撐三類，再描述實際看到的位置、形狀與發生時間。相同的「不好看」可能來自完全不同的原因。",manga:{label:"GPT 教學圖解",src:"../assets/course-11/illustrations/symptom-map.webp",alt:"繁體中文教學圖：第一層、表面出料與結構支撐三類症狀",caption:"先分類，再描述：哪一層、哪個表面、列印到什麼時候開始出現。"},points:["第一層：未黏住、翹邊、被拖走","表面／出料：拉絲、氣泡、缺料、層紋異常","結構／支撐：橋接下垂、層間裂開、支撐面粗糙"],sources:[{label:"內容參考：Bambu Lab Wiki｜列印品質問題與解法",url:"https://wiki.bambulab.com/en/filament-acc/filament/print-quality"}]},
+      {title:"固定五步驟：一次只改一項",body:"排錯使用固定循環：觀察並拍照、列出可能原因、先做最簡單安全的檢查、只改一項、用小測試件重新驗證。每次都記錄原始條件與結果，避免靠印象猜測。",manga:{label:"GPT 教學圖解",src:"../assets/course-11/illustrations/five-step-troubleshooting.webp",alt:"繁體中文教學圖：觀察症狀、查找原因、只改一項與重新測試",caption:"能說明改了什麼、其他條件是否相同，測試結果才有意義。"},steps:["拍照並寫下症狀發生的位置與時間。","列出三個可能原因，從常見且安全的項目開始。","核對平台、線材路徑、預設與模型方向。","只修改一個條件，其他設定保持不變。","列印小型測試件，記錄改善、無效或惡化。"],sources:[{label:"內容參考：Bambu Lab Wiki｜避免噴嘴堵塞",url:"https://wiki.bambulab.com/en/knowledge-sharing/how_to_avoid_nozzle_clogs"}]},
+      {title:"從症狀走到安全的第一個檢查",body:"拉絲先看線材受潮與材料預設；堵塞先確認線材是否纏繞、進料是否順暢；翹曲先看平台清潔、冷風與接觸面；支撐面粗糙先比較模型方向、支撐介面與間距。需要拆熱端或電氣處理時停止並交由教師。",manga:{label:"GPT 教學圖解",src:"../assets/course-11/illustrations/fault-paths.webp",alt:"繁體中文教學圖：拉絲、堵塞、翹曲與支撐粗糙的排查路徑",caption:"每個症狀先走向安全、低風險且容易驗證的檢查，不從拆機開始。"},compareHeaders:["症狀","第一個安全檢查","下一步","停止並求助"],compare:[["拉絲","線材是否受潮、材料預設是否正確","小型溫度測試","無法穩定出料"],["疑似堵塞","線材有無纏繞、進料路徑是否順暢","依機型官方流程檢查","需要拆熱端"],["翹曲","平台清潔、冷風、接觸面","比較 Brim 或改變方向","持續撞件或作品鬆脫"],["支撐粗糙","方向、支撐接觸位置","小件比較介面與間距","支撐無法安全拆除"]],sources:[{label:"內容參考：Bambu Lab Wiki｜模型翹曲原因與解法",url:"https://wiki.bambulab.com/en/knowledge-sharing/printed-model-warping"}]}
     ],
     task:{title:"排錯紀錄",text:"選一個曾經失敗的作品，寫下：症狀、三個可能原因、第一個檢查項目、只改的一個變因與測試結果。"},
     checkpoint:"我遇到失敗時會留下紀錄，一次只改一個設定，再比較結果。"
@@ -250,9 +284,9 @@ window.COURSES = [
     lead:"真正完成課程，不只是成功列印，而是能安全收尾、維護機器，並解釋自己為什麼這樣設定。",
     goals:["完成列印前與列印後檢核","執行基本平台與線材維護","獨立規劃並完成結業作品"],
     sections:[
-      {title:"日常維護",body:"保持平台清潔、清除噴嘴周圍殘料、密封保存線材，定期依機器提示執行維護。任何拆機、熱端處理或電氣維修都交由熟悉設備的人員進行。"},
-      {title:"列印前十項檢核",body:"確認機型、平台、線材、模型方向、層高、填充、支撐、切片預覽、線材餘量與自動調平。開始後留在旁邊確認第一層。"},
-      {title:"結業作品",body:"設計或選擇一件有明確用途的小作品，例如姓名牌、線材夾或桌面收納。作品需能在合理時間內完成，並附上一張設定說明卡。",points:["作品用途與尺寸","材料與機型","模型方向與支撐選擇","層高、外殼與填充","遇到的問題與解法"]}
+      {title:"維護要分工，也要留下記錄",body:"學生可在機器停止、平台冷卻後清潔已取下的平台、整理鬆散殘料與密封線材；噴嘴、熱端、拆機、皮帶與電氣工作由教師依官方維護指南處理。完成後記錄日期、項目與異常。",manga:{label:"GPT 教學圖解",src:"../assets/course-12/illustrations/routine-maintenance.webp",alt:"繁體中文教學圖：學生可做、教師處理與完成記錄的維護分工",caption:"日常清潔不等於拆機維修；先確認冷卻與權責，再開始處理。"},compareHeaders:["學生可做","前提","教師處理","原因"],compare:[["擦拭已取下的平台","機器停止、平台冷卻","熱端與噴嘴拆裝","高溫與精密零件"],["清除工作區鬆散殘料","不伸入移動機構","皮帶、導軌與機構調整","需依機型程序與工具"],["線材密封與乾燥劑檢查","依教室保存規則","電氣、線材與外殼拆修","觸電與設備損壞風險"]],sources:[{label:"內容參考：Bambu Lab Wiki｜A1 維護指南",url:"https://wiki.bambulab.com/en/a1/maintenance"}]},
+      {title:"列印前十項檢核",body:"送出工作前依序核對機型、平台、線材種類、線材餘量、材料預設、模型尺寸方向、層高填充、支撐、逐層預覽與自動調平。開始後留在旁邊，親眼確認第一層。",manga:{label:"GPT 教學圖解",src:"../assets/course-12/illustrations/ten-point-preflight.webp",alt:"繁體中文教學圖：機型平台、線材預設、模型參數與預覽首層十項檢核",caption:"十項檢核不是背口號，而是送出前逐項對照現場機器、線材與切片結果。"},steps:["確認目標機型與噴嘴。","確認平台類型正確、乾淨且就定位。","確認線材種類正確。","確認線材餘量足夠。","確認材料預設與實物一致。","確認模型尺寸、方向與接觸面。","確認層高、外殼與填充符合用途。","確認必要支撐與平台附著。","逐層查看切片預覽。","保留自動調平並留在現場確認第一層。"],sources:[{label:"內容參考：Bambu Lab Wiki｜列印平台總覽",url:"https://wiki.bambulab.com/en/general/build-plate"}]},
+      {title:"結業作品：從用途走到分享",body:"選擇一件有明確用途、60 分鐘內可完成的小作品。先定義尺寸與限制，再完成切片、第一層觀察、成品記錄與口頭分享；若出現失敗，說明如何分類症狀、只改一項並重新測試。",manga:{label:"GPT 教學圖解",src:"../assets/course-12/illustrations/capstone-workflow.webp",alt:"繁體中文教學圖：規劃、切片、列印、記錄與分享結業作品",caption:"完成作品只是結果；能解釋每個選擇與一次問題解決，才是完整成果。"},points:["用途與關鍵尺寸","材料、機型與平台","模型方向與支撐選擇","層高、外殼與填充","問題、只改的一項與測試結果"],callout:"成果說明卡必須使用自己的觀察，不只抄寫切片數值。作品若無法在課堂時間與安全條件內完成，就縮小範圍或改用更簡單的模型。",sources:[{label:"內容參考：Bambu Lab Wiki｜專案式工作流程",url:"https://wiki.bambulab.com/en/software/bambu-studio/project-based-workflow"}]}
     ],
     task:{title:"成果挑戰",text:"完成一件 60 分鐘內可印製的小作品，附上五項設定說明，並用自己的話介紹從模型到成品的完整流程。"},
     checkpoint:"我能獨立完成作品，也能說明安全、材料、方向與參數選擇。"

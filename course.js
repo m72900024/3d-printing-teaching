@@ -31,6 +31,36 @@ const goalArtByCourse = {
     { src: "../assets/course-04/anime-v2/02-three-platforms.webp", alt: "比較 Thingiverse、Printables 與 MakerWorld 三種模型平台" },
     { src: "../assets/course-04/anime-v2/03-file-levels.webp", alt: "分辨原始設計、模型交換檔、切片專案與機器指令" },
     { src: "../assets/course-04/anime-v2/04-download-checklist.webp", alt: "模型偵探檢查來源、授權、尺寸、材料與機型相容性" }
+  ],
+  "06": [
+    { src: "../assets/course-06/illustrations/a1-preflight.webp", alt: "A1 第一次列印前依序確認平台、PLA 線材、0.4 mm 噴嘴與切片預覽" },
+    { src: "../assets/course-06/illustrations/first-layer-four-states.webp", alt: "正常、噴嘴過高、噴嘴過低與未黏住四種第一層狀況對照" },
+    { src: "../assets/course-06/illustrations/cooled-removal-five-steps.webp", alt: "列印完成、等待降溫、取下鋼板、彎曲取件與清潔平台五步驟" }
+  ],
+  "08": [
+    { src: "../assets/course-08/illustrations/layer-height-comparison.webp", alt: "以精細、均衡、快速三種層高比較表面層紋與列印時間" },
+    { src: "../assets/course-08/illustrations/walls-vs-infill.webp", alt: "比較外殼優先、平衡配置與高填充的模型剖面" },
+    { src: "../assets/course-08/illustrations/one-variable-experiment.webp", alt: "固定條件、只改一項並比較切片結果的參數實驗" }
+  ],
+  "09": [
+    { src: "../assets/course-09/illustrations/orientation-bridge-support.webp", alt: "比較改變方向、短距橋接與需要支撐三種情況" },
+    { src: "../assets/course-09/illustrations/normal-vs-tree-support.webp", alt: "一般支撐、樹狀支撐與拆除後接觸面的比較" },
+    { src: "../assets/course-09/illustrations/adhesion-aids.webp", alt: "裙邊、帽沿與底筏三種平台附著輔助比較" }
+  ],
+  "10": [
+    { src: "../assets/course-10/illustrations/material-use-cases.webp", alt: "PLA 室內模型、PETG 耐水功能件與 ASA 戶外耐候件比較" },
+    { src: "../assets/course-10/illustrations/printer-material-match.webp", alt: "A1 開放環境、P1S 封閉環境與材料預設核對" },
+    { src: "../assets/course-10/illustrations/moisture-storage-drying.webp", alt: "線材受潮症狀、密封保存與依建議乾燥流程" }
+  ],
+  "11": [
+    { src: "../assets/course-11/illustrations/symptom-map.webp", alt: "第一層、表面出料與結構支撐三類列印症狀" },
+    { src: "../assets/course-11/illustrations/five-step-troubleshooting.webp", alt: "觀察症狀、查找原因、只改一項與重新測試的排錯循環" },
+    { src: "../assets/course-11/illustrations/fault-paths.webp", alt: "拉絲、堵塞、翹曲與支撐粗糙的安全排查路徑" }
+  ],
+  "12": [
+    { src: "../assets/course-12/illustrations/routine-maintenance.webp", alt: "學生可做、教師處理與完成記錄的維護分工" },
+    { src: "../assets/course-12/illustrations/ten-point-preflight.webp", alt: "機型平台、線材預設、模型參數與預覽首層十項檢核" },
+    { src: "../assets/course-12/illustrations/capstone-workflow.webp", alt: "規劃、切片、列印、記錄與分享的結業作品流程" }
   ]
 };
 const goalArt = goalArtByCourse[course.id];
@@ -161,7 +191,7 @@ content.innerHTML = renderLessonVisual(course.lessonVisual) + course.sections.ma
     <div>
       <h2>${section.title}</h2>
       <p>${section.body}</p>
-      ${section.manga ? `<figure class="manga-figure"><img src="${section.manga.src}" alt="${section.manga.alt}" width="1600" height="757" loading="eager" decoding="async"><figcaption><span>MANGA EXPLAINER</span>${section.manga.caption}</figcaption></figure>` : ""}
+      ${section.manga ? `<figure class="manga-figure"><img src="${section.manga.src}" alt="${section.manga.alt}" width="1600" height="757" loading="eager" decoding="async"><figcaption><span>${section.manga.label || "MANGA EXPLAINER"}</span>${section.manga.caption}</figcaption></figure>` : ""}
       ${renderTradeoff(section.tradeoff)}
       ${section.image ? `<figure class="lesson-figure"><img src="${section.image}" alt="${section.imageAlt || ""}" loading="lazy"><figcaption>線材經過加熱、擠出與逐層堆疊，最後成為實體作品。</figcaption></figure>` : ""}
       ${renderSteps(section.steps)}
