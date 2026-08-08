@@ -127,6 +127,7 @@ test("publishes two advanced courses with static art and Bambu Wiki sources", ()
   const overview = fs.readFileSync(path.join(outputDir, "advanced/index.html"), "utf8");
   const drying = fs.readFileSync(path.join(outputDir, "advanced/01-filament-drying.html"), "utf8");
   const quality = fs.readFileSync(path.join(outputDir, "advanced/02-quality-diagnostics.html"), "utf8");
+  const courseCss = fs.readFileSync(path.join(outputDir, "course.css"), "utf8");
 
   assert.equal(result.advancedCourseCount, 2);
   assert.equal(result.htmlCount, 16);
@@ -141,6 +142,8 @@ test("publishes two advanced courses with static art and Bambu Wiki sources", ()
   assert.equal((quality.match(/GPT 教學圖解/g) || []).length, 5);
   assert.equal((drying.match(/內容參考：Bambu Lab Wiki/g) || []).length, 5);
   assert.equal((quality.match(/內容參考：Bambu Lab Wiki/g) || []).length, 5);
+  assert.match(courseCss, /\.course-page\[data-track="advanced"\] \.manga-figure img\{[^}]*aspect-ratio:3\/2;object-fit:contain[^}]*\}/);
+  assert.ok(courseCss.includes('@media(max-width:640px){.course-page[data-track="advanced"] .goal-box ul{grid-template-columns:1fr}.course-page[data-track="advanced"] .goal-card{grid-template-columns:1fr}.course-page[data-track="advanced"] .goal-visual{width:100%;height:auto;aspect-ratio:3/2}}'));
 
   for (const [folder, files] of Object.entries({
     "advanced-a01": ["dry-vs-damp.webp", "moisture-risk.webp", "drying-decision.webp", "drying-methods.webp", "storage-workflow.webp"],
