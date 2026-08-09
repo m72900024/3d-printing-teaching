@@ -110,9 +110,10 @@ test("publishes the anime homepage with beginner and active advanced paths", () 
   assert.match(home, /<strong>12<\/strong><span>堂初階課程<\/span>/);
   assert.match(home, /id="beginner-courses"/);
   assert.match(home, /初階課程[\s\S]*12 堂課/);
-  assert.match(home, /id="advanced-courses"[\s\S]*2 堂課已開放/);
+  assert.match(home, /id="advanced-courses"[\s\S]*3 堂課已開放/);
   assert.match(home, /href="advanced\/index\.html"/);
-  assert.match(home, /線材乾燥[\s\S]*品質診斷[\s\S]*熱蠕變／熱堆積/);
+  assert.match(home, /材料、診斷與支撐策略/);
+  assert.match(home, /支撐介面[\s\S]*頂部 Z 距離/);
   assert.match(home, /id="about"/);
   assert.match(home, /安全操作/);
   assert.match(home, /Bambu Studio/);
@@ -122,32 +123,41 @@ test("publishes the anime homepage with beginner and active advanced paths", () 
   assert.match(styles, /#beginner-courses,#advanced-courses,#about\{scroll-margin-top:/);
 });
 
-test("publishes two advanced courses with static art and Bambu Wiki sources", () => {
+test("publishes three advanced courses with static art and Bambu Wiki sources", () => {
   const { outputDir, result } = buildTemporarySite("3d-course-advanced-path-");
   const overview = fs.readFileSync(path.join(outputDir, "advanced/index.html"), "utf8");
   const drying = fs.readFileSync(path.join(outputDir, "advanced/01-filament-drying.html"), "utf8");
   const quality = fs.readFileSync(path.join(outputDir, "advanced/02-quality-diagnostics.html"), "utf8");
+  const support = fs.readFileSync(path.join(outputDir, "advanced/03-support-settings.html"), "utf8");
   const courseCss = fs.readFileSync(path.join(outputDir, "course.css"), "utf8");
 
-  assert.equal(result.advancedCourseCount, 2);
-  assert.equal(result.htmlCount, 16);
+  assert.equal(result.advancedCourseCount, 3);
+  assert.equal(result.htmlCount, 17);
   assert.match(overview, /A01[\s\S]*線材乾燥與保存/);
   assert.match(overview, /A02[\s\S]*品質問題診斷/);
+  assert.match(overview, /A03[\s\S]*支撐與支撐介面設定/);
   assert.match(drying, /A1／A1 mini[^。]*不可使用[^。]*熱床乾燥/);
   assert.match(quality, /熱蠕變／熱堆積/);
   assert.match(quality, /A1[\s\S]*P1S/);
   assert.match(drying, /three-d-advanced-course-chapters/);
-  assert.match(quality, /data-course-total="2"/);
+  assert.match(support, /頂部Z距離/);
+  assert.match(support, /一般支撐[\s\S]*樹狀支撐/);
+  assert.match(support, /同材質[\s\S]*專用支撐材料/);
+  assert.match(quality, /data-course-total="3"/);
+  assert.match(support, /data-course-total="3"/);
   assert.equal((drying.match(/GPT 教學圖解/g) || []).length, 5);
   assert.equal((quality.match(/GPT 教學圖解/g) || []).length, 5);
+  assert.equal((support.match(/GPT 教學圖解/g) || []).length, 5);
   assert.equal((drying.match(/內容參考：Bambu Lab Wiki/g) || []).length, 5);
   assert.equal((quality.match(/內容參考：Bambu Lab Wiki/g) || []).length, 5);
+  assert.equal((support.match(/內容參考：Bambu Lab Wiki/g) || []).length, 5);
   assert.match(courseCss, /\.course-page\[data-track="advanced"\] \.manga-figure img\{[^}]*aspect-ratio:3\/2;object-fit:contain[^}]*\}/);
   assert.ok(courseCss.includes('@media(max-width:640px){.course-page[data-track="advanced"] .goal-box ul{grid-template-columns:1fr}.course-page[data-track="advanced"] .goal-card{grid-template-columns:1fr}.course-page[data-track="advanced"] .goal-visual{width:100%;height:auto;aspect-ratio:3/2}}'));
 
   for (const [folder, files] of Object.entries({
     "advanced-a01": ["dry-vs-damp.webp", "moisture-risk.webp", "drying-decision.webp", "drying-methods.webp", "storage-workflow.webp"],
-    "advanced-a02": ["diagnostic-loop.webp", "extrusion-symptoms.webp", "warping-layer-cracks.webp", "bridge-seam-surface.webp", "a1-p1s-heat-creep.webp"]
+    "advanced-a02": ["diagnostic-loop.webp", "extrusion-symptoms.webp", "warping-layer-cracks.webp", "bridge-seam-surface.webp", "a1-p1s-heat-creep.webp"],
+    "advanced-a03": ["support-or-redesign.webp", "support-types.webp", "threshold-preview.webp", "interface-z-gap.webp", "support-test.webp"]
   })) for (const file of files) {
     assert.ok(fs.existsSync(path.join(outputDir, "assets", folder, "illustrations", file)));
   }
