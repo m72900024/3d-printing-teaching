@@ -110,9 +110,10 @@ test("publishes the anime homepage with beginner and active advanced paths", () 
   assert.match(home, /<strong>12<\/strong><span>堂初階課程<\/span>/);
   assert.match(home, /id="beginner-courses"/);
   assert.match(home, /初階課程[\s\S]*12 堂課/);
-  assert.match(home, /id="advanced-courses"[\s\S]*2 堂課已開放/);
+  assert.match(home, /id="advanced-courses"[\s\S]*3 堂課已開放/);
   assert.match(home, /href="advanced\/index\.html"/);
-  assert.match(home, /線材乾燥[\s\S]*品質診斷[\s\S]*熱蠕變／熱堆積/);
+  assert.match(home, /材料、診斷與支撐策略/);
+  assert.match(home, /支撐介面[\s\S]*頂部 Z 距離/);
   assert.match(home, /id="about"/);
   assert.match(home, /安全操作/);
   assert.match(home, /Bambu Studio/);
