@@ -41,6 +41,20 @@
 
 「需求 → 候選 → 機型 → 噴嘴 → 送料 → 小件測試」改放在頁尾互動練習，不作為第七張主圖，讓圖片先回答材料能完成什麼作品。
 
+## 網路實際作品
+
+每個材料單元在原創圖解後加入「網路實際作品」卡，列出作品名稱、作者／平台、案例使用或建議的線材、適合觀察的功能，以及可直接開啟的原始連結。不下載、不重製也不熱連社群作品圖片；材料特性仍以 Bambu Lab Wiki 為依據，MakerWorld 僅作為實際應用範例，並標示社群案例不等於官方性能認證。
+
+- **PLA｜桌面收納**：[Mid-Century Organizer](https://makerworld.com/en/models/139371)；觀察 PLA 在展示、收納與外觀件上的應用。
+- **PETG｜活動式收納功能件**：[Tilted Gridfinity Drawer for Pegboards](https://makerworld.com/en/models/919517-tilted-gridfinity-drawer-for-pegboards-with-handle)；查看社群以 PETG 列印卡合與活動結構的回饋。
+- **ABS／ASA｜戶外用品**：[Sand Safe with AirTag](https://makerworld.com/en/models/497031-sand-safe-with-airtag)；作者建議以 ASA 或 ABS 製作戶外使用版本。
+- **TPU｜柔性保護套**：[iPhone 13 Case](https://makerworld.com/en/models/210252-iphone-13-case)；觀察 TPU 如何利用彈性包覆物件。
+- **PC／複合材料｜承力掛鉤**：[StrongArm Table & Desk Holder](https://makerworld.com/en/models/15447-strongarm-a-table-desk-holder-hook-for-bags-and-pu)；作者提供 PLA、ASA 與 PC-CF 的不同版本及負載測試說明，適合討論材料與幾何共同影響結果。
+- **PA-CF｜尺寸配合零件**：[YEC Tray PA6-CF](https://makerworld.com/en/models/1160299-yec-tray-pa6-cf)；觀察 PA6-CF 用於硬碟托盤轉接零件的案例。
+- **PAHT-CF｜工程治具**：[BMW Clutch Flywheel Lock Tool](https://makerworld.com/en/models/721613-bmw-clutch-flywheel-lock-tool)；觀察工程複合材料在工具與治具上的應用，同時提醒網路案例不可取代安全驗證。
+
+連結若失效，課程仍保留完整的原創圖解與文字；建置測試會檢查連結格式與標示，但不把第三方網站即時可用性當成靜態網站建置的必要條件。
+
 ## 學習成果
 
 - 用六項需求描述作品，而不是直接從材料名稱開始選擇。
@@ -74,6 +88,7 @@ Wiki 的核心說明包含：PLA、ABS 與 PETG 的入門特性；不同線材�
 
 - 靜態建置包含 12 堂初階、4 堂進階，共 18 個 HTML 頁面。
 - A04 含完整學習成果、七段正文、七張 3:2 圖解與逐段 Bambu Lab Wiki 引用標示。
+- 各材料單元附可直接開啟的 MakerWorld 實際作品卡，清楚區分社群案例與官方材料依據。
 - 課文清楚區分材料性能、作品需求與設備相容性，不宣稱某種線材在所有情境都是最佳選擇。
 - CF／GF 主圖只呈現治具、支架、機器手臂零件與功能外殼；正文以一段簡短文字提醒硬化鋼噴嘴、0.2 mm 堵塞風險與 AMS／AMS lite 相容性，並連回官方資料，不另外製作設備檢查表。
 - 桌機與 390 px 手機寬度皆無圖片裁切或橫向溢出。
