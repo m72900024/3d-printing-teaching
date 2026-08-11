@@ -79,6 +79,16 @@ function renderSources(sources) {
   }).join("") + "</div></aside>";
 }
 
+function renderExamples(examples) {
+  if (!Array.isArray(examples) || examples.length === 0) return "";
+  return '<div class="example-grid">' + examples.map(example => {
+    return '<article class="example-card"><div class="example-top"><small>' + escapeHtml(example.label) +
+      '</small></div><h3>' + escapeHtml(example.title) + '</h3><p>' + escapeHtml(example.body) +
+      '</p><p class="example-why">' + escapeHtml(example.why) + '</p><a href="' + escapeHtml(example.source) +
+      '" target="_blank" rel="noopener noreferrer">' + escapeHtml(example.sourceLabel) + ' ↗</a></article>';
+  }).join("") + "</div>";
+}
+
 function renderManga(manga) {
   if (!manga) return "";
   return '<figure class="manga-figure static-lesson-manga">' +
@@ -91,7 +101,6 @@ function renderSection(section, index) {
     section.tradeoff ? [section.tradeoff] : null,
     section.cards,
     section.details,
-    section.examples,
     section.structureGuide ? [section.structureGuide] : null,
     section.realPhotos,
     section.photoStudy ? [section.photoStudy] : null,
@@ -106,6 +115,7 @@ function renderSection(section, index) {
     renderManga(section.manga) +
     renderTextList(section.steps, "process-steps static-process-steps") +
     supplements +
+    renderExamples(section.examples) +
     renderTextList(section.points, "lesson-points") +
     renderCompare(section) +
     (section.callout ? '<aside class="lesson-callout"><span>!</span><p>' + escapeHtml(section.callout) + "</p></aside>" : "") +
