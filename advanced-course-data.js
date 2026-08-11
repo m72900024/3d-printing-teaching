@@ -170,5 +170,80 @@ window.COURSES = [
     ],
     task:{title:"完成一張支撐介面對照表",text:"選一個有平坦懸空面的固定試片，先保存預設切片結果。保持模型、方向、材料、層高與支撐類型不變，每輪只改頂部Z距離、頂部接觸面層數或線距其中一項；記錄列印時間、支撐材料量、冷卻後拆除難度與底面照片，選出本材料可接受的平衡。"},
     checkpoint:"我能先減少不必要支撐，分辨一般、樹狀與手動支撐，也能把支撐接觸面層數、線距和頂部Z距離分開測試；使用專用支撐材料時會先核對官方相容性與切片預覽。"
+  },
+  {
+    id:"A04", slug:"04-filament-selection.html", stage:"材料應用", stageNo:"A", duration:"40 分鐘", type:"情境判讀＋選材實作",
+    title:"依作品需求選擇線材", subtitle:"先看作品要承受什麼，再從功能需求縮小材料範圍。",
+    lead:"選線材不是背一張材料排行表，也不是越昂貴越好。本課從室內外環境、溫度、受力、彎曲、外觀與後加工六個問題出發，比較 PLA、PETG、ABS、ASA、TPU、PC、PA 與 CF／GF 填料線材，最後用小件測試確認選擇。以下社群案例用來觀察真實用途，不等於官方性能認證。",
+    goals:["用六個作品問題寫出需求條件","把材料特性連到實際功能與環境","比較常用、耐候、柔性與工程材料","理解 CF／GF 填料改善的是剛性與穩定性","用候選材料與小件測試留下選材證據"],
+    goalArt:[
+      {src:"../assets/advanced-a04/illustrations/needs-six-questions.webp",alt:"從室內外、溫度、受力、彎曲、外觀與後加工判斷作品需求"},
+      {src:"../assets/advanced-a04/illustrations/material-function-map.webp",alt:"以容易列印、日常耐用、戶外耐候、柔性、工程功能與剛性分類線材"},
+      {src:"../assets/advanced-a04/illustrations/pla-petg-applications.webp",alt:"PLA 展示模型與 PETG 日常功能件的應用比較"},
+      {src:"../assets/advanced-a04/illustrations/abs-asa-applications.webp",alt:"ABS 耐熱外殼與 ASA 戶外耐候零件的應用比較"},
+      {src:"../assets/advanced-a04/illustrations/tpu-flexibility.webp",alt:"TPU 壓縮、彎曲、回彈與壁厚設計的功能圖解"}
+    ],
+    sections:[
+      {
+        title:"先問六個問題，再看材料名稱",
+        body:"先寫清楚作品會放在室內或戶外、接觸多高的環境溫度、承受撞擊或長期載重、是否需要彎曲回彈、表面要精緻或耐磨，以及完成後是否要打磨、鑽孔或黏合。答案越具體，越能排除不合適的材料；若只寫「要堅固」，候選範圍仍然太大。",
+        manga:{src:"../assets/advanced-a04/illustrations/needs-six-questions.webp",alt:"老師以六個使用情境問題帶領學生整理選材需求",label:"GPT 教學圖解",caption:"不要先問哪一種線材最強；先問作品在哪裡用、怎麼受力、需要什麼外觀與後加工。"},
+        steps:["寫出室內或戶外與日照條件","估計環境溫度與熱源距離","描述撞擊、彎曲或持續載重","決定硬挺、韌性或柔性需求","列出外觀、耐磨與後加工要求","挑兩種候選材料做小件測試"],
+        callout:"材料規格是縮小範圍的依據，不是成品保證。模型方向、壁厚、結構、受潮與列印品質都會改變最終表現。",
+        sources:[{label:"內容參考：Bambu Lab Wiki｜初學者線材選擇指南",url:"https://wiki.bambulab.com/en/knowledge-sharing/filament-guide-beginners"}]
+      },
+      {
+        title:"把需求對到材料功能地圖",
+        body:"容易列印的 PLA 適合快速驗證與展示；PETG 偏向日常耐用；ABS、ASA、PC、PA 服務更明確的耐熱、耐候或工程需求；TPU 負責柔性與回彈；加入短切 CF／GF 的線材則著重剛性與尺寸穩定。功能地圖只用來建立候選，不用來宣布唯一答案。",
+        manga:{src:"../assets/advanced-a04/illustrations/material-function-map.webp",alt:"六種作品功能需求對應不同線材家族的地圖",label:"GPT 教學圖解",caption:"從用途入口進入材料家族，再回到機型、保存狀態與小件測試確認。"},
+        compareHeaders:["作品需求","先看的材料家族","再確認"],
+        compare:[["快速模型與室內展示","PLA","耐熱需求與外觀"],["日常容器、治具與耐用件","PETG","剛性、耐磨與環境"],["戶外或較高溫環境","ASA／ABS／PC","日照、溫度與機型條件"],["保護套、緩衝與回彈","TPU","硬度、壁厚與送料穩定"],["受力活動件與工程治具","PA／PC／CF／GF 複合材料","吸濕、方向與小件測試"]],
+        sources:[{label:"內容參考：Bambu Lab Wiki｜線材材料特性表",url:"https://wiki.bambulab.com/en/general/filament-guide-material-table"}]
+      },
+      {
+        title:"PLA 與 PETG：從展示模型到日常功能件",
+        body:"PLA 容易取得良好外觀與細節，適合室內模型、教具和快速原型，但不應把它當成高溫環境的通用材料。PETG 通常比 PLA 更適合需要韌性、耐水與日常耐用的收納、夾具或工具；它也可能較容易拉絲，外觀與可列印性仍要用實際預設確認。",
+        manga:{src:"../assets/advanced-a04/illustrations/pla-petg-applications.webp",alt:"PLA 室內展示模型與 PETG 日常收納功能件的應用圖",label:"GPT 教學圖解",caption:"PLA 強在快速、細節與室內展示；PETG 常被選來做更耐用的日常功能件。"},
+        details:[{label:"PLA",title:"模型、教具、外觀原型",text:"適合快速驗證尺寸和造型；若作品靠近熱源、車內或戶外曝曬，先重新評估。"},{label:"PETG",title:"收納、夾具、日常工具",text:"適合需要韌性與耐水的功能件；仍要留意剛性、拉絲與表面需求。"}],
+        examples:[{icon:"box",label:"社群案例 · PLA",title:"可堆疊收納抽屜",body:"用實際收納件觀察 PLA 如何服務室內整理與尺寸驗證。",why:"社群案例提供用途靈感，不等於官方性能認證。",source:"https://makerworld.com/en/models/139371",sourceLabel:"MakerWorld 查看作品"},{icon:"tools",label:"社群案例 · PETG",title:"洞洞板傾斜抽屜",body:"抽屜、把手與安裝結構呈現 PETG 在日常耐用件上的常見方向。",why:"實際承重仍取決於方向、壁厚與列印品質；不等於官方性能認證。",source:"https://makerworld.com/en/models/919517-tilted-gridfinity-drawer-for-pegboards-with-handle",sourceLabel:"MakerWorld 查看作品"}],
+        sources:[{label:"內容參考：Bambu Lab Wiki｜PLA、PETG 材料特性",url:"https://wiki.bambulab.com/en/general/filament-guide-material-table"}]
+      },
+      {
+        title:"ABS 與 ASA：較高溫環境和戶外耐候",
+        body:"ABS 常見於需要韌性、耐衝擊與較高耐熱需求的外殼或功能件；ASA 的方向相近，並更適合考慮紫外線與戶外耐候的作品。兩者比 PLA、PETG 更容易受收縮與環境風影響，通常應使用合適的封閉式機型、平台與官方材料預設。",
+        manga:{src:"../assets/advanced-a04/illustrations/abs-asa-applications.webp",alt:"ABS 耐熱設備外殼與 ASA 戶外日照用品的功能比較",label:"GPT 教學圖解",caption:"ABS 先看耐熱外殼與室內功能件；ASA 進一步處理日照、雨水與戶外耐候需求。"},
+        points:["接近熱源不等於可直接接觸火焰；先查材料與成品的安全限制","戶外使用除了材料，還要評估積水、固定方式、厚度與長期載重","大型平面與尖角更容易翹曲，先從方向與幾何降低風險"],
+        examples:[{icon:"sun",label:"社群案例 · ASA",title:"沙灘用 AirTag 防護盒",body:"戶外攜帶、沙塵與日照情境展示 ASA 類材料為何會成為候選。",why:"這是設計用途參考，不代表防水、耐候或保護等級的官方認證。",source:"https://makerworld.com/en/models/497031-sand-safe-with-airtag",sourceLabel:"MakerWorld 查看作品"}],
+        sources:[{label:"內容參考：Bambu Lab Wiki｜ABS、ASA 材料特性與機型建議",url:"https://wiki.bambulab.com/en/general/filament-guide-material-table"}]
+      },
+      {
+        title:"TPU：用硬度、壁厚與形狀設計回彈",
+        body:"TPU 的價值不是單純「軟」，而是能透過材料硬度、壁厚、填充與幾何做出保護、緩衝、防滑和可彎曲結構。同一捲 TPU 做成薄殼會容易彎曲，增加壁厚或肋條後會明顯變硬；因此選材時必須把材料與結構一起測試。",
+        manga:{src:"../assets/advanced-a04/illustrations/tpu-flexibility.webp",alt:"TPU 壓縮、彎曲、回彈及壁厚改變剛性的圖解",label:"GPT 教學圖解",caption:"TPU 的手感由材料硬度與模型結構共同決定；先印薄片與實際局部結構，比只看線材名稱更可靠。"},
+        compareHeaders:["設計方式","可能手感","常見用途"],
+        compare:[["薄壁、開孔或細帶","容易彎曲","束帶、保護套、活動連接"],["較厚壁與圓角","緩衝並可回彈","防撞墊、腳墊、握把"],["厚壁、肋條或高填充","較硬且抗壓","輪胎、支撐墊、受壓功能件"]],
+        examples:[{icon:"shield",label:"社群案例 · TPU",title:"手機保護殼",body:"薄壁、按鍵與包覆邊緣能觀察 TPU 柔性、回彈和局部厚度的配合。",why:"保護效果取決於設計與測試，不等於官方防摔性能認證。",source:"https://makerworld.com/en/models/210252-iphone-13-case",sourceLabel:"MakerWorld 查看作品"}],
+        sources:[{label:"內容參考：Bambu Lab Wiki｜TPU 材料特性與送料注意事項",url:"https://wiki.bambulab.com/en/general/filament-guide-material-table"}]
+      },
+      {
+        title:"PC 與 PA：耐衝擊、韌性和反覆受力",
+        body:"PC 常被列入耐衝擊、耐熱與硬挺外殼的候選；PA（尼龍）則常用在需要韌性、耐磨或反覆活動的齒輪、鉸鏈與治具。兩者都屬於需要更完整材料管理與列印條件的工程材料，尤其 PA 吸濕後可能快速失去穩定出料與表面品質，測試前應依官方說明乾燥。",
+        manga:{src:"../assets/advanced-a04/illustrations/pc-pa-engineering.webp",alt:"PC 耐衝擊耐熱外殼與 PA 齒輪鉸鏈反覆受力的應用圖",label:"GPT 教學圖解",caption:"PC 先看耐衝擊與耐熱外殼；PA 先看韌性、耐磨與活動零件，兩者都要重視環境和含水狀態。"},
+        details:[{label:"PC",title:"硬挺外殼與受衝擊零件",text:"適合進一步評估耐熱與衝擊需求，但仍要檢查環境、方向與機型條件。"},{label:"PA",title:"齒輪、鉸鏈與反覆受力件",text:"韌性與耐磨是常見選擇理由；乾燥、密封保存與列印後調濕都可能影響結果。"}],
+        examples:[{icon:"hook",label:"社群案例 · PC／PC-CF",title:"桌邊掛鉤",body:"以集中載重的掛鉤觀察幾何、列印方向與材料剛性如何共同工作。",why:"標題中的材料選擇來自作者案例，不等於官方承重性能認證。",source:"https://makerworld.com/en/models/15447-strongarm-a-table-desk-holder-hook-for-bags-and-pu",sourceLabel:"MakerWorld 查看作品"},{icon:"tray",label:"社群案例 · PA6-CF",title:"工程用零件托盤",body:"薄壁分隔、尺寸配合和耐用需求呈現 PA 複合材料的功能件方向。",why:"實際耐化學與尺寸表現需自行驗證，不等於官方性能認證。",source:"https://makerworld.com/en/models/1160299-yec-tray-pa6-cf",sourceLabel:"MakerWorld 查看作品"}],
+        sources:[{label:"內容參考：Bambu Lab Wiki｜PC、PA 材料特性",url:"https://wiki.bambulab.com/en/general/filament-guide-material-table"},{label:"內容參考：Bambu Lab Wiki｜工程材料乾燥",url:"https://wiki.bambulab.com/en/filament-acc/filament/dry-filament"}]
+      },
+      {
+        title:"CF／GF 填料：提高剛性與尺寸穩定，不是連續纖維",
+        body:"CF／GF 線材通常是在基材中加入短切碳纖或玻璃纖維，用來提高剛性、降低部分收縮並改善尺寸穩定；它不等同連續纖維零件，也不能取代結構設計與方向測試。適合治具、支架、機器零件和需要保持形狀的功能件。這類材料可能磨耗送料路徑並對噴嘴有要求，使用前只需依材料頁核對機型、硬化鋼噴嘴、噴嘴尺寸與送料方式，不另把設備限制當成選材主題。",
+        manga:{src:"../assets/advanced-a04/illustrations/cf-gf-functional-parts.webp",alt:"短切碳纖與玻璃纖維複合線材用於治具、支架與機器零件",label:"GPT 教學圖解",caption:"重點是治具與支架需要的剛性、抗彎和尺寸穩定；短纖填料不是連續纖維結構。"},
+        points:["先寫清楚是需要更硬挺、較穩定尺寸，還是需要抗衝擊與韌性","確認基材是 PLA、PETG、PA 或其他材料，填料不會抹去基材特性","以實際受力方向列印小件，和未填料基材做同條件比較","研磨、鑽孔與粉塵處理依場域安全規範進行"],
+        examples:[{icon:"tools",label:"社群案例 · PAHT-CF",title:"汽車離合器飛輪固定工具",body:"工具需要維持形狀並承受操作力，是剛性、幾何與列印方向共同作用的例子。",why:"作者分享的是實際用途，不等於官方承載、維修或安全性能認證。",source:"https://makerworld.com/en/models/721613-bmw-clutch-flywheel-lock-tool",sourceLabel:"MakerWorld 查看作品"}],
+        callout:"最後流程：需求 → 候選 → 材料與機型相容 → 小件測試 → 記錄結果。若小件失敗，先找症狀原因，不要直接把材料換成更昂貴的等級。",
+        sources:[{label:"內容參考：Bambu Lab Wiki｜CF／GF 複合線材與噴嘴相容",url:"https://wiki.bambulab.com/en/general/filament-guide-material-table"}]
+      }
+    ],
+    task:{title:"完成一張作品選材卡",text:"挑一件準備製作的作品，寫出六項需求並選兩種候選材料。引用官方材料表說明入選與淘汰理由，再固定模型、方向、層高與尺寸，各列印一個小型關鍵結構；比較外觀、手感、變形與破壞位置，留下照片和最終選擇。"},
+    checkpoint:"我能從作品環境與受力需求建立候選材料，分辨 PLA、PETG、ABS、ASA、TPU、PC、PA 與 CF／GF 填料的功能方向，也會用官方資料和小件測試確認，而不是把社群案例當成性能保證。"
   }
 ];
