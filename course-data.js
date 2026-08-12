@@ -1,4 +1,4 @@
-window.COURSES = [
+window.BEGINNER_COURSES = [
   {
     id:"01", slug:"01-introduction.html", stage:"第一次成功", stageNo:"01", duration:"22 分鐘＋延伸影片", type:"觀念＋互動",
     title:"認識 3D 列印", subtitle:"先看懂「一層一層」是怎麼回事。",
@@ -292,3 +292,4 @@ window.COURSES = [
     checkpoint:"我能獨立完成作品，也能說明安全、材料、方向與參數選擇。"
   }
 ];
+window.COURSES = window.BEGINNER_COURSES;

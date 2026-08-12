@@ -1,4 +1,4 @@
-window.COURSES = [
+window.ADVANCED_COURSES = [
   {
     id:"A01", slug:"01-filament-drying.html", stage:"材料管理", stageNo:"A", duration:"25 分鐘", type:"判讀＋實作",
     title:"線材乾燥與保存", subtitle:"先看懂受潮訊號，再用安全方法讓材料回到穩定狀態。",
@@ -247,3 +247,4 @@ window.COURSES = [
     checkpoint:"我能從作品環境與受力需求建立候選材料，分辨 PLA、PETG、ABS、ASA、TPU、PC、PA 與 CF／GF 填料的功能方向，也會用官方資料和小件測試確認，而不是把社群案例當成性能保證。"
   }
 ];
+window.COURSES = window.ADVANCED_COURSES;

@@ -7,6 +7,8 @@ function readCompletedCourses() {
   }
 }
 
+window.setupSiteNavigation({ document, window });
+
 const completed = readCompletedCourses();
 const links = [...document.querySelectorAll("[data-course]")];
 const progressText = document.querySelector("#progressText");

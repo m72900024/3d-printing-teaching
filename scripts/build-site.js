@@ -10,6 +10,7 @@ const PUBLIC_ENTRIES = [
   "index.html",
   "styles.css",
   "app.js",
+  "site-navigation.js",
   "course.css",
   "course-data.js",
   "course-menu.js",

@@ -119,7 +119,15 @@ test("publishes the anime homepage with beginner and active advanced paths", () 
   assert.match(home, /Bambu Studio/);
   assert.match(home, /assets\/homepage\/anime-3d-printing-classroom\.webp/);
   assert.match(home, /alt="[^\"]*3D 印表機[^\"]*"/);
+  assert.match(home, /id="siteNavMenuButton"/);
+  assert.match(home, /data-site-nav-target="beginnerDirectory"/);
+  assert.match(home, /第一次成功[\s\S]*01 認識 3D 列印[\s\S]*06 完成第一次列印/);
+  assert.match(home, /理解與調整[\s\S]*07 模型方向與切片預覽[\s\S]*09 支撐與平台附著/);
+  assert.match(home, /獨立完成[\s\S]*10 認識列印材料[\s\S]*12 維護與成果挑戰/);
+  assert.match(home, /A01[\s\S]*線材乾燥與保存[\s\S]*A04[\s\S]*依作品需求選擇線材/);
+  assert.match(home, /src="site-navigation\.js\?v=[a-f0-9]{12}"/);
   assert.ok(fs.existsSync(path.join(outputDir, "assets/homepage/anime-3d-printing-classroom.webp")));
+  assert.ok(fs.existsSync(path.join(outputDir, "site-navigation.js")));
   assert.match(styles, /#beginner-courses,#advanced-courses,#about\{scroll-margin-top:/);
 });
 
