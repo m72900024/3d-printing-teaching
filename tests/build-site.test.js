@@ -187,6 +187,42 @@ test("publishes four advanced courses with static art, official sources, and rea
   }
 });
 
+test("publishes the force direction course with ten annotated teaching figures", () => {
+  const { outputDir, result } = buildTemporarySite("3d-course-force-direction-");
+  const forceDirection = fs.readFileSync(path.join(outputDir, "advanced/05-force-direction.html"), "utf8");
+  const overview = fs.readFileSync(path.join(outputDir, "advanced/index.html"), "utf8");
+  const home = fs.readFileSync(path.join(outputDir, "index.html"), "utf8");
+  const figures = [
+    "force-types.webp",
+    "xy-z-anisotropy.webp",
+    "bracket-orientations.webp",
+    "hook-load-path.webp",
+    "fastener-snap-fit.webp",
+    "bambu-preview.webp",
+    "break-test.webp",
+    "screw-boss-detail.webp",
+    "snap-fit-sequence.webp",
+    "preview-fracture-match.webp"
+  ];
+
+  assert.equal(result.advancedCourseCount, 5);
+  assert.equal(result.htmlCount, 19);
+  assert.match(forceDirection, /受力方向與列印方向/);
+  assert.match(forceDirection, /拉伸[\s\S]*壓縮[\s\S]*彎曲[\s\S]*剪切[\s\S]*扭轉/);
+  assert.match(forceDirection, /XY[\s\S]*Z[\s\S]*層間/);
+  assert.match(forceDirection, /掛鉤[\s\S]*L 型支架[\s\S]*螺絲孔[\s\S]*卡扣/);
+  assert.match(forceDirection, /網站首頁[\s\S]*進階課程總覽/);
+  assert.equal((forceDirection.match(/GPT 教學圖解/g) || []).length, 10);
+  assert.ok((forceDirection.match(/圖解步驟/g) || []).length >= 10);
+  assert.match(overview, /5 ADVANCED COURSES[\s\S]*A05[\s\S]*受力方向與列印方向/);
+  assert.match(home, /A05[\s\S]*受力方向與列印方向/);
+  assert.match(forceDirection, /UltiMaker[\s\S]*Stratasys[\s\S]*Prusa[\s\S]*Bambu Studio/);
+  for (const figure of figures) {
+    assert.ok(fs.existsSync(path.join(outputDir, "assets/advanced-a05/illustrations", figure)));
+    assert.match(forceDirection, new RegExp(figure.replace(".", "\\.")));
+  }
+});
+
 test("fingerprints every local stylesheet and script reference", () => {
   const { outputDir } = buildTemporarySite("3d-course-assets-");
 
