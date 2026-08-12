@@ -8,11 +8,13 @@ const hierarchy = isAdvancedTrack
   ? { homeHref: "../index.html", overviewHref: "index.html", overviewLabel: "進階課程總覽" }
   : { homeHref: "../index.html", overviewHref: "../index.html#beginner-courses", overviewLabel: "初階課程總覽" };
 const brand = document.querySelector(".course-sidebar .brand");
-const quickLinks = document.createElement("nav");
-quickLinks.className = "course-quick-links";
-quickLinks.setAttribute("aria-label", "返回入口");
-quickLinks.innerHTML = `<a class="site-home-link" href="${hierarchy.homeHref}">⌂ 網站首頁</a><a class="track-overview-link" href="${hierarchy.overviewHref}">▦ ${hierarchy.overviewLabel}</a>`;
-brand.after(quickLinks);
+if (!document.querySelector(".course-sidebar .course-quick-links")) {
+  const quickLinks = document.createElement("nav");
+  quickLinks.className = "course-quick-links";
+  quickLinks.setAttribute("aria-label", "返回入口");
+  quickLinks.innerHTML = `<a class="site-home-link" href="${hierarchy.homeHref}">⌂ 網站首頁</a><a class="track-overview-link" href="${hierarchy.overviewHref}">▦ ${hierarchy.overviewLabel}</a>`;
+  brand.after(quickLinks);
+}
 
 const topbar = document.querySelector(".course-topbar");
 const topbarHome = topbar.querySelector("a");

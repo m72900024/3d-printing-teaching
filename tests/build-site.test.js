@@ -16,6 +16,7 @@ test("publishes twelve course pages with static core content", () => {
   const { outputDir, result } = buildTemporarySite("3d-course-site-");
   const first = fs.readFileSync(path.join(outputDir, "courses/01-introduction.html"), "utf8");
   const last = fs.readFileSync(path.join(outputDir, "courses/12-project.html"), "utf8");
+  const courseScript = fs.readFileSync(path.join(outputDir, "course.js"), "utf8");
 
   assert.equal(result.courseCount, 12);
   assert.match(first, /<h1 id="courseTitle">認識 3D 列印<\/h1>/);
@@ -24,6 +25,8 @@ test("publishes twelve course pages with static core content", () => {
   assert.match(first, /class="site-home-link" href="\.\.\/index\.html">[^<]*網站首頁/);
   assert.match(first, /class="track-overview-link" href="\.\.\/index\.html#beginner-courses">[^<]*初階課程總覽/);
   assert.match(first, /第一次成功[\s\S]*理解與調整[\s\S]*獨立完成/);
+  assert.equal((first.match(/class="course-quick-links"/g) || []).length, 1);
+  assert.match(courseScript, /if \(!document\.querySelector\("\.course-sidebar \.course-quick-links"\)\)/);
   assert.match(last, /<h1 id="courseTitle">維護與成果挑戰<\/h1>/);
   assert.match(last, /我能獨立完成作品/);
 });
