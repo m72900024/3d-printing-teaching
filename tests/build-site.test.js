@@ -113,10 +113,10 @@ test("publishes the anime homepage with beginner and active advanced paths", () 
   assert.match(home, /<strong>12<\/strong><span>堂初階課程<\/span>/);
   assert.match(home, /id="beginner-courses"/);
   assert.match(home, /初階課程[\s\S]*12 堂課/);
-  assert.match(home, /id="advanced-courses"[\s\S]*4 堂課已開放/);
+  assert.match(home, /id="advanced-courses"[\s\S]*5 堂課已開放/);
   assert.match(home, /href="advanced\/index\.html"/);
-  assert.match(home, /材料、診斷與支撐策略/);
-  assert.match(home, /支撐介面[\s\S]*頂部 Z 距離/);
+  assert.match(home, /材料、診斷與結構驗證/);
+  assert.match(home, /受力方向[\s\S]*安全小件測試/);
   assert.match(home, /id="about"/);
   assert.match(home, /安全操作/);
   assert.match(home, /Bambu Studio/);
@@ -134,7 +134,7 @@ test("publishes the anime homepage with beginner and active advanced paths", () 
   assert.match(styles, /#beginner-courses,#advanced-courses,#about\{scroll-margin-top:/);
 });
 
-test("publishes four advanced courses with static art, official sources, and real examples", () => {
+test("publishes five advanced courses with static art, official sources, and real examples", () => {
   const { outputDir, result } = buildTemporarySite("3d-course-advanced-path-");
   const overview = fs.readFileSync(path.join(outputDir, "advanced/index.html"), "utf8");
   const drying = fs.readFileSync(path.join(outputDir, "advanced/01-filament-drying.html"), "utf8");
@@ -143,12 +143,13 @@ test("publishes four advanced courses with static art, official sources, and rea
   const filament = fs.readFileSync(path.join(outputDir, "advanced/04-filament-selection.html"), "utf8");
   const courseCss = fs.readFileSync(path.join(outputDir, "course.css"), "utf8");
 
-  assert.equal(result.advancedCourseCount, 4);
-  assert.equal(result.htmlCount, 18);
+  assert.equal(result.advancedCourseCount, 5);
+  assert.equal(result.htmlCount, 19);
   assert.match(overview, /A01[\s\S]*線材乾燥與保存/);
   assert.match(overview, /A02[\s\S]*品質問題診斷/);
   assert.match(overview, /A03[\s\S]*支撐與支撐介面設定/);
   assert.match(overview, /A04[\s\S]*依作品需求選擇線材/);
+  assert.match(overview, /A05[\s\S]*受力方向與列印方向/);
   assert.match(drying, /A1／A1 mini[^。]*不可使用[^。]*熱床乾燥/);
   assert.match(quality, /熱蠕變／熱堆積/);
   assert.match(quality, /A1[\s\S]*P1S/);
@@ -163,9 +164,9 @@ test("publishes four advanced courses with static art, official sources, and rea
   assert.match(filament, /makerworld\.com\/en\/models\/721613/);
   assert.match(drying, /class="site-home-link" href="\.\.\/index\.html">[^<]*網站首頁/);
   assert.match(drying, /class="track-overview-link" href="index\.html">[^<]*進階課程總覽/);
-  assert.match(quality, /data-course-total="4"/);
-  assert.match(support, /data-course-total="4"/);
-  assert.match(filament, /data-course-total="4"/);
+  assert.match(quality, /data-course-total="5"/);
+  assert.match(support, /data-course-total="5"/);
+  assert.match(filament, /data-course-total="5"/);
   assert.equal((drying.match(/GPT 教學圖解/g) || []).length, 5);
   assert.equal((quality.match(/GPT 教學圖解/g) || []).length, 5);
   assert.equal((support.match(/GPT 教學圖解/g) || []).length, 5);

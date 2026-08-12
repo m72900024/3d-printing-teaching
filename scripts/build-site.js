@@ -92,9 +92,17 @@ function renderExamples(examples) {
 
 function renderManga(manga) {
   if (!manga) return "";
-  return '<figure class="manga-figure static-lesson-manga">' +
+  const guides = Array.isArray(manga.guides) && manga.guides.length
+    ? '<div class="figure-guide" aria-label="圖解步驟"><strong>圖解步驟</strong><div>' + manga.guides.map(guide => '<article><span>' + escapeHtml(guide.number) + '</span><div><h3>' + escapeHtml(guide.title) + '</h3><p>' + escapeHtml(guide.text) + '</p></div></article>').join("") + "</div></div>"
+    : "";
+  return '<div class="annotated-figure"><figure class="manga-figure static-lesson-manga">' +
     '<img src="' + escapeHtml(manga.src) + '" alt="' + escapeHtml(manga.alt) + '" loading="lazy">' +
-    '<figcaption><span>' + escapeHtml(manga.label || "GPT 教學圖解") + "</span>" + escapeHtml(manga.caption) + "</figcaption></figure>";
+    '<figcaption><span>' + escapeHtml(manga.label || "GPT 教學圖解") + "</span>" + escapeHtml(manga.caption) + "</figcaption></figure>" + guides + "</div>";
+}
+
+function renderDetailFigures(figures) {
+  if (!Array.isArray(figures) || figures.length === 0) return "";
+  return '<div class="detail-figure-stack">' + figures.map(renderManga).join("") + "</div>";
 }
 
 function renderSection(section, index) {
@@ -114,6 +122,7 @@ function renderSection(section, index) {
     "<div><h2>" + escapeHtml(section.title) + "</h2>" +
     (section.body ? "<p>" + escapeHtml(section.body) + "</p>" : "") +
     renderManga(section.manga) +
+    renderDetailFigures(section.detailFigures) +
     renderTextList(section.steps, "process-steps static-process-steps") +
     supplements +
     renderExamples(section.examples) +

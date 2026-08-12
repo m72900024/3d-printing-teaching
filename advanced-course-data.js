@@ -245,6 +245,126 @@ window.ADVANCED_COURSES = [
     ],
     task:{title:"完成一張作品選材卡",text:"挑一件準備製作的作品，寫出六項需求並選兩種候選材料。引用官方材料表說明入選與淘汰理由，再固定模型、方向、層高與尺寸，各列印一個小型關鍵結構；比較外觀、手感、變形與破壞位置，留下照片和最終選擇。"},
     checkpoint:"我能從作品環境與受力需求建立候選材料，分辨 PLA、PETG、ABS、ASA、TPU、PC、PA 與 CF／GF 填料的功能方向，也會用官方資料和小件測試確認，而不是把社群案例當成性能保證。"
+  },
+  {
+    id:"A05", slug:"05-force-direction.html", stage:"結構設計", stageNo:"A", duration:"40 分鐘", type:"受力判讀＋破壞實驗",
+    title:"受力方向與列印方向", subtitle:"先追蹤力量怎麼走，再決定模型怎麼放。",
+    lead:"功能零件不是只要印得漂亮；掛上重量、鎖入螺絲或反覆按壓後，力量會沿結構尋找路徑。本課用十張標註圖，帶你從外力、固定點與傳力路徑判斷列印方向，並以安全小件測試驗證。",
+    goals:["分辨拉伸、壓縮、彎曲、剪切與扭轉","解釋 XY 連續線與 Z 層間接合的方向性","標出固定點、外力、傳力路徑與可能破壞面","比較同一支架平放、側放與直立的取捨","在 Bambu Studio 預覽關鍵層與截面","完成只改列印方向的安全小件測試"],
+    goalArt:[
+      {src:"../assets/advanced-a05/illustrations/force-types.webp",alt:"五種基本受力的方向與變形方式"},
+      {src:"../assets/advanced-a05/illustrations/xy-z-anisotropy.webp",alt:"XY 連續線與 Z 層間接合比較"},
+      {src:"../assets/advanced-a05/illustrations/hook-load-path.webp",alt:"掛鉤固定點、載重與傳力路徑"},
+      {src:"../assets/advanced-a05/illustrations/bracket-orientations.webp",alt:"同一支架三種列印方向比較"},
+      {src:"../assets/advanced-a05/illustrations/bambu-preview.webp",alt:"切片預覽中的外殼、填充與接縫"},
+      {src:"../assets/advanced-a05/illustrations/break-test.webp",alt:"固定條件只改方向的小件測試"}
+    ],
+    sections:[
+      {
+        title:"先畫力，不先旋轉模型",
+        body:"先找作品如何被固定，再畫使用時的外力。拉伸把物體拉長，壓縮把物體推短，彎曲會讓同一截面一側受拉、一側受壓，剪切讓相鄰截面相對滑動，扭轉則繞軸旋轉。實際零件常同時承受兩種以上受力，所以先畫固定點、力與方向，比直接猜擺法可靠。",
+        manga:{src:"../assets/advanced-a05/illustrations/force-types.webp",alt:"五種基本受力的方向、固定點與變形方式比較",label:"GPT 教學圖解",caption:"先把力的方向說清楚，再討論層線；同一個零件在不同使用方式下，主要受力也可能改變。",guides:[
+          {number:"1",title:"先看外力",text:"藍色箭頭表示力量從哪裡進入，以及推、拉或旋轉的方向。"},
+          {number:"2",title:"再找固定點",text:"黃色位置限制零件移動，外力與固定點之間才會形成內部受力。"},
+          {number:"3",title:"辨認主要變形",text:"觀察零件被拉長、壓短、彎曲、滑移或扭轉，不只看力箭頭。"},
+          {number:"4",title:"注意組合受力",text:"掛鉤與支架通常以彎曲為主，同時也可能包含剪切或拉伸。"}
+        ]},
+        points:["力必須有來源，也必須有承受它的固定位置","彎曲截面的受拉側常比受壓側更需要連續材料路徑","若使用情境改變，原本合理的列印方向也可能需要重選"],
+        callout:"本課只建立設計與測試方法，不提供吊掛、攀爬、人體承重或安全關鍵零件的承載保證。"
+      },
+      {
+        title:"線條、層面與異向性",
+        body:"FFF 以擠出線在 XY 平面鋪設，再沿 Z 軸逐層堆疊；因此同一材料在不同方向受力時，結果可能不同。沿連續列印線受力與跨越層間接合受力不是同一件事，但也不能簡化成「Z 永遠最弱」：材料、溫度、含水、擠出品質、幾何、外殼與路徑都會改變實際表現。",
+        manga:{src:"../assets/advanced-a05/illustrations/xy-z-anisotropy.webp",alt:"XY 連續列印線與 Z 層間接合的受力方向比較",label:"GPT 教學圖解",caption:"方向性來自製程與路徑；先看受力是否跨層，再把材料與列印品質納入判斷。",guides:[
+          {number:"1",title:"沿線追蹤",text:"綠色 XY 連續線能把力量沿擠出路徑傳遞。"},
+          {number:"2",title:"辨認層間接合",text:"紫色層面代表每層與上一層熔接的位置。"},
+          {number:"3",title:"看跨層受力",text:"藍色箭頭若把層面拉開，就要特別留意層間品質。"},
+          {number:"4",title:"保留條件",text:"紅色虛線是可能剝離面，不是每個成品都會沿此處斷裂。"}
+        ]},
+        sources:[{label:"UltiMaker｜How to design for FFF 3D printing",url:"https://ultimaker.com/wp-content/uploads/2024/06/How-to-design-for-FFF-1.pdf"},{label:"同儕審查研究｜列印方向與拉伸、破壞行為",url:"https://doi.org/10.1016/j.mtcomm.2026.115715"}]
+      },
+      {
+        title:"同一支架的三種列印方向",
+        body:"平放、側放與直立會同時改變層線相對受力的方向、平台接觸面、支撐需求、列印高度、表面與孔的品質。不要只選支撐最少的擺法；先用相同外力追蹤綠色傳力路徑，再比較紅色可能裂縫是否切斷主要路徑。",
+        manga:{src:"../assets/advanced-a05/illustrations/bracket-orientations.webp",alt:"同一 L 型支架平放、側放與直立時的傳力和層線比較",label:"GPT 教學圖解",caption:"三種擺法沒有脫離情境的固定冠軍；要把強度、支撐、接觸面、時間與表面一起比較。",guides:[
+          {number:"1",title:"保持外力相同",text:"三個支架使用同一固定方式與同一向下載重，才有可比性。"},
+          {number:"2",title:"追綠色路徑",text:"從受力孔一路追到固定孔，找出路徑是否連續。"},
+          {number:"3",title:"對照層線",text:"紫色線隨擺放改變，注意主要受拉區是否跨越層面。"},
+          {number:"4",title:"再比較製程",text:"把支撐、接觸面與列印高度列成取捨，不只看其中一項。"}
+        ]},
+        compareHeaders:["擺放方式","先觀察","還要付出的代價"],
+        compare:[["平放","層線與支架平面、孔周路徑","底面外觀與孔形"],["側放","主要路徑與層線關係","懸空與支撐接觸面"],["直立","截面與層面關係","高度、晃動與列印時間"]],
+        sources:[{label:"Stratasys｜Design Considerations: FDM Additive Manufacturing Tooling",url:"https://www.stratasys.com/contentassets/1a0cc7a8e7d14f29ac972189bfeade4c/dg_fdm_designconsiderationsfdmtooling_0718a.pdf?v=48fbe5"}]
+      },
+      {
+        title:"四種功能零件：從力找到薄弱位置",
+        body:"掛鉤先看根部彎曲與外側受拉；L 型支架先看內角與孔之間的傳力；螺絲孔與螺絲座要看鎖固造成的徑向撐開與根部剝離；卡扣則要看反覆彎曲時的根部受拉、圓角與列印線。這些都是找測試位置的線索，不是斷裂預言。",
+        manga:{src:"../assets/advanced-a05/illustrations/hook-load-path.webp",alt:"掛鉤的固定點、向下載重、拉壓兩側與根部裂縫位置",label:"GPT 教學圖解",caption:"掛鉤的力從鉤端回到夾持處；根部與內角是應優先觀察、加圓角並安排連續路徑的位置。",guides:[
+          {number:"1",title:"載重進入",text:"藍色向下箭頭是袋子或物件施加在鉤端的力。"},
+          {number:"2",title:"固定位置",text:"桌緣與夾具阻止掛鉤整體下落。"},
+          {number:"3",title:"傳力回固定點",text:"綠線顯示力如何穿過彎曲部與根部。"},
+          {number:"4",title:"分辨拉壓側",text:"彎曲外側受拉、內側受壓，兩側的失效方式可能不同。"},
+          {number:"5",title:"觀察根部",text:"紅色位置是可能裂縫起點；圓角可降低尖銳應力集中。"}
+        ]},
+        detailFigures:[{src:"../assets/advanced-a05/illustrations/screw-boss-detail.webp",alt:"螺絲鎖入後孔周徑向力、外殼與螺絲座根部剝離風險",label:"GPT 教學圖解",caption:"螺絲不只把零件壓住，也可能向外撐開螺絲座；孔周外殼與根部幾何要一起看。",guides:[
+          {number:"1",title:"先看徑向力",text:"螺絲鎖入後，藍色箭頭由孔軸向四周撐開。"},
+          {number:"2",title:"檢查孔周外殼",text:"綠色同心路徑應連續包圍孔，不被稀疏填充取代。"},
+          {number:"3",title:"確認鎖固面",text:"黃色位置承受螺絲頭或墊片傳來的壓力。"},
+          {number:"4",title:"看螺絲座根部",text:"力量最後回到支架本體，根部圓角與厚度很重要。"},
+          {number:"5",title:"對照層面",text:"紅色虛線若與層面重合，需用方向與小件測試驗證。"}
+        ]}]
+      },
+      {
+        title:"方向、外殼與填充的調整順序",
+        body:"先調整模型方向與幾何，讓主要傳力路徑更連續並降低尖角；再增加必要的外殼圈數，尤其是孔周與根部；最後才把填充密度、圖樣或角度當成單一變因。100% 填充不是通用答案，因為外殼通常更直接參與彎曲與表面受力，填充則常負責支撐外殼與抵抗壓縮。",
+        manga:{src:"../assets/advanced-a05/illustrations/fastener-snap-fit.webp",alt:"功能零件先調方向和幾何，再看外殼與填充",label:"GPT 教學圖解",caption:"先讓力走得順，再補足孔周外殼；不要用提高填充掩蓋不利方向或尖銳根部。",guides:[
+          {number:"1",title:"先改方向",text:"讓主要受拉區減少跨層剝離風險。"},
+          {number:"2",title:"再改幾何",text:"增加圓角、厚度或肋條，讓傳力轉折更平順。"},
+          {number:"3",title:"補足外殼",text:"孔周與外表面用連續圈數承受主要拉壓。"},
+          {number:"4",title:"最後測填充",text:"固定其他條件，比較密度或方向對變形和破壞的影響。"}
+        ]},
+        steps:["方向與固定方式","根部圓角與截面","外殼圈數與孔周路徑","填充密度、圖樣或角度","同尺寸小件測試"],
+        sources:[{label:"Prusa Knowledge Base｜Infill：外殼與填充對強度的角色",url:"https://help.prusa3d.com/article/infill_42"},{label:"Prusa Knowledge Base｜Modeling with 3D printing in mind",url:"https://help.prusa3d.com/article/modeling-with-3d-printing-in-mind_164135"}]
+      },
+      {
+        title:"回到 Bambu Studio 預覽關鍵截面",
+        body:"擺好方向後，不要只看實心模型外觀。切片後切換到 Bambu Studio 預覽，逐層檢查外殼是否繞過孔、填充如何接上外殼、填充方向是否符合假設、接縫是否落在高應力區，以及關鍵截面是否突然變薄。預覽能查路徑，但不能直接證明承重能力。",
+        manga:{src:"../assets/advanced-a05/illustrations/bambu-preview.webp",alt:"切片預覽中的外殼、孔周路徑、填充方向、接縫與關鍵截面",label:"GPT 教學圖解",caption:"從整體預覽切到關鍵層；孔周連續圈、填充接合與接縫位置都要在送出前確認。",guides:[
+          {number:"1",title:"先看外殼",text:"外殼是否沿零件外緣保持連續，轉角是否突然變少。"},
+          {number:"2",title:"放大孔周",text:"孔邊應有清楚的同心路徑，而非只有填充擦過。"},
+          {number:"3",title:"看填充接合",text:"追蹤填充方向及其如何連到外殼，不只看密度數字。"},
+          {number:"4",title:"找接縫",text:"紫色接縫若落在高受力根部，可比較其他接縫策略。"},
+          {number:"5",title:"滑到關鍵層",text:"沿 Z 軸逐層查看孔、根部和截面是否出現不連續。"}
+        ]},
+        detailFigures:[{src:"../assets/advanced-a05/illustrations/preview-fracture-match.webp",alt:"切片關鍵層與實際斷裂試片的外殼、填充、接縫和裂縫對照",label:"GPT 教學圖解",caption:"把預覽截圖與斷面照片用相同編號對照，才能知道原先的路徑假設是否接近實際破壞。",guides:[
+          {number:"1",title:"對照外殼",text:"確認斷面外圍與預覽中的外殼圈數及位置。"},
+          {number:"2",title:"對照填充",text:"觀察裂縫是否穿過填充、沿填充或先從外殼開始。"},
+          {number:"3",title:"對照接縫",text:"檢查裂縫起點是否靠近接縫或其他路徑中斷處。"},
+          {number:"4",title:"保存記錄",text:"保留關鍵層截圖、測試照片與裂縫方向，供下一版比較。"}
+        ]}],
+        sources:[{label:"Bambu Studio 官方專案與目前版本功能",url:"https://github.com/bambulab/BambuStudio"},{label:"Bambu Studio 官方製程設定檔",url:"https://github.com/bambulab/BambuStudio/blob/master/resources/profiles/BBL/process/fdm_process_common.json"}]
+      },
+      {
+        title:"固定條件，做安全的小件破壞測試",
+        body:"用同一模型、材料批次、機型、噴嘴、層高、外殼與填充，只改平放、側放、直立。以有防護罩的小型治具逐步加載，記錄開始變形的載重、最大載重、破壞位置與裂縫方向。測試答案只適用於這組條件；不可外推成人體承重或安全關鍵用途。",
+        manga:{src:"../assets/advanced-a05/illustrations/break-test.webp",alt:"固定其他條件、只改列印方向的小型支架破壞測試",label:"GPT 教學圖解",caption:"相同試片、相同載重方式、一次只改方向；結果才有機會回答方向是否改變破壞行為。",guides:[
+          {number:"1",title:"固定條件",text:"模型、材料、層高、外殼、填充與列印機保持一致。"},
+          {number:"2",title:"只改方向",text:"平放、側放、直立是本輪唯一設計變因。"},
+          {number:"3",title:"逐步加載",text:"在透明防護罩內用小砝碼緩慢增加，不用手直接壓。"},
+          {number:"4",title:"記錄裂縫",text:"同時記變形、載重、裂縫位置與方向，不只寫斷或沒斷。"},
+          {number:"5",title:"限制結論",text:"結果用來改良這個小件，不代表其他材料、尺寸或用途。"}
+        ]},
+        detailFigures:[{src:"../assets/advanced-a05/illustrations/snap-fit-sequence.webp",alt:"卡扣從壓入、最大彎曲到回彈定位的三格動作與根部受力",label:"GPT 教學圖解",caption:"反覆動作件要觀察完整循環；一次成功扣上，不等於長期疲勞壽命已經驗證。",guides:[
+          {number:"1",title:"壓入",text:"記錄藍色力的方向，確認固定點與列印線相對位置。"},
+          {number:"2",title:"最大彎曲",text:"根部受拉最大，優先觀察白化、永久變形與裂縫。"},
+          {number:"3",title:"回彈定位",text:"測量是否回到原位，以及卡合力是否逐次下降。"},
+          {number:"4",title:"比較圓角",text:"固定其他尺寸，只改根部圓角做下一輪單一變因測試。"}
+        ]}],
+        callout:"全程戴護目鏡並使用透明防護罩。不要把手、臉或身體置於受力方向，也不要測試可能彈射、墜落或傷人的零件。"
+      }
+    ],
+    task:{title:"完成一組方向對照試片",text:"選一個小型 L 型支架，先標固定點、外力、傳力路徑與可能裂縫；以相同材料與切片設定製作平放、側放、直立三件。保存每一件的關鍵層預覽，再於透明防護罩內逐步加載，記錄變形、載重與裂縫方向。"},
+    checkpoint:"我能先依使用情境畫出受力與固定點，在切片預覽核對外殼、孔周、填充與接縫，並以固定條件的小件測試驗證列印方向，而不是把 Z 軸或 100% 填充當成通用答案。"
   }
 ];
 window.COURSES = window.ADVANCED_COURSES;

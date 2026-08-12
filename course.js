@@ -163,6 +163,19 @@ function renderSources(sources) {
   return `<aside class="lesson-sources"><strong>延伸資料</strong><div>${sources.map(source => `<a href="${source.url}" target="_blank" rel="noopener noreferrer">${source.label} →</a>`).join("")}</div></aside>`;
 }
 
+function renderMangaFigure(manga, loading = "lazy") {
+  if (!manga) return "";
+  const guides = Array.isArray(manga.guides) && manga.guides.length
+    ? `<div class="figure-guide" aria-label="圖解步驟"><strong>圖解步驟</strong><div>${manga.guides.map(guide => `<article><span>${guide.number}</span><div><h3>${guide.title}</h3><p>${guide.text}</p></div></article>`).join("")}</div></div>`
+    : "";
+  return `<div class="annotated-figure"><figure class="manga-figure"><img src="${manga.src}" alt="${manga.alt}" width="1536" height="1024" loading="${loading}" decoding="async"><figcaption><span>${manga.label || "GPT 教學圖解"}</span>${manga.caption}</figcaption></figure>${guides}</div>`;
+}
+
+function renderDetailFigures(figures) {
+  if (!Array.isArray(figures)) return "";
+  return `<div class="detail-figure-stack">${figures.map(figure => renderMangaFigure(figure)).join("")}</div>`;
+}
+
 function renderSteps(steps) {
   if (!steps) return "";
   return `<ol class="process-steps">${steps.map((step, index) => `<li><span>${index + 1}</span>${step}</li>`).join("")}</ol>`;
@@ -213,7 +226,8 @@ content.innerHTML = renderLessonVisual(course.lessonVisual) + course.sections.ma
     <div>
       <h2>${section.title}</h2>
       <p>${section.body}</p>
-      ${section.manga ? `<figure class="manga-figure"><img src="${section.manga.src}" alt="${section.manga.alt}" width="1600" height="757" loading="eager" decoding="async"><figcaption><span>${section.manga.label || "MANGA EXPLAINER"}</span>${section.manga.caption}</figcaption></figure>` : ""}
+      ${renderMangaFigure(section.manga, "eager")}
+      ${renderDetailFigures(section.detailFigures)}
       ${renderTradeoff(section.tradeoff)}
       ${section.image ? `<figure class="lesson-figure"><img src="${section.image}" alt="${section.imageAlt || ""}" loading="lazy"><figcaption>線材經過加熱、擠出與逐層堆疊，最後成為實體作品。</figcaption></figure>` : ""}
       ${renderSteps(section.steps)}
