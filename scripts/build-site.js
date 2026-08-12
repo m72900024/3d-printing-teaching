@@ -138,11 +138,23 @@ function replaceElement(html, id, content) {
   return html.replace(pattern, "$1" + content + "$3");
 }
 
-function renderCourseNav(courses, current) {
-  return courses.map(item => {
+function renderCourseLink(item, current) {
     const active = item.id === current.id ? ' class="active" aria-current="page"' : "";
     return '<a href="' + escapeHtml(item.slug) + '"' + active + "><span>" + escapeHtml(item.id) + "</span>" + escapeHtml(item.title) + "</a>";
-  }).join("");
+}
+
+function renderCourseNav(courses, current, track) {
+  if (track === "advanced") return courses.map(item => renderCourseLink(item, current)).join("");
+  const stages = [...new Set(courses.map(item => item.stage))];
+  return stages.map(stage => '<section class="course-nav-group"><h2>' + escapeHtml(stage) + "</h2>" + courses.filter(item => item.stage === stage).map(item => renderCourseLink(item, current)).join("") + "</section>").join("");
+}
+
+function injectHierarchyLinks(html, track) {
+  const advanced = track === "advanced";
+  const links = '<nav class="course-quick-links" aria-label="返回入口"><a class="site-home-link" href="../index.html">⌂ 網站首頁</a><a class="track-overview-link" href="' + (advanced ? "index.html" : "../index.html#beginner-courses") + '">▦ ' + (advanced ? "進階課程總覽" : "初階課程總覽") + "</a></nav>";
+  const brandPattern = /(<a class="brand"[^>]*>[\s\S]*?<\/a>)/;
+  if (!brandPattern.test(html)) throw new Error("Missing course brand link");
+  return html.replace(brandPattern, "$1" + links);
 }
 
 function replacePagination(html, id, course, label) {
@@ -152,6 +164,7 @@ function replacePagination(html, id, course, label) {
 }
 
 function injectCourse(html, course, courses, options = {}) {
+  const track = options.track || "beginner";
   const homeHref = options.homeHref || "../index.html";
   const homeLabel = options.homeLabel || "課程首頁";
   html = replaceElement(html, "courseStage", "STAGE " + escapeHtml(course.stageNo) + " · " + escapeHtml(course.stage));
@@ -165,7 +178,8 @@ function injectCourse(html, course, courses, options = {}) {
   html = replaceElement(html, "taskTitle", escapeHtml(course.task.title));
   html = replaceElement(html, "taskText", escapeHtml(course.task.text));
   html = replaceElement(html, "checkpointText", escapeHtml(course.checkpoint));
-  html = replaceElement(html, "courseNav", renderCourseNav(courses, course));
+  html = replaceElement(html, "courseNav", renderCourseNav(courses, course, track));
+  html = injectHierarchyLinks(html, track);
 
   const currentIndex = courses.indexOf(course);
   const previous = courses[currentIndex - 1];
@@ -242,7 +256,7 @@ function buildSite({ rootDir, outputDir }) {
     const htmlFile = path.join(output, "advanced", course.slug);
     if (!fs.existsSync(htmlFile)) throw new Error("Missing advanced course page for " + course.id + ": " + course.slug);
     const html = fs.readFileSync(htmlFile, "utf8");
-    fs.writeFileSync(htmlFile, injectCourse(html, course, advancedCourses, { homeHref: "index.html", homeLabel: "進階課程首頁" }));
+    fs.writeFileSync(htmlFile, injectCourse(html, course, advancedCourses, { track: "advanced", homeHref: "index.html", homeLabel: "進階課程首頁" }));
   }
 
   const htmlFiles = listFiles(output, file => file.endsWith(".html"));

@@ -47,6 +47,8 @@ function createMenuFixture() {
   const sidebar = new FakeElement("aside");
   const nav = new FakeElement("nav");
   nav.links = [new FakeElement("a"), new FakeElement("a")];
+  const quickLink = new FakeElement("a");
+  sidebar.links = [quickLink, ...nav.links];
   const body = new FakeElement("body");
   const document = new EventTarget();
   document.body = body;
@@ -59,7 +61,7 @@ function createMenuFixture() {
 
   const mediaQuery = new FakeMediaQuery();
   const window = { matchMedia: () => mediaQuery };
-  const fixture = { document, window, menuButton, sidebar, nav, mediaQuery };
+  const fixture = { document, window, menuButton, sidebar, nav, quickLink, mediaQuery };
   setupCourseMenu(fixture);
   fixture.overlay = sidebar.insertedAfter;
   fixture.pressEscape = () => {
@@ -100,6 +102,16 @@ test("course navigation closes without stealing focus", () => {
   fixture.menuButton.click();
 
   fixture.nav.links[0].click();
+
+  assert.equal(fixture.menuButton.getAttribute("aria-expanded"), "false");
+  assert.equal(fixture.menuButton.focusCount, 0);
+});
+
+test("sidebar quick links close without stealing focus", () => {
+  const fixture = createMenuFixture();
+  fixture.menuButton.click();
+
+  fixture.quickLink.click();
 
   assert.equal(fixture.menuButton.getAttribute("aria-expanded"), "false");
   assert.equal(fixture.menuButton.focusCount, 0);

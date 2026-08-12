@@ -44,7 +44,7 @@
     else open();
   });
   overlay.addEventListener("click", () => close({ restoreFocus: true }));
-  courseNav.querySelectorAll("a").forEach(link => link.addEventListener("click", () => close()));
+  sidebar.querySelectorAll("a").forEach(link => link.addEventListener("click", () => close()));
   documentRef.addEventListener("keydown", event => {
     if (event.key === "Escape" && isOpen()) close({ restoreFocus: true });
   });

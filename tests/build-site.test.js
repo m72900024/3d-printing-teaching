@@ -21,6 +21,9 @@ test("publishes twelve course pages with static core content", () => {
   assert.match(first, /<h1 id="courseTitle">認識 3D 列印<\/h1>/);
   assert.match(first, /3D 列印到底做了什麼？/);
   assert.match(first, /切片想像實驗/);
+  assert.match(first, /class="site-home-link" href="\.\.\/index\.html">[^<]*網站首頁/);
+  assert.match(first, /class="track-overview-link" href="\.\.\/index\.html#beginner-courses">[^<]*初階課程總覽/);
+  assert.match(first, /第一次成功[\s\S]*理解與調整[\s\S]*獨立完成/);
   assert.match(last, /<h1 id="courseTitle">維護與成果挑戰<\/h1>/);
   assert.match(last, /我能獨立完成作品/);
 });
@@ -158,6 +161,8 @@ test("publishes four advanced courses with static art, official sources, and rea
   assert.match(filament, /社群案例[\s\S]*不等於官方性能認證/);
   assert.match(filament, /makerworld\.com\/en\/models\/139371/);
   assert.match(filament, /makerworld\.com\/en\/models\/721613/);
+  assert.match(drying, /class="site-home-link" href="\.\.\/index\.html">[^<]*網站首頁/);
+  assert.match(drying, /class="track-overview-link" href="index\.html">[^<]*進階課程總覽/);
   assert.match(quality, /data-course-total="4"/);
   assert.match(support, /data-course-total="4"/);
   assert.match(filament, /data-course-total="4"/);

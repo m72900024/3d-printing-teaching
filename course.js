@@ -3,6 +3,28 @@ const courses = window.COURSES;
 const course = courses.find(item => item.id === courseId);
 if (!course) throw new Error(`Unknown course: ${courseId}`);
 
+const isAdvancedTrack = document.body.dataset.track === "advanced";
+const hierarchy = isAdvancedTrack
+  ? { homeHref: "../index.html", overviewHref: "index.html", overviewLabel: "進階課程總覽" }
+  : { homeHref: "../index.html", overviewHref: "../index.html#beginner-courses", overviewLabel: "初階課程總覽" };
+const brand = document.querySelector(".course-sidebar .brand");
+const quickLinks = document.createElement("nav");
+quickLinks.className = "course-quick-links";
+quickLinks.setAttribute("aria-label", "返回入口");
+quickLinks.innerHTML = `<a class="site-home-link" href="${hierarchy.homeHref}">⌂ 網站首頁</a><a class="track-overview-link" href="${hierarchy.overviewHref}">▦ ${hierarchy.overviewLabel}</a>`;
+brand.after(quickLinks);
+
+const topbar = document.querySelector(".course-topbar");
+const topbarHome = topbar.querySelector("a");
+topbarHome.className = "site-home-link";
+topbarHome.href = hierarchy.homeHref;
+topbarHome.textContent = "網站首頁";
+const topbarOverview = document.createElement("a");
+topbarOverview.className = "track-overview-link";
+topbarOverview.href = hierarchy.overviewHref;
+topbarOverview.textContent = hierarchy.overviewLabel;
+topbar.insertBefore(topbarOverview, document.querySelector("#courseStage"));
+
 document.title = `${course.id} ${course.title}｜3D 列印入門教室`;
 document.querySelector("#courseStage").textContent = `STAGE ${course.stageNo} · ${course.stage}`;
 document.querySelector("#courseMeta").textContent = `${course.duration} · ${course.type}`;
@@ -278,7 +300,16 @@ document.querySelector("#taskText").textContent = course.task.text;
 document.querySelector("#checkpointText").textContent = course.checkpoint;
 
 const nav = document.querySelector("#courseNav");
-nav.innerHTML = courses.map(item => `<a href="${item.slug}" class="${item.id === course.id ? "active" : ""}"><span>${item.id}</span>${item.title}</a>`).join("");
+function renderCourseLink(item) {
+  const active = item.id === course.id ? ' class="active" aria-current="page"' : "";
+  return `<a href="${item.slug}"${active}><span>${item.id}</span>${item.title}</a>`;
+}
+if (isAdvancedTrack) {
+  nav.innerHTML = courses.map(renderCourseLink).join("");
+} else {
+  const stageOrder = [...new Set(courses.map(item => item.stage))];
+  nav.innerHTML = stageOrder.map(stage => `<section class="course-nav-group"><h2>${stage}</h2>${courses.filter(item => item.stage === stage).map(renderCourseLink).join("")}</section>`).join("");
+}
 
 const currentIndex = courses.indexOf(course);
 const prev = courses[currentIndex - 1];
