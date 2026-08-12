@@ -14,6 +14,7 @@ const PUBLIC_ENTRIES = [
   "course.css",
   "course-data.js",
   "course-menu.js",
+  "course-media.js",
   "course.js",
   "advanced-course-data.js",
   "advanced-app.js",
@@ -105,7 +106,7 @@ function renderDetailFigures(figures) {
   return '<div class="detail-figure-stack">' + figures.map(renderManga).join("") + "</div>";
 }
 
-function renderSection(section, index) {
+function renderSection(section, index, options = {}) {
   const supplements = [
     section.tradeoff ? [section.tradeoff] : null,
     section.cards,
@@ -117,7 +118,11 @@ function renderSection(section, index) {
     section.workflowVisual ? [section.workflowVisual] : null
   ].filter(Boolean).map(items => renderCollection(items, "static-details")).join("");
 
-  return '<section class="lesson-section static-lesson-section">' +
+  const sectionId = options.includeOutline ? ' id="lesson-section-' + (index + 1) + '"' : "";
+  const returnLink = options.includeOutline
+    ? '<a class="back-to-outline" href="#lessonOutline">↑ 回到本課目錄</a>'
+    : "";
+  return '<section class="lesson-section static-lesson-section"' + sectionId + ">" +
     '<span class="section-count">' + String(index + 1).padStart(2, "0") + "</span>" +
     "<div><h2>" + escapeHtml(section.title) + "</h2>" +
     (section.body ? "<p>" + escapeHtml(section.body) + "</p>" : "") +
@@ -129,16 +134,34 @@ function renderSection(section, index) {
     renderTextList(section.points, "lesson-points") +
     renderCompare(section) +
     (section.callout ? '<aside class="lesson-callout"><span>!</span><p>' + escapeHtml(section.callout) + "</p></aside>" : "") +
-    renderSources(section.sources) +
+    renderSources(section.sources) + returnLink +
     "</div></section>";
 }
 
+function renderLessonOutline(course) {
+  if (course.id !== "A05") return "";
+  return '<nav class="lesson-outline a05-lesson-outline" id="lessonOutline" aria-label="本課目錄"><strong>本課目錄</strong><div>' + course.sections.map((section, index) => {
+    return '<a href="#lesson-section-' + (index + 1) + '"><span>' + String(index + 1).padStart(2, "0") + "</span>" + escapeHtml(section.title) + "</a>";
+  }).join("") + "</div></nav>";
+}
+
 function renderStaticContent(course) {
-  const sections = course.sections.map(renderSection).join("");
+  const includeOutline = course.id === "A05";
+  const sections = course.sections.map((section, index) => renderSection(section, index, { includeOutline })).join("");
   const realCase = course.realCase
     ? '<section class="real-case-section static-real-case"><div class="real-case-heading"><p>' + escapeHtml(course.realCase.eyebrow) + "</p><h2>" + escapeHtml(course.realCase.title) + '</h2></div><div class="real-case-copy"><p>' + escapeHtml(course.realCase.body) + "</p><p>" + escapeHtml(course.realCase.why) + "</p></div></section>"
     : "";
-  return '<noscript><p class="noscript-note">互動動畫、測驗與進度記錄需要 JavaScript；完整課程正文仍可正常閱讀。</p></noscript>' + sections + realCase;
+  const backToTop = includeOutline ? '<a class="back-to-top" href="#lessonMain" aria-label="回到頁面頂端">↑<span>回到頂端</span></a>' : "";
+  return '<noscript><p class="noscript-note">互動動畫、測驗與進度記錄需要 JavaScript；完整課程正文仍可正常閱讀。</p></noscript>' + renderLessonOutline(course) + sections + realCase + backToTop;
+}
+
+function renderCourseGoals(course) {
+  if (course.id !== "A05" || !Array.isArray(course.goalArt) || course.goalArt.length === 0) {
+    return course.goals.map(goal => "<li>" + escapeHtml(goal) + "</li>").join("");
+  }
+  const summary = course.goalArt[0];
+  return '<li class="goal-summary-visual"><img src="' + escapeHtml(summary.src) + '" alt="' + escapeHtml(summary.alt) + '" width="1536" height="1024" decoding="async"><span>本課重點總覽</span></li>' +
+    course.goals.map(goal => '<li class="goal-text">' + escapeHtml(goal) + "</li>").join("");
 }
 
 function replaceElement(html, id, content) {
@@ -179,10 +202,13 @@ function injectCourse(html, course, courses, options = {}) {
   html = replaceElement(html, "courseStage", "STAGE " + escapeHtml(course.stageNo) + " · " + escapeHtml(course.stage));
   html = replaceElement(html, "courseMeta", escapeHtml(course.duration) + " · " + escapeHtml(course.type));
   html = replaceElement(html, "courseNumber", escapeHtml(course.id));
-  html = replaceElement(html, "courseTitle", escapeHtml(course.title));
+  const courseTitle = course.id === "A05"
+    ? '<span class="course-title-line">受力方向與</span><span class="course-title-line">列印方向</span>'
+    : escapeHtml(course.title);
+  html = replaceElement(html, "courseTitle", courseTitle);
   html = replaceElement(html, "courseSubtitle", escapeHtml(course.subtitle));
   html = replaceElement(html, "courseLead", escapeHtml(course.lead));
-  html = replaceElement(html, "courseGoals", course.goals.map(goal => "<li>" + escapeHtml(goal) + "</li>").join(""));
+  html = replaceElement(html, "courseGoals", renderCourseGoals(course));
   html = replaceElement(html, "courseContent", renderStaticContent(course));
   html = replaceElement(html, "taskTitle", escapeHtml(course.task.title));
   html = replaceElement(html, "taskText", escapeHtml(course.task.text));

@@ -250,10 +250,10 @@ window.ADVANCED_COURSES = [
     id:"A05", slug:"05-force-direction.html", stage:"結構設計", stageNo:"A", duration:"40 分鐘", type:"受力判讀＋破壞實驗",
     title:"受力方向與列印方向", subtitle:"先追蹤力量怎麼走，再決定模型怎麼放。",
     lead:"功能零件不是只要印得漂亮；掛上重量、鎖入螺絲或反覆按壓後，力量會沿結構尋找路徑。本課用十張標註圖，帶你從外力、固定點與傳力路徑判斷列印方向，並以安全小件測試驗證。",
-    goals:["分辨拉伸、壓縮、彎曲、剪切與扭轉","解釋 XY 連續線與 Z 層間接合的方向性","標出固定點、外力、傳力路徑與可能破壞面","比較同一支架平放、側放與直立的取捨","在 Bambu Studio 預覽關鍵層與截面","完成只改列印方向的安全小件測試"],
+    goals:["分辨拉伸、壓縮、彎曲、剪切與扭轉","解釋 XY 層內路徑與 Z 層間接合的方向性","標出固定邊界、外力、傳力路徑與可能破壞面","比較同一支架平放、側放與直立的取捨","在 Bambu Studio 預覽關鍵層與截面","完成只改列印方向的安全小件測試"],
     goalArt:[
       {src:"../assets/advanced-a05/illustrations/force-types.webp",alt:"五種基本受力的方向與變形方式"},
-      {src:"../assets/advanced-a05/illustrations/xy-z-anisotropy.webp",alt:"XY 連續線與 Z 層間接合比較"},
+      {src:"../assets/advanced-a05/illustrations/xy-z-anisotropy.webp",alt:"XY 層內路徑與 Z 層間接合比較"},
       {src:"../assets/advanced-a05/illustrations/hook-load-path.webp",alt:"掛鉤固定點、載重與傳力路徑"},
       {src:"../assets/advanced-a05/illustrations/bracket-orientations.webp",alt:"同一支架三種列印方向比較"},
       {src:"../assets/advanced-a05/illustrations/bambu-preview.webp",alt:"切片預覽中的外殼、填充與接縫"},
@@ -274,11 +274,11 @@ window.ADVANCED_COURSES = [
       },
       {
         title:"線條、層面與異向性",
-        body:"FFF 以擠出線在 XY 平面鋪設，再沿 Z 軸逐層堆疊；因此同一材料在不同方向受力時，結果可能不同。沿連續列印線受力與跨越層間接合受力不是同一件事，但也不能簡化成「Z 永遠最弱」：材料、溫度、含水、擠出品質、幾何、外殼與路徑都會改變實際表現。",
-        manga:{src:"../assets/advanced-a05/illustrations/xy-z-anisotropy.webp",alt:"XY 連續列印線與 Z 層間接合的受力方向比較",label:"GPT 教學圖解",caption:"方向性來自製程與路徑；先看受力是否跨層，再把材料與列印品質納入判斷。",guides:[
-          {number:"1",title:"沿線追蹤",text:"綠色 XY 連續線能把力量沿擠出路徑傳遞。"},
+        body:"FFF 先在 XY 平面形成單層擠出路徑，再沿 Z 軸逐層堆疊；因此同一材料在不同方向受力時，結果可能不同。沿單層路徑受力與跨越層間接合受力不是同一件事，但也不能簡化成「Z 永遠最弱」：材料、溫度、含水、擠出品質、幾何、外殼、接縫與路徑中斷都會改變實際表現。",
+        manga:{src:"../assets/advanced-a05/illustrations/xy-z-anisotropy.webp",alt:"XY 單層擠出路徑與 Z 逐層堆疊、層間接合的受力方向比較",label:"GPT 教學圖解",caption:"水平箭頭表示單層擠出路徑，垂直 Z 箭頭表示逐層堆疊方向；先看受力是否跨層，再把材料與列印品質納入判斷。",guides:[
+          {number:"1",title:"沿單層路徑追蹤",text:"綠色 XY 層內路徑能沿擠出線傳遞力量，但轉角、接縫與中斷仍需另外檢查。"},
           {number:"2",title:"辨認層間接合",text:"紫色層面代表每層與上一層熔接的位置。"},
-          {number:"3",title:"看跨層受力",text:"藍色箭頭若把層面拉開，就要特別留意層間品質。"},
+          {number:"3",title:"確認逐層堆疊方向",text:"Z 軸是逐層堆疊方向；藍色箭頭若把層面拉開，就要特別留意層間品質。"},
           {number:"4",title:"保留條件",text:"紅色虛線是可能剝離面，不是每個成品都會沿此處斷裂。"}
         ]},
         sources:[{label:"UltiMaker｜How to design for FFF 3D printing",url:"https://ultimaker.com/wp-content/uploads/2024/06/How-to-design-for-FFF-1.pdf"},{label:"同儕審查研究｜列印方向與拉伸、破壞行為",url:"https://doi.org/10.1016/j.mtcomm.2026.115715"}]
@@ -298,25 +298,26 @@ window.ADVANCED_COURSES = [
       },
       {
         title:"四種功能零件：從力找到薄弱位置",
-        body:"掛鉤先看根部彎曲與外側受拉；L 型支架先看內角與孔之間的傳力；螺絲孔與螺絲座要看鎖固造成的徑向撐開與根部剝離；卡扣則要看反覆彎曲時的根部受拉、圓角與列印線。這些都是找測試位置的線索，不是斷裂預言。",
-        manga:{src:"../assets/advanced-a05/illustrations/hook-load-path.webp",alt:"掛鉤的固定點、向下載重、拉壓兩側與根部裂縫位置",label:"GPT 教學圖解",caption:"掛鉤的力從鉤端回到夾持處；根部與內角是應優先觀察、加圓角並安排連續路徑的位置。",guides:[
+        body:"掛鉤先畫完整夾持邊界、載重接觸點與根部分析截面，再判斷該截面的受拉側和受壓側；L 型支架先看內角與孔之間的傳力；螺絲孔若使用自攻／擠牙螺絲直接鎖入塑膠，要看底孔、扭力造成的環向撐開與螺絲座根部；卡扣則要看反覆彎曲時的根部受拉、圓角與列印線。這些都是找測試位置的線索，不是斷裂預言。",
+        manga:{src:"../assets/advanced-a05/illustrations/hook-load-path.webp",alt:"掛鉤的完整夾持邊界、載重接觸點、根部分析截面與可能起裂區",label:"GPT 教學圖解",caption:"先把夾具接觸形成的固定邊界畫完整，再在根部選定截面判斷拉壓；紅色位置只是可能起裂區，不是唯一破壞路徑。",guides:[
           {number:"1",title:"載重進入",text:"藍色向下箭頭是袋子或物件施加在鉤端的力。"},
-          {number:"2",title:"固定位置",text:"桌緣與夾具阻止掛鉤整體下落。"},
+          {number:"2",title:"畫完整夾持邊界",text:"桌緣、背板與壓緊螺桿共同限制掛鉤移動，不把單一接觸點當成全部固定條件。"},
           {number:"3",title:"傳力回固定點",text:"綠線顯示力如何穿過彎曲部與根部。"},
-          {number:"4",title:"分辨拉壓側",text:"彎曲外側受拉、內側受壓，兩側的失效方式可能不同。"},
-          {number:"5",title:"觀察根部",text:"紅色位置是可能裂縫起點；圓角可降低尖銳應力集中。"}
+          {number:"4",title:"在根部截面分辨拉壓",text:"只在選定的根部分析截面標示受拉側與受壓側，避免把整段曲面都當成相同狀態。"},
+          {number:"5",title:"觀察可能起裂區",text:"紅色位置是優先觀察區；圓角可降低尖銳應力集中，但實際裂縫仍由測試確認。"}
         ]},
-        detailFigures:[{src:"../assets/advanced-a05/illustrations/screw-boss-detail.webp",alt:"螺絲鎖入後孔周徑向力、外殼與螺絲座根部剝離風險",label:"GPT 教學圖解",caption:"螺絲不只把零件壓住，也可能向外撐開螺絲座；孔周外殼與根部幾何要一起看。",guides:[
-          {number:"1",title:"先看徑向力",text:"螺絲鎖入後，藍色箭頭由孔軸向四周撐開。"},
+        detailFigures:[{src:"../assets/advanced-a05/illustrations/screw-boss-detail.webp",alt:"自攻或擠牙螺絲直接鎖入塑膠時的環向撐開、孔周外殼與螺絲座根部風險",label:"GPT 教學圖解",caption:"這是自攻／擠牙螺絲直接鎖入塑膠的案例；底孔過小、扭力過高或沉頭楔入會增加撐裂風險，不能套用到所有螺絲接合。",guides:[
+          {number:"1",title:"先確認螺絲接合方式",text:"只有自攻／擠牙螺絲直接成形塑膠牙時，才把環向撐開列為主要檢查。"},
           {number:"2",title:"檢查孔周外殼",text:"綠色同心路徑應連續包圍孔，不被稀疏填充取代。"},
-          {number:"3",title:"確認鎖固面",text:"黃色位置承受螺絲頭或墊片傳來的壓力。"},
+          {number:"3",title:"核對底孔與扭力",text:"底孔過小、扭力過高及沉頭楔入都可能提高螺絲座開裂風險。"},
           {number:"4",title:"看螺絲座根部",text:"力量最後回到支架本體，根部圓角與厚度很重要。"},
-          {number:"5",title:"對照層面",text:"紅色虛線若與層面重合，需用方向與小件測試驗證。"}
-        ]}]
+          {number:"5",title:"分清嵌件與螺帽",text:"機械牙螺絲配合金屬嵌件／螺帽時，主要載重可能改為軸向夾緊、孔壁承壓或剪切。"}
+        ]}],
+        sources:[{label:"Covestro｜Self-tapping screws for thermoplastics",url:"https://solutions.covestro.com/-/media/covestro/solution-center/story/brochures/self-tapping-screws_gb.pdf"}]
       },
       {
         title:"方向、外殼與填充的調整順序",
-        body:"先調整模型方向與幾何，讓主要傳力路徑更連續並降低尖角；再增加必要的外殼圈數，尤其是孔周與根部；最後才把填充密度、圖樣或角度當成單一變因。100% 填充不是通用答案，因為外殼通常更直接參與彎曲與表面受力，填充則常負責支撐外殼與抵抗壓縮。",
+        body:"先調整模型方向與幾何，讓主要傳力路徑更連續並降低尖角；再檢查孔周、根部與外表面的外殼圈數；最後把填充密度、圖樣或角度當成單一變因。100% 填充不是通用答案：許多殼狀或以彎曲為主的零件會由外殼承擔較多外側拉壓，但填充仍可能承擔剪切、支撐外殼、抵抗壓縮與挫曲，必須依實際幾何和載重測試。",
         manga:{src:"../assets/advanced-a05/illustrations/fastener-snap-fit.webp",alt:"功能零件先調方向和幾何，再看外殼與填充",label:"GPT 教學圖解",caption:"先讓力走得順，再補足孔周外殼；不要用提高填充掩蓋不利方向或尖銳根部。",guides:[
           {number:"1",title:"先改方向",text:"讓主要受拉區減少跨層剝離風險。"},
           {number:"2",title:"再改幾何",text:"增加圓角、厚度或肋條，讓傳力轉折更平順。"},

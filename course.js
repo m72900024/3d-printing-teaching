@@ -27,11 +27,13 @@ topbarOverview.href = hierarchy.overviewHref;
 topbarOverview.textContent = hierarchy.overviewLabel;
 topbar.insertBefore(topbarOverview, document.querySelector("#courseStage"));
 
-document.title = `${course.id} ${course.title}｜3D 列印入門教室`;
+document.title = `${course.id} ${course.title}｜${isAdvancedTrack ? "3D 列印進階教室" : "3D 列印入門教室"}`;
 document.querySelector("#courseStage").textContent = `STAGE ${course.stageNo} · ${course.stage}`;
 document.querySelector("#courseMeta").textContent = `${course.duration} · ${course.type}`;
 document.querySelector("#courseNumber").textContent = course.id;
-document.querySelector("#courseTitle").textContent = course.title;
+const courseTitleElement = document.querySelector("#courseTitle");
+if (course.id === "A05") courseTitleElement.innerHTML = '<span class="course-title-line">受力方向與</span><span class="course-title-line">列印方向</span>';
+else courseTitleElement.textContent = course.title;
 document.querySelector("#courseSubtitle").textContent = course.subtitle;
 document.querySelector("#courseLead").textContent = course.lead;
 const goalArtByCourse = {
@@ -89,7 +91,9 @@ const goalArtByCourse = {
 };
 const goalArt = course.goalArt || goalArtByCourse[course.id];
 const goalsElement = document.querySelector("#courseGoals");
-goalsElement.innerHTML = goalArt
+goalsElement.innerHTML = course.id === "A05" && goalArt
+  ? `<li class="goal-summary-visual"><img src="${goalArt[0].src}" alt="${goalArt[0].alt}" width="1536" height="1024" decoding="async"><span>本課重點總覽</span></li>${course.goals.map(goal => `<li class="goal-text">${goal}</li>`).join("")}`
+  : goalArt
   ? course.goals.map((goal, index) => `<li class="goal-card"><div class="goal-visual"><img src="${goalArt[index].src}" alt="${goalArt[index].alt}" width="640" height="640" decoding="async"></div><div><small>0${index + 1}</small><p>${goal}</p></div></li>`).join("")
   : course.goals.map(goal => `<li>${goal}</li>`).join("");
 if (course.id === "01") {
@@ -221,9 +225,14 @@ function renderRealCase(realCase) {
   </section>`;
 }
 
+function renderLessonOutline() {
+  if (course.id !== "A05") return "";
+  return `<nav class="lesson-outline a05-lesson-outline" id="lessonOutline" aria-label="本課目錄"><strong>本課目錄</strong><div>${course.sections.map((section, index) => `<a href="#lesson-section-${index + 1}"><span>${String(index + 1).padStart(2, "0")}</span>${section.title}</a>`).join("")}</div></nav>`;
+}
+
 const content = document.querySelector("#courseContent");
-content.innerHTML = renderLessonVisual(course.lessonVisual) + course.sections.map((section, index) => `
-  <section class="lesson-section reveal"${section.examples ? ` id="real-examples"` : ""}>
+content.innerHTML = renderLessonVisual(course.lessonVisual) + renderLessonOutline() + course.sections.map((section, index) => `
+  <section class="lesson-section reveal"${course.id === "A05" ? ` id="lesson-section-${index + 1}"` : section.examples ? ` id="real-examples"` : ""}>
     <span class="section-count">${String(index + 1).padStart(2,"0")}</span>
     <div>
       <h2>${section.title}</h2>
@@ -246,8 +255,11 @@ content.innerHTML = renderLessonVisual(course.lessonVisual) + course.sections.ma
       ${section.compare ? `<div class="compare-table" role="table">${section.compareHeaders ? `<div class="compare-row compare-head" role="row">${section.compareHeaders.map(cell => `<span role="columnheader">${cell}</span>`).join("")}</div>` : ""}${section.compare.map(row => `<div class="compare-row" role="row">${row.map((cell, cellIndex) => `<span role="${cellIndex === 0 ? "rowheader" : "cell"}">${cell}</span>`).join("")}</div>`).join("")}</div>` : ""}
       ${section.callout ? `<aside class="lesson-callout"><span>!</span><p>${section.callout}</p></aside>` : ""}
       ${renderSources(section.sources)}
+      ${course.id === "A05" ? '<a class="back-to-outline" href="#lessonOutline">↑ 回到本課目錄</a>' : ""}
     </div>
-  </section>`).join("") + renderRealCase(course.realCase);
+  </section>`).join("") + renderRealCase(course.realCase) + (course.id === "A05" ? '<a class="back-to-top" href="#lessonMain" aria-label="回到頁面頂端">↑<span>回到頂端</span></a>' : "");
+
+if (course.id === "A05" && window.setupCourseMedia) window.setupCourseMedia({ document, window });
 
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 function runLayerCycle(lab) {
