@@ -241,6 +241,28 @@ test("publishes the force direction course with ten annotated teaching figures",
   }
 });
 
+test("publishes the illustrated A06 infill selection course", () => {
+  const { outputDir } = buildTemporarySite("3d-course-infill-selection-");
+  const infill = fs.readFileSync(path.join(outputDir, "advanced/06-infill-selection.html"), "utf8");
+  const overview = fs.readFileSync(path.join(outputDir, "advanced/index.html"), "utf8");
+  const home = fs.readFileSync(path.join(outputDir, "index.html"), "utf8");
+  const imageReferences = infill.match(/assets\/advanced-a06\/illustrations\/[^\"]+\.webp/g) || [];
+
+  assert.match(infill, /<title>A06 依作品需求選擇填充｜3D 列印進階教室<\/title>/);
+  assert.equal((infill.match(/id="lesson-section-[1-7]"/g) || []).length, 7);
+  assert.equal(imageReferences.length, 11);
+  assert.equal(new Set(imageReferences).size, 10);
+  assert.match(infill, /展示模型[\s\S]*收納盒[\s\S]*支架[\s\S]*受壓/);
+  assert.match(infill, /5–12%[\s\S]*10–18%[\s\S]*15–30%[\s\S]*25–40%/);
+  assert.match(infill, /本課建議起始值/);
+  assert.match(infill, /Lightning[\s\S]*Gyroid[\s\S]*Cubic[\s\S]*Triangles[\s\S]*Concentric/);
+  assert.match(infill, /10%[\s\S]*20%[\s\S]*30%[\s\S]*單一變因/);
+  assert.match(infill, /github\.com\/bambulab\/BambuStudio/);
+  assert.match(infill, /help\.prusa3d\.com[\s\S]*ultimaker\.com/);
+  assert.match(overview, /6 ADVANCED COURSES[\s\S]*A06[\s\S]*依作品需求選擇填充/);
+  assert.match(home, /ADVANCED · 6 COURSES[\s\S]*A06[\s\S]*依作品需求選擇填充/);
+});
+
 test("fingerprints every local stylesheet and script reference", () => {
   const { outputDir } = buildTemporarySite("3d-course-assets-");
 
