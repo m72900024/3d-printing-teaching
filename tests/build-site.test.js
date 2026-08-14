@@ -246,7 +246,20 @@ test("publishes the illustrated A06 infill selection course", () => {
   const infill = fs.readFileSync(path.join(outputDir, "advanced/06-infill-selection.html"), "utf8");
   const overview = fs.readFileSync(path.join(outputDir, "advanced/index.html"), "utf8");
   const home = fs.readFileSync(path.join(outputDir, "index.html"), "utf8");
+  const courseCss = fs.readFileSync(path.join(outputDir, "course.css"), "utf8");
   const imageReferences = infill.match(/assets\/advanced-a06\/illustrations\/[^\"]+\.webp/g) || [];
+  const figures = [
+    "infill-anatomy.webp",
+    "density-comparison.webp",
+    "decision-flow.webp",
+    "pattern-matrix.webp",
+    "path-crossing.webp",
+    "display-lightning.webp",
+    "storage-box.webp",
+    "bracket-infill.webp",
+    "compression-block.webp",
+    "bambu-infill-preview.webp"
+  ];
 
   assert.match(infill, /<title>A06 依作品需求選擇填充｜3D 列印進階教室<\/title>/);
   assert.equal((infill.match(/id="lesson-section-[1-7]"/g) || []).length, 7);
@@ -261,6 +274,11 @@ test("publishes the illustrated A06 infill selection course", () => {
   assert.match(infill, /help\.prusa3d\.com[\s\S]*ultimaker\.com/);
   assert.match(overview, /6 ADVANCED COURSES[\s\S]*A06[\s\S]*依作品需求選擇填充/);
   assert.match(home, /ADVANCED · 6 COURSES[\s\S]*A06[\s\S]*依作品需求選擇填充/);
+  assert.match(courseCss, /\.course-page\[data-course="A06"\] \.goal-summary-visual img/);
+  assert.match(courseCss, /\.course-page\[data-course="A06"\] \.manga-figure img\[role="button"\]/);
+  for (const figure of figures) {
+    assert.ok(fs.existsSync(path.join(outputDir, "assets/advanced-a06/illustrations", figure)));
+  }
 });
 
 test("fingerprints every local stylesheet and script reference", () => {
