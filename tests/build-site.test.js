@@ -247,6 +247,7 @@ test("publishes the illustrated A06 infill selection course", () => {
   const overview = fs.readFileSync(path.join(outputDir, "advanced/index.html"), "utf8");
   const home = fs.readFileSync(path.join(outputDir, "index.html"), "utf8");
   const courseCss = fs.readFileSync(path.join(outputDir, "course.css"), "utf8");
+  const courseJs = fs.readFileSync(path.join(outputDir, "course.js"), "utf8");
   const imageReferences = infill.match(/assets\/advanced-a06\/illustrations\/[^\"]+\.webp/g) || [];
   const figures = [
     "infill-anatomy.webp",
@@ -276,6 +277,8 @@ test("publishes the illustrated A06 infill selection course", () => {
   assert.match(home, /ADVANCED · 6 COURSES[\s\S]*A06[\s\S]*依作品需求選擇填充/);
   assert.match(courseCss, /\.course-page\[data-course="A06"\] \.goal-summary-visual img/);
   assert.match(courseCss, /\.course-page\[data-course="A06"\] \.manga-figure img\[role="button"\]/);
+  assert.match(courseJs, /const usesLongCourseLayout = \["A05", "A06"\]\.includes\(course\.id\)/);
+  assert.ok((courseJs.match(/usesLongCourseLayout/g) || []).length >= 7);
   for (const figure of figures) {
     assert.ok(fs.existsSync(path.join(outputDir, "assets/advanced-a06/illustrations", figure)));
   }

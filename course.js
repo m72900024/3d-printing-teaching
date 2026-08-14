@@ -2,6 +2,7 @@ const courseId = document.body.dataset.course;
 const courses = window.COURSES;
 const course = courses.find(item => item.id === courseId);
 if (!course) throw new Error(`Unknown course: ${courseId}`);
+const usesLongCourseLayout = ["A05", "A06"].includes(course.id);
 
 const isAdvancedTrack = document.body.dataset.track === "advanced";
 const hierarchy = isAdvancedTrack
@@ -91,7 +92,7 @@ const goalArtByCourse = {
 };
 const goalArt = course.goalArt || goalArtByCourse[course.id];
 const goalsElement = document.querySelector("#courseGoals");
-goalsElement.innerHTML = course.id === "A05" && goalArt
+goalsElement.innerHTML = usesLongCourseLayout && goalArt
   ? `<li class="goal-summary-visual"><img src="${goalArt[0].src}" alt="${goalArt[0].alt}" width="1536" height="1024" decoding="async"><span>本課重點總覽</span></li>${course.goals.map(goal => `<li class="goal-text">${goal}</li>`).join("")}`
   : goalArt
   ? course.goals.map((goal, index) => `<li class="goal-card"><div class="goal-visual"><img src="${goalArt[index].src}" alt="${goalArt[index].alt}" width="640" height="640" decoding="async"></div><div><small>0${index + 1}</small><p>${goal}</p></div></li>`).join("")
@@ -226,13 +227,13 @@ function renderRealCase(realCase) {
 }
 
 function renderLessonOutline() {
-  if (course.id !== "A05") return "";
+  if (!usesLongCourseLayout) return "";
   return `<nav class="lesson-outline a05-lesson-outline" id="lessonOutline" aria-label="本課目錄"><strong>本課目錄</strong><div>${course.sections.map((section, index) => `<a href="#lesson-section-${index + 1}"><span>${String(index + 1).padStart(2, "0")}</span>${section.title}</a>`).join("")}</div></nav>`;
 }
 
 const content = document.querySelector("#courseContent");
 content.innerHTML = renderLessonVisual(course.lessonVisual) + renderLessonOutline() + course.sections.map((section, index) => `
-  <section class="lesson-section reveal"${course.id === "A05" ? ` id="lesson-section-${index + 1}"` : section.examples ? ` id="real-examples"` : ""}>
+  <section class="lesson-section reveal"${usesLongCourseLayout ? ` id="lesson-section-${index + 1}"` : section.examples ? ` id="real-examples"` : ""}>
     <span class="section-count">${String(index + 1).padStart(2,"0")}</span>
     <div>
       <h2>${section.title}</h2>
@@ -255,11 +256,11 @@ content.innerHTML = renderLessonVisual(course.lessonVisual) + renderLessonOutlin
       ${section.compare ? `<div class="compare-table" role="table">${section.compareHeaders ? `<div class="compare-row compare-head" role="row">${section.compareHeaders.map(cell => `<span role="columnheader">${cell}</span>`).join("")}</div>` : ""}${section.compare.map(row => `<div class="compare-row" role="row">${row.map((cell, cellIndex) => `<span role="${cellIndex === 0 ? "rowheader" : "cell"}">${cell}</span>`).join("")}</div>`).join("")}</div>` : ""}
       ${section.callout ? `<aside class="lesson-callout"><span>!</span><p>${section.callout}</p></aside>` : ""}
       ${renderSources(section.sources)}
-      ${course.id === "A05" ? '<a class="back-to-outline" href="#lessonOutline">↑ 回到本課目錄</a>' : ""}
+      ${usesLongCourseLayout ? '<a class="back-to-outline" href="#lessonOutline">↑ 回到本課目錄</a>' : ""}
     </div>
-  </section>`).join("") + renderRealCase(course.realCase) + (course.id === "A05" ? '<a class="back-to-top" href="#lessonMain" aria-label="回到頁面頂端">↑<span>回到頂端</span></a>' : "");
+  </section>`).join("") + renderRealCase(course.realCase) + (usesLongCourseLayout ? '<a class="back-to-top" href="#lessonMain" aria-label="回到頁面頂端">↑<span>回到頂端</span></a>' : "");
 
-if (course.id === "A05" && window.setupCourseMedia) window.setupCourseMedia({ document, window });
+if (usesLongCourseLayout && window.setupCourseMedia) window.setupCourseMedia({ document, window });
 
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 function runLayerCycle(lab) {
