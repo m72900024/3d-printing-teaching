@@ -366,6 +366,107 @@ window.ADVANCED_COURSES = [
     ],
     task:{title:"完成一組方向對照試片",text:"選一個小型 L 型支架，先標固定點、外力、傳力路徑與可能裂縫；以相同材料與切片設定製作平放、側放、直立三件。保存每一件的關鍵層預覽，再於透明防護罩內逐步加載，記錄變形、載重與裂縫方向。"},
     checkpoint:"我能先依使用情境畫出受力與固定點，在切片預覽核對外殼、孔周、填充與接縫，並以固定條件的小件測試驗證列印方向，而不是把 Z 軸或 100% 填充當成通用答案。"
+  },
+  {
+    id:"A06", slug:"06-infill-selection.html", stage:"切片策略", stageNo:"A", duration:"45 分鐘", type:"需求判讀＋對照實驗",
+    title:"依作品需求選擇填充", subtitle:"先判斷作品需要什麼，再決定圖樣與密度。",
+    lead:"填充不是把模型內部隨意塞滿，也不是密度越高就一定越好。本課先分清外殼、頂底層與填充的工作，再從展示模型、收納盒、支架與受壓零件四種用途，選擇可測試的圖樣和密度起點，最後回到 Bambu Studio 預覽並做單一變因比較。",
+    goals:["分辨外殼、頂底層與填充各自的工作","依受力、表面、時間與材料限制整理需求","辨認七種常用填充圖樣的路徑特性","為四種作品選擇合理的圖樣與密度起點","在 Bambu Studio 預覽內部路徑與頂面支撐","完成 10%、20%、30% 的單一變因試片"],
+    goalArt:[{src:"../assets/advanced-a06/illustrations/infill-anatomy.webp",alt:"外殼、頂底層與內部填充共同組成列印零件的剖面總覽"}],
+    sections:[
+      {
+        title:"填充不是把模型塞滿",
+        body:"切片後的零件通常由外殼、頂層、底層與內部填充共同組成。外殼形成外形並承接表面附近的拉壓；頂底層封住模型；填充則支撐上方路徑、連接兩側外殼，並依幾何承擔部分剪切、壓縮或抗挫曲工作。提高填充不能補救太薄的外殼、不利的列印方向或尖銳受力轉角。",
+        manga:{src:"../assets/advanced-a06/illustrations/infill-anatomy.webp",alt:"透明零件剖面標示外殼、頂層、底層、填充與載重方向",label:"GPT 教學圖解",caption:"先看各部分負責什麼，再決定要增加外殼、頂層，或調整內部填充。",guides:[
+          {number:"1",title:"外殼形成連續邊界",text:"外表面附近常承受較大的彎曲拉壓，外殼圈數不能被填充密度取代。"},
+          {number:"2",title:"頂底層封住模型",text:"頂面是否能被平順托住，會受到填充間距、圖樣與頂層厚度共同影響。"},
+          {number:"3",title:"填充連接並支撐",text:"內部路徑可支撐頂面、傳遞部分力量，也會改變時間、重量和材料量。"},
+          {number:"4",title:"先處理主要弱點",text:"方向、截面、圓角或孔周不足時，單純加密通常不是最有效的第一步。"}
+        ]},
+        points:["外殼與填充是合作關係，不是互相替代","視覺模型也需要足以支撐頂面的內部結構","功能件應先沿實際固定點與外力追蹤傳力路徑"],
+        sources:[{label:"一般切片原理：Prusa Knowledge Base｜Infill",url:"https://help.prusa3d.com/article/infill_42"},{label:"設計補充：UltiMaker｜How to design for FFF",url:"https://ultimaker.com/wp-content/uploads/2024/06/How-to-design-for-FFF-1.pdf"}]
+      },
+      {
+        title:"選填充前先回答四個問題",
+        body:"不要先從圖樣清單猜答案。先確認作品是不是只展示、是否需要平整頂面、主要力量從哪裡進入，以及時間與材料能花多少。答案會把候選縮小，再由小件測試確認；若需求改變，原本的選擇也要重做。",
+        manga:{src:"../assets/advanced-a06/illustrations/decision-flow.webp",alt:"從作品用途、受力、表面與製作成本走向填充候選的決策流程",label:"GPT 教學圖解",caption:"四個問題先建立條件，最後才選圖樣與密度；圖中的百分比是測試起點，不是保證值。",guides:[
+          {number:"1",title:"作品做什麼",text:"展示、收納、固定或承壓，決定你最在意外觀、重量還是變形。"},
+          {number:"2",title:"力量怎麼走",text:"標出固定點、外力方向與關鍵截面，判斷是否需要多方向連接。"},
+          {number:"3",title:"表面需要什麼",text:"大面積平頂通常需要更穩定的下方支撐，也可能要增加頂層。"},
+          {number:"4",title:"成本能接受多少",text:"把列印時間、材料重量和失敗成本一起比較，不只看密度。"}
+        ]},
+        compareHeaders:["先問","觀察證據","會影響的設定"],
+        compare:[["用途","展示、收納、支撐或承壓","密度範圍與圖樣候選"],["受力","方向、固定點、載重時間","多方向或方向性路徑"],["表面","平頂跨距、外觀面位置","密度、圖樣與頂層"],["成本","時間、重量、材料限制","先採較低起點再測試"]],
+        callout:"以下百分比均為本課建議起始值。它們不是 Bambu Lab 官方保證，也不能直接推算承重能力。"
+      },
+      {
+        title:"七種常用填充圖樣",
+        body:"Lines 與 Rectilinear 路徑簡單、速度快；Grid 在同層交叉，列印時交會點可能重複經過；Gyroid 以連續曲面形成多方向連接；Cubic 建立三維斜向結構；Triangles 形成較硬挺的平面網格；Lightning 只在需要托住上方的位置長出分枝；Concentric 沿外形一圈圈縮進。圖樣名稱相同，也要以目前切片器版本的預覽為準。",
+        manga:{src:"../assets/advanced-a06/illustrations/pattern-matrix.webp",alt:"七種常用填充圖樣的俯視與立體路徑功能比較",label:"GPT 教學圖解",caption:"圖樣沒有全面冠軍；用路徑方向、頂面支撐、列印效率與受力需求選候選。",guides:[
+          {number:"1",title:"快速與省料",text:"Lines、Rectilinear 適合快速原型；Lightning 更偏向支撐頂面而非功能承載。"},
+          {number:"2",title:"多方向連接",text:"Gyroid 與 Cubic 常被拿來作為功能件起點，但仍要配合方向和外殼測試。"},
+          {number:"3",title:"平面硬挺",text:"Triangles、Grid 可形成密集平面網格，但交會方式和列印時間需看預覽。"},
+          {number:"4",title:"跟隨外形",text:"Concentric 沿輪廓排列，適合特定外形或柔性行為，不代表普遍最強。"}
+        ]},
+        detailFigures:[{src:"../assets/advanced-a06/illustrations/path-crossing.webp",alt:"Grid 同層交叉與 Gyroid 連續路徑的噴嘴行走差異",label:"GPT 教學圖解",caption:"同樣看似多方向，路徑是否在同層重複交叉仍不同；用逐層預覽確認實際走法。",guides:[
+          {number:"1",title:"看同一層",text:"先把預覽滑到單層，不用模型外觀猜內部路徑。"},
+          {number:"2",title:"找交會點",text:"Grid 的路徑可能在同層交叉，交會處的實際行為受切片器版本與設定影響。"},
+          {number:"3",title:"看連續轉向",text:"Gyroid 以曲線轉向形成三維連接，通常不以同層直線交叉完成。"},
+          {number:"4",title:"回到需求",text:"交叉少不等於自動更強；仍需比較受力、時間與成品結果。"}
+        ]}],
+        sources:[{label:"一般切片原理：Prusa Knowledge Base｜Infill patterns",url:"https://help.prusa3d.com/article/infill-patterns_177130"},{label:"一般設計參考：UltiMaker｜Infill density guide",url:"https://ultimaker.com/learn/3d-printing-infill-density-optimizing-strength-and-speed/"}]
+      },
+      {
+        title:"依四種作品選擇",
+        body:"把圖樣和密度當成第一輪候選：展示模型優先節省時間與材料；收納盒兼顧平整頂面與日常剛性；支架需要沿受力路徑連接外殼；受壓底座則要觀察壓力是否均勻、是否會挫曲。先選低到中等起點，結果不足再單獨提高。",
+        manga:{src:"../assets/advanced-a06/illustrations/display-lightning.webp",alt:"展示模型使用 Lightning 或 Lines 低密度填充來支撐頂面",label:"GPT 教學圖解",caption:"展示模型先求外觀完整和成功列印；Lightning／Lines、5–12% 是本課建議起始值。",guides:[
+          {number:"1",title:"確認只是展示",text:"若會被把玩、鎖固或放在高溫環境，就不能只用展示模型條件。"},
+          {number:"2",title:"保留頂面支撐",text:"低密度仍要檢查大平頂下方是否有足夠路徑托住。"},
+          {number:"3",title:"先測 5–12%",text:"這是本課建議起始值；薄小模型可能受外殼影響更大。"}
+        ]},
+        detailFigures:[
+          {src:"../assets/advanced-a06/illustrations/storage-box.webp",alt:"收納盒使用 Lines 或 Gyroid 中低密度填充並檢查頂面",label:"GPT 教學圖解",caption:"收納盒：Lines／Gyroid、10–18% 是本課建議起始值；大平頂同時檢查頂層厚度。",guides:[{number:"1",title:"找大平頂",text:"跨距較大的蓋面需要內部路徑托住。"},{number:"2",title:"看壁面剛性",text:"手握或堆疊造成的變形，可能更適合先調外殼。"},{number:"3",title:"測 10–18%",text:"以實際尺寸和開口形狀確認，不把區間視為保證。"}]},
+          {src:"../assets/advanced-a06/illustrations/bracket-infill.webp",alt:"功能支架使用 Gyroid 或 Cubic 填充連接外殼與受力區",label:"GPT 教學圖解",caption:"支架：Gyroid／Cubic、15–30% 是本課建議起始值；方向、根部圓角與外殼優先。",guides:[{number:"1",title:"畫固定點與外力",text:"先找力量從孔位或接觸面如何回到固定端。"},{number:"2",title:"檢查關鍵截面",text:"根部和孔周路徑不足時，先改幾何或外殼。"},{number:"3",title:"測 15–30%",text:"以相同載重方式比較變形，不直接宣稱承重。"}]},
+          {src:"../assets/advanced-a06/illustrations/compression-block.webp",alt:"受壓底座比較 Cubic、Triangles 與 Grid 填充的壓力傳遞",label:"GPT 教學圖解",caption:"受壓底座：Cubic／Triangles／Grid、25–40% 是本課建議起始值；先確認受壓面與邊界。",guides:[{number:"1",title:"確認壓力分布",text:"整面均勻受壓與局部點載重，內部需要的支撐不同。"},{number:"2",title:"觀察側向鼓出",text:"壓縮時外殼、填充和高度共同影響變形與挫曲。"},{number:"3",title:"測 25–40%",text:"超出本課情境或安全關鍵用途，應依工程規範另行驗證。"}]}
+        ],
+        compareHeaders:["作品需求","圖樣候選","本課建議起始值"],
+        compare:[["展示模型、公仔","Lightning／Lines","5–12%"],["收納盒、外殼","Lines／Gyroid","10–18%"],["支架、功能零件","Gyroid／Cubic","15–30%"],["受壓底座、墊塊","Cubic／Triangles／Grid","25–40%"]],
+        callout:"四組區間是教學用起點，不是官方保證。安全關鍵、長期載重、人體承重或高風險用途，不可只依填充百分比決定。"
+      },
+      {
+        title:"為什麼不是密度越高越好",
+        body:"密度提高通常會增加材料、重量與列印時間，內部路徑也更頻繁；但強度增幅不一定與百分比成正比，破壞位置甚至可能仍在孔邊、接縫、尖角或層間。對許多彎曲零件，增加外殼、改善方向或加圓角可能比一路提高填充更有效。",
+        points:["先修正方向、幾何與外殼，再測填充","比較切片估算與實際成品，不只看設定數字","觀察變形與真正破壞位置，不只看成品重量","100% 可能增加內應力、時間與材料，也不等同射出實心件"],
+        sources:[{label:"一般設計參考：UltiMaker｜Infill density guide",url:"https://ultimaker.com/learn/3d-printing-infill-density-optimizing-strength-and-speed/"},{label:"一般切片原理：Prusa Knowledge Base｜Infill",url:"https://help.prusa3d.com/article/infill_42"}]
+      },
+      {
+        title:"在 Bambu Studio 實際設定",
+        body:"選定候選後，在 Bambu Studio 的強度設定中調整填充密度與圖樣，再切片查看時間、材料和逐層路徑。不要只停在參數欄：切到預覽，找外殼、內部填充、頂面下方支撐與關鍵截面。官方常用製程設定檔可證明欄位與預設存在，但不代表每件作品都應套用同一數值。",
+        manga:{src:"../assets/advanced-a06/illustrations/bambu-infill-preview.webp",alt:"Bambu Studio 強度設定與逐層預覽中標示填充密度、圖樣、外殼和頂面",label:"GPT 教學圖解",caption:"設定只是輸入；逐層預覽才讓你確認切片器實際建立了哪些路徑。",guides:[
+          {number:"1",title:"先複製預設",text:"保留可回復的原始設定，再只改填充圖樣或密度。"},
+          {number:"2",title:"重新切片",text:"記錄時間與材料估算，避免只憑感覺比較。"},
+          {number:"3",title:"逐層看內部",text:"檢查圖樣方向、外殼接合、交叉位置與頂面下方間距。"},
+          {number:"4",title:"保存證據",text:"截下相同高度的預覽，和列印後照片放在同一紀錄。"}
+        ]},
+        steps:["選定機型、噴嘴、材料與層高","複製製程預設並只改一項","設定填充圖樣與密度後重新切片","記錄時間、材料重量與關鍵層截圖","確認頂面支撐、外殼接合與受力截面"],
+        sources:[{label:"Bambu 官方：Bambu Studio 常用製程設定檔",url:"https://github.com/bambulab/BambuStudio/blob/master/resources/profiles/BBL/process/fdm_process_common.json"},{label:"Bambu 官方：強度類製程描述文字",url:"https://github.com/bambulab/BambuStudio/blob/master/src/slic3r/Utils/ProfileDescription.hpp"}]
+      },
+      {
+        title:"單一變因填充實驗",
+        body:"用同一個小型試片與同一捲材料，固定方向、層高、外殼、頂底層、圖樣、速度與溫度，只比較 10%、20%、30% 三種密度。每件記錄切片時間、材料重量、頂面、手感或固定治具下的變形；如果要比較圖樣，另開下一輪並固定密度。",
+        manga:{src:"../assets/advanced-a06/illustrations/density-comparison.webp",alt:"10%、20%、30% 三個相同試片的單一變因比較流程",label:"GPT 教學圖解",caption:"第一輪只改 10%、20%、30% 密度；第二輪才固定密度比較圖樣，避免同時改兩個問題。",guides:[
+          {number:"1",title:"固定基準",text:"模型、方向、材料、外殼、圖樣與列印條件完全相同。"},
+          {number:"2",title:"只改密度",text:"建立 10%、20%、30% 三份設定，清楚命名並保存。"},
+          {number:"3",title:"記錄四項結果",text:"比較時間、重量、頂面品質與固定方式下的變形。"},
+          {number:"4",title:"限制結論",text:"選的是這件作品的足夠起點，不是所有模型的最佳百分比。"}
+        ]},
+        compareHeaders:["試片","唯一變因","共同記錄"],
+        compare:[["A","10%","時間、重量、頂面、變形"],["B","20%","時間、重量、頂面、變形"],["C","30%","時間、重量、頂面、變形"]],
+        callout:"若要施力，使用小型固定治具、護目鏡與透明防護罩；不要徒手折斷可能彈射的零件，也不要把結果外推到安全關鍵用途。"
+      }
+    ],
+    task:{title:"完成一張填充選擇與比較表",text:"從展示模型、收納盒、支架或受壓底座選一種，寫下用途、受力、表面與成本需求；選一個圖樣候選，固定其他條件列印 10%、20%、30% 小試片。保存三張相同高度的切片預覽，記錄時間、重量、頂面與變形，選出足夠而非最高的密度。"},
+    checkpoint:"我能先分清外殼、頂底層與填充的角色，依作品需求選擇圖樣與密度起點，在 Bambu Studio 預覽實際路徑，並以單一變因試片驗證，而不是把高密度或 100% 當成通用答案。"
   }
 ];
 window.COURSES = window.ADVANCED_COURSES;
