@@ -271,10 +271,13 @@ test("publishes the illustrated A06 infill selection course", () => {
   assert.equal(imageReferences.length, 11);
   assert.equal(new Set(imageReferences).size, 10);
   assert.match(infill, /展示模型[\s\S]*收納盒[\s\S]*支架[\s\S]*受壓/);
-  assert.match(infill, /5–12%[\s\S]*10–18%[\s\S]*15–30%[\s\S]*25–40%/);
+  assert.match(infill, /四種作品，填充密度從多少開始/);
+  assert.match(infill, /展示模型、公仔<\/th><td>8%[\s\S]*收納盒、外殼<\/th><td>15%[\s\S]*支架、功能零件<\/th><td>20%[\s\S]*受壓底座、墊塊<\/th><td>30%/);
   assert.match(infill, /本課建議起始值/);
   assert.match(infill, /Lightning[\s\S]*Gyroid[\s\S]*Cubic[\s\S]*Triangles[\s\S]*Concentric/);
-  assert.match(infill, /10%[\s\S]*20%[\s\S]*30%[\s\S]*單一變因/);
+  const fourUses = infill.match(/id="lesson-section-4"[\s\S]*?(?=<section class="lesson-section static-lesson-section" id="lesson-section-5")/)[0];
+  assert.doesNotMatch(fourUses, /Lightning／Lines|Lines／Gyroid|Gyroid／Cubic|Cubic／Triangles／Grid|頂面支撐/);
+  assert.match(infill, /起始值[\s\S]*起始值＋5%[\s\S]*起始值＋10%[\s\S]*單一變因/);
   assert.match(infill, /github\.com\/bambulab\/BambuStudio/);
   assert.match(infill, /help\.prusa3d\.com[\s\S]*ultimaker\.com/);
   assert.match(overview, /6 ADVANCED COURSES[\s\S]*A06[\s\S]*依作品需求選擇填充/);

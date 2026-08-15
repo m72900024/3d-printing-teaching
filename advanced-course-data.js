@@ -372,7 +372,7 @@ window.ADVANCED_COURSES = [
     id:"A06", slug:"06-infill-selection.html", stage:"切片策略", stageNo:"A", duration:"45 分鐘", type:"需求判讀＋對照實驗",
     title:"依作品需求選擇填充", subtitle:"先判斷作品需要什麼，再決定圖樣與密度。",
     lead:"填充不是把模型內部隨意塞滿，也不是密度越高就一定越好。本課先分清外殼、頂底層與填充的工作，再從展示模型、收納盒、支架與受壓零件四種用途，選擇可測試的圖樣和密度起點，最後回到 Bambu Studio 預覽並做單一變因比較。",
-    goals:["分辨外殼、頂底層與填充各自的工作","依受力、表面、時間與材料限制整理需求","辨認七種常用填充圖樣的路徑特性","為四種作品選擇合理的圖樣與密度起點","在 Bambu Studio 預覽內部路徑與頂面支撐","完成 10%、20%、30% 的單一變因試片"],
+    goals:["分辨外殼、頂底層與填充各自的工作","依受力、表面、時間與材料限制整理需求","辨認七種常用填充圖樣的路徑特性","為四種作品選擇填充密度起點","在 Bambu Studio 預覽內部路徑與材料估算","完成起始值、＋5%、＋10% 的單一變因試片"],
     goalArt:[{src:"../assets/advanced-a06/illustrations/infill-anatomy.webp",alt:"外殼、頂底層與內部填充共同組成列印零件的剖面總覽"}],
     sections:[
       {
@@ -418,21 +418,22 @@ window.ADVANCED_COURSES = [
         sources:[{label:"一般切片原理：Prusa Knowledge Base｜Infill patterns",url:"https://help.prusa3d.com/article/infill-patterns_177130"},{label:"一般設計參考：UltiMaker｜Infill density guide",url:"https://ultimaker.com/learn/3d-printing-infill-density-optimizing-strength-and-speed/"}]
       },
       {
-        title:"依四種作品選擇",
-        body:"把圖樣和密度當成第一輪候選：展示模型優先節省時間與材料；收納盒兼顧平整頂面與日常剛性；支架需要沿受力路徑連接外殼；受壓底座則要觀察壓力是否均勻、是否會挫曲。先選低到中等起點，結果不足再單獨提高。",
-        manga:{src:"../assets/advanced-a06/illustrations/display-lightning.webp",alt:"展示模型使用 Lightning 或 Lines 低密度填充來支撐頂面",label:"GPT 教學圖解",caption:"展示模型先求外觀完整和成功列印；Lightning／Lines、5–12% 是本課建議起始值。",guides:[
-          {number:"1",title:"確認只是展示",text:"若會被把玩、鎖固或放在高溫環境，就不能只用展示模型條件。"},
-          {number:"2",title:"保留頂面支撐",text:"低密度仍要檢查大平頂下方是否有足夠路徑托住。"},
-          {number:"3",title:"先測 5–12%",text:"這是本課建議起始值；薄小模型可能受外殼影響更大。"}
+        title:"四種作品，填充密度從多少開始",
+        body:"先依作品用途選一個容易操作的起始值，不必在寬廣區間裡猜數字。展示模型先設 8%、收納盒先設 15%、支架先設 20%、受壓底座先設 30%；切片後記錄時間與材料，列印後觀察實際變形。若結果不足，每次只增加 5%，不要一次跳到最高密度。",
+        manga:{src:"../assets/advanced-a06/illustrations/display-lightning.webp",alt:"展示模型以 8% 填充密度開始並觀察外觀與手感",label:"GPT 教學圖解",caption:"展示模型：第一次先設 8%，確認外觀完整且拿取時不會明顯變形。",guides:[
+          {number:"1",title:"確認用途",text:"只用來觀看、陳列或確認造型，才歸在展示模型。"},
+          {number:"2",title:"先設 8%",text:"把 8% 當作第一次測試，不是所有展示模型的固定答案。"},
+          {number:"3",title:"觀察結果",text:"若外觀不完整或拿取時明顯變形，再提高到 13% 比較。"}
         ]},
         detailFigures:[
-          {src:"../assets/advanced-a06/illustrations/storage-box.webp",alt:"收納盒使用 Lines 或 Gyroid 中低密度填充並檢查頂面",label:"GPT 教學圖解",caption:"收納盒：Lines／Gyroid、10–18% 是本課建議起始值；大平頂同時檢查頂層厚度。",guides:[{number:"1",title:"找大平頂",text:"跨距較大的蓋面需要內部路徑托住。"},{number:"2",title:"看壁面剛性",text:"手握或堆疊造成的變形，可能更適合先調外殼。"},{number:"3",title:"測 10–18%",text:"以實際尺寸和開口形狀確認，不把區間視為保證。"}]},
-          {src:"../assets/advanced-a06/illustrations/bracket-infill.webp",alt:"功能支架使用 Gyroid 或 Cubic 填充連接外殼與受力區",label:"GPT 教學圖解",caption:"支架：Gyroid／Cubic、15–30% 是本課建議起始值；方向、根部圓角與外殼優先。",guides:[{number:"1",title:"畫固定點與外力",text:"先找力量從孔位或接觸面如何回到固定端。"},{number:"2",title:"檢查關鍵截面",text:"根部和孔周路徑不足時，先改幾何或外殼。"},{number:"3",title:"測 15–30%",text:"以相同載重方式比較變形，不直接宣稱承重。"}]},
-          {src:"../assets/advanced-a06/illustrations/compression-block.webp",alt:"受壓底座比較 Cubic、Triangles 與 Grid 填充的壓力傳遞",label:"GPT 教學圖解",caption:"受壓底座：Cubic／Triangles／Grid、25–40% 是本課建議起始值；先確認受壓面與邊界。",guides:[{number:"1",title:"確認壓力分布",text:"整面均勻受壓與局部點載重，內部需要的支撐不同。"},{number:"2",title:"觀察側向鼓出",text:"壓縮時外殼、填充和高度共同影響變形與挫曲。"},{number:"3",title:"測 25–40%",text:"超出本課情境或安全關鍵用途，應依工程規範另行驗證。"}]}
+          {src:"../assets/advanced-a06/illustrations/storage-box.webp",alt:"收納盒以 15% 填充密度開始並進行手壓與堆疊觀察",label:"GPT 教學圖解",caption:"收納盒：第一次先設 15%，用手壓與實際堆疊觀察是否明顯變形。",guides:[{number:"1",title:"確認用途",text:"用於收納、日常拿取或輕度堆疊，不是承重設備。"},{number:"2",title:"先設 15%",text:"切片後先記錄時間、材料與重量估算。"},{number:"3",title:"觀察結果",text:"若手壓或堆疊時明顯變形，再提高到 20% 比較。"}]},
+          {src:"../assets/advanced-a06/illustrations/bracket-infill.webp",alt:"功能支架以 20% 填充密度開始並在固定方式下觀察變形",label:"GPT 教學圖解",caption:"支架：第一次先設 20%，依實際固定方式逐步測試並記錄變形。",guides:[{number:"1",title:"確認用途",text:"作品會固定其他物件或承受日常操作力，才歸在支架。"},{number:"2",title:"先設 20%",text:"保持方向、外殼與其他設定不變，建立第一次測試。"},{number:"3",title:"觀察結果",text:"若固定測試下的變形不能接受，再提高到 25% 比較。"}]},
+          {src:"../assets/advanced-a06/illustrations/compression-block.webp",alt:"受壓底座以 30% 填充密度開始並觀察塌陷與側向鼓出",label:"GPT 教學圖解",caption:"受壓底座：第一次先設 30%，逐步施壓並觀察塌陷或側向鼓出。",guides:[{number:"1",title:"確認用途",text:"力量主要由上往下壓入，並由底面承接。"},{number:"2",title:"先設 30%",text:"只在小型、非安全關鍵的測試件上使用這個起點。"},{number:"3",title:"觀察結果",text:"若出現明顯塌陷或側向鼓出，再提高到 35% 比較。"}]}
         ],
-        compareHeaders:["作品需求","圖樣候選","本課建議起始值"],
-        compare:[["展示模型、公仔","Lightning／Lines","5–12%"],["收納盒、外殼","Lines／Gyroid","10–18%"],["支架、功能零件","Gyroid／Cubic","15–30%"],["受壓底座、墊塊","Cubic／Triangles／Grid","25–40%"]],
-        callout:"四組區間是教學用起點，不是官方保證。安全關鍵、長期載重、人體承重或高風險用途，不可只依填充百分比決定。"
+        compareHeaders:["作品用途","第一次先設","什麼情況提高密度"],
+        compare:[["展示模型、公仔","8%","外觀不完整或拿取時明顯變形"],["收納盒、外殼","15%","手壓或堆疊時明顯變形"],["支架、功能零件","20%","固定測試下的變形不能接受"],["受壓底座、墊塊","30%","壓縮時明顯塌陷或向側面鼓出"]],
+        callout:"四個數值是課堂測試起點，不是官方保證或承重規格。若問題主要來自受力方向、外殼或形狀，先回到 A05「受力方向與列印方向」，不要只提高填充密度。",
+        sources:[{label:"先修回顧：A05｜受力方向與列印方向",url:"05-force-direction.html"}]
       },
       {
         title:"為什麼不是密度越高越好",
@@ -454,19 +455,19 @@ window.ADVANCED_COURSES = [
       },
       {
         title:"單一變因填充實驗",
-        body:"用同一個小型試片與同一捲材料，固定方向、層高、外殼、頂底層、圖樣、速度與溫度，只比較 10%、20%、30% 三種密度。每件記錄切片時間、材料重量、頂面、手感或固定治具下的變形；如果要比較圖樣，另開下一輪並固定密度。",
-        manga:{src:"../assets/advanced-a06/illustrations/density-comparison.webp",alt:"10%、20%、30% 三個相同試片的單一變因比較流程",label:"GPT 教學圖解",caption:"第一輪只改 10%、20%、30% 密度；第二輪才固定密度比較圖樣，避免同時改兩個問題。",guides:[
+        body:"先依第 04 節選出作品的起始值，再用同一個小型試片與同一捲材料，固定方向、層高、外殼、頂底層、圖樣、速度與溫度，只比較起始值、起始值＋5%、起始值＋10%。每件記錄切片時間、材料重量、外觀與固定方式下的變形；若要比較圖樣，另開下一輪並固定密度。",
+        manga:{src:"../assets/advanced-a06/illustrations/density-comparison.webp",alt:"起始值、起始值加 5% 與加 10% 三個相同試片的單一變因比較流程",label:"GPT 教學圖解",caption:"先依作品用途選起始值，再只增加 5% 與 10% 做同條件比較，避免測試範圍和作品需求互相矛盾。",guides:[
           {number:"1",title:"固定基準",text:"模型、方向、材料、外殼、圖樣與列印條件完全相同。"},
-          {number:"2",title:"只改密度",text:"建立 10%、20%、30% 三份設定，清楚命名並保存。"},
-          {number:"3",title:"記錄四項結果",text:"比較時間、重量、頂面品質與固定方式下的變形。"},
+          {number:"2",title:"只改密度",text:"建立起始值、＋5%、＋10% 三份設定，清楚命名並保存。"},
+          {number:"3",title:"記錄四項結果",text:"比較時間、重量、外觀與固定方式下的變形。"},
           {number:"4",title:"限制結論",text:"選的是這件作品的足夠起點，不是所有模型的最佳百分比。"}
         ]},
         compareHeaders:["試片","唯一變因","共同記錄"],
-        compare:[["A","10%","時間、重量、頂面、變形"],["B","20%","時間、重量、頂面、變形"],["C","30%","時間、重量、頂面、變形"]],
+        compare:[["A","起始值","時間、重量、外觀、變形"],["B","起始值＋5%","時間、重量、外觀、變形"],["C","起始值＋10%","時間、重量、外觀、變形"]],
         callout:"若要施力，使用小型固定治具、護目鏡與透明防護罩；不要徒手折斷可能彈射的零件，也不要把結果外推到安全關鍵用途。"
       }
     ],
-    task:{title:"完成一張填充選擇與比較表",text:"從展示模型、收納盒、支架或受壓底座選一種，寫下用途、受力、表面與成本需求；選一個圖樣候選，固定其他條件列印 10%、20%、30% 小試片。保存三張相同高度的切片預覽，記錄時間、重量、頂面與變形，選出足夠而非最高的密度。"},
+    task:{title:"完成一張填充選擇與比較表",text:"從展示模型、收納盒、支架或受壓底座選一種，依第 04 節選出密度起始值；固定其他條件，列印起始值、＋5%、＋10% 三個小試片。保存三張相同高度的切片預覽，記錄時間、重量、外觀與變形，選出足夠而非最高的密度。"},
     checkpoint:"我能先分清外殼、頂底層與填充的角色，依作品需求選擇圖樣與密度起點，在 Bambu Studio 預覽實際路徑，並以單一變因試片驗證，而不是把高密度或 100% 當成通用答案。"
   }
 ];
