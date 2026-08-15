@@ -164,8 +164,9 @@ window.ADVANCED_COURSES = [
         body:"專用支撐材料通常只放在支撐接觸面，主體仍用模型材料，可節省專用材料；但增加換料與沖刷時間。官方說明指出，相容的專用支撐材料可把頂部Z距離設為 0，讓底面獲得連續承托。若支撐接觸面與模型使用同材質，則從材料與層高預設開始，以固定試片逐項比較，不直接套用別人的最佳數字。",
         manga:{src:"../assets/advanced-a03/illustrations/support-test.webp",alt:"固定支撐試片、只改一項、列印、冷卻拆除、評分與保存設定的實驗流程",label:"GPT 教學圖解",caption:"最好的設定不是只有底面漂亮；還要能安全拆除、耗時合理，並在相同條件下重複成功。"},
         steps:["固定模型、方向、層高、材料與支撐類型","記錄基準的頂部接觸面層數、線距與頂部Z距離","每輪只改一項，重新切片並記錄時間與材料量","列印後等待冷卻，再朝遠離手掌方向拆除支撐","用底面完整度、拆除難度、耗材與時間評分","保存成功的 3MF、照片與適用材料，不覆蓋原始預設"],
+        examples:[{icon:"tools",label:"實作案例 · Flashforge",title:"Top Z 距離測試",body:"影片使用固定試片比較 0.20～0.30 mm：逐一拆除支撐，找出容易拆除、底面品質也能接受的試片，再把該數值填入切片軟體的 Top Z distance。",why:"這段數值是 Flashforge Creator 5 的示範範圍，不是通用答案。改用 Bambu Studio 時仍要固定材料、層高與支撐類型，從目前預設開始做單一變因測試並檢查切片預覽。",source:"https://www.facebook.com/share/r/17qYS85Bnm/?mibextid=wwXIfr",sourceLabel:"觀看 Flashforge 原始影片"}],
         callout:"使用不同支撐接觸面材料前，先核對材料相容性、噴嘴與 AMS／進料限制。若切換材料需要頂部Z距離為 0，接受官方建議後仍要先檢查切片預覽。",
-        sources:[{label:"內容參考：Bambu Lab Wiki｜專用支撐材料與接觸面",url:"https://wiki.bambulab.com/en/software/bambu-studio/support"}]
+        sources:[{label:"內容參考：Bambu Lab Wiki｜專用支撐材料與接觸面",url:"https://wiki.bambulab.com/en/software/bambu-studio/support"},{label:"影片來源：Flashforge 官方 Facebook 頻道",url:"https://www.facebook.com/flashforge3dprinters"}]
       }
     ],
     task:{title:"完成一張支撐介面對照表",text:"選一個有平坦懸空面的固定試片，先保存預設切片結果。保持模型、方向、材料、層高與支撐類型不變，每輪只改頂部Z距離、頂部接觸面層數或線距其中一項；記錄列印時間、支撐材料量、冷卻後拆除難度與底面照片，選出本材料可接受的平衡。"},

@@ -160,6 +160,10 @@ test("publishes six advanced courses with static art, official sources, and real
   assert.match(support, /頂部Z距離/);
   assert.match(support, /一般支撐[\s\S]*樹狀支撐/);
   assert.match(support, /同材質[\s\S]*專用支撐材料/);
+  assert.match(support, /實作案例 · Flashforge[\s\S]*Top Z 距離測試/);
+  assert.match(support, /0\.20～0\.30 mm[\s\S]*不是通用答案/);
+  assert.match(support, /facebook\.com\/share\/r\/17qYS85Bnm/);
+  assert.match(support, /facebook\.com\/flashforge3dprinters/);
   assert.match(filament, /PLA[\s\S]*PETG[\s\S]*ABS[\s\S]*ASA[\s\S]*TPU[\s\S]*PC[\s\S]*PA/);
   assert.match(filament, /CF／GF/);
   assert.match(filament, /社群案例[\s\S]*不等於官方性能認證/);
