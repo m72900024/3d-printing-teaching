@@ -469,6 +469,111 @@ window.ADVANCED_COURSES = [
     ],
     task:{title:"完成一張填充選擇與比較表",text:"從展示模型、收納盒、支架或受壓底座選一種，依第 04 節選出密度起始值；固定其他條件，列印起始值、＋5%、＋10% 三個小試片。保存三張相同高度的切片預覽，記錄時間、重量、外觀與變形，選出足夠而非最高的密度。"},
     checkpoint:"我能先分清外殼、頂底層與填充的角色，依作品需求選擇圖樣與密度起點，在 Bambu Studio 預覽實際路徑，並以單一變因試片驗證，而不是把高密度或 100% 當成通用答案。"
+  },
+  {
+    id:"A07", slug:"07-build-plate-selection.html", stage:"平台策略", stageNo:"A", duration:"40 分鐘", type:"選擇＋對照實驗",
+    title:"依列印需求選擇底板", subtitle:"從底面外觀、附著、材料與取件方式，選出合適的列印表面。",
+    lead:"底板不只是讓第一層黏住。它還會決定作品底面的紋理、光澤與圖案，也影響清潔、冷卻和取件方式。本課比較紋理 PEI、光滑 PEI、彩虹／鑽石／碳纖維效果板、低溫高黏聚脲板，以及傳統口紅膠的兩種用途，最後把實際安裝的底板、Bambu Studio 設定與第一層結果核對一致。",
+    goals:["辨認彈簧鋼底板與表面塗層的構造","比較紋理 PEI、光滑 PEI 與效果板的底面表現","說明聚脲板的低溫高黏特性與使用限制","分辨口紅膠用來增加附著或形成隔離層","核對實際底板、切片設定、第一層與冷卻取件"],
+    goalArt:[{src:"../assets/advanced-a07/illustrations/adhesion-comparison.webp",alt:"依作品需求選擇紋理 PEI、光滑或效果板、低溫高黏板的決策圖"}],
+    sections:[
+      {
+        title:"先看懂底板：不是只有最上面那一層",
+        body:"常見可彎式底板以彈簧鋼片提供平整與可彎曲取件能力，上方再覆蓋 PEI、特殊高黏塗層或可替換效果貼片。底板放回機器時，磁吸平台負責固定；真正接觸第一層的是最上方表面。選底板時要分清鋼片、表面材料、表面紋理與切片器中的底板設定。",
+        manga:{src:"../assets/advanced-a07/illustrations/plate-anatomy.webp",alt:"磁吸平台、彈簧鋼片、表面塗層、第一層與作品底面的五層構造",label:"GPT 教學圖解",caption:"由下往上辨認磁吸平台、彈簧鋼片、表面塗層與第一層；作品冷卻取下後，最底面會保留接觸表面的特徵。",guides:[
+          {number:"1",title:"磁吸平台固定鋼片",text:"放回前先確認鋼片對齊、底下沒有碎屑，避免局部翹起。"},
+          {number:"2",title:"彈簧鋼片負責可彎曲取件",text:"它不是耗材表面的名稱；同一類鋼片可搭配不同塗層或貼片。"},
+          {number:"3",title:"最上層決定接觸效果",text:"PEI、特殊高黏塗層或效果貼片會改變附著與作品底面。"},
+          {number:"4",title:"第一層仍要正確",text:"底板再黏，也不能取代乾淨表面、正確材料預設和穩定第一層。"}
+        ]},
+        sources:[{label:"Bambu Lab 官方：A1 可搭配的列印板類型",url:"https://us.store.bambulab.com/products/a1"}]
+      },
+      {
+        title:"紋理 PEI：耐用、好取件的日常基準",
+        body:"紋理 PEI 表面有細小凹凸，第一層會填入紋理並在作品底面留下霧面顆粒感。它常作為日常列印的實用起點：冷卻後作品通常較容易鬆開，也較不顯細小刮痕；但需要鏡面底面、細字或精密貼合面時，紋理會被轉印，未必符合外觀需求。",
+        manga:{src:"../assets/advanced-a07/illustrations/textured-pei.webp",alt:"紋理 PEI 表面、第一層貼合與作品底面霧面紋理的三格圖解",label:"GPT 教學圖解",caption:"紋理不是印在板上的圖案，而是第一層複製了表面的微小高低差。",guides:[
+          {number:"1",title:"先清潔接觸面",text:"油脂會降低附著；依板材說明清潔，不用手反覆觸摸列印區。"},
+          {number:"2",title:"觀察第一層線條",text:"線條應連續貼合，不能因為板面粗糙就忽略過高、過低或未黏住。"},
+          {number:"3",title:"接受霧面顆粒底面",text:"若底面是展示面或密合面，先確認這種紋理是否合適。"}
+        ]},
+        callout:"紋理 PEI 是可靠的基準選項，不代表適合所有外觀面。先問作品底面是隱藏面、展示面，還是裝配面。",
+        sources:[{label:"Bambu Lab 官方：Textured PEI Plate 使用與相容資訊",url:"https://us.store.bambulab.com/products/bambu-textured-pei-plate"}]
+      },
+      {
+        title:"光滑 PEI 與效果板：平整和圖案是兩件事",
+        body:"一般光滑 PEI 會留下較平整、帶光澤的底面。效果板則在接觸面製作極細微的繞射或幾何紋理，讓作品底面轉印出彩虹、鑽石或碳纖維視覺效果；它不是把油墨印到作品上，也不是使用碳纖維線材。圖案能否完整出現，取決於第一層是否連續貼合、底面是否夠平整，以及材料與表面的相容性。",
+        manga:{src:"../assets/advanced-a07/illustrations/smooth-effect-plates.webp",alt:"光滑 PEI、彩虹、鑽石與碳纖維效果板轉印至作品底面的比較",label:"GPT 教學圖解",caption:"四種表面都可能看起來平滑，但結果不同：一般光滑 PEI 提供平整底面；效果板把微紋理造成的光學圖案轉印到底面。",guides:[
+          {number:"1",title:"光滑 PEI 看平整與光澤",text:"適合想保留平坦底面、細字或後續貼合的作品。"},
+          {number:"2",title:"彩虹效果會隨角度變色",text:"微結構改變反射光，作品轉動時才會看見明顯色彩變化。"},
+          {number:"3",title:"鑽石效果強調幾何反光",text:"適合裝飾面，但刮傷、髒污或第一層空隙也會被放大。"},
+          {number:"4",title:"碳纖維效果只是表面圖樣",text:"它不會讓一般 PLA 變成碳纖維複合材料，也不能提高結構強度。"}
+        ]},
+        callout:"先用小型平底試片確認效果。若模型底面有文字，記得檢查方向；轉印效果會跟著接觸面一起呈現。",
+        sources:[{label:"Bambu Lab 官方：Smooth PEI Plate",url:"https://us.store.bambulab.com/products/bambu-smooth-pei-plate"},{label:"Bambu Lab 官方：3D Effect Sheet",url:"https://us.store.bambulab.com/products/bambu-3d-effect-sheets"}]
+      },
+      {
+        title:"聚脲板：社群俗稱「尿板」的低溫高黏選項",
+        body:"台灣社群常把聚脲類低溫高黏板簡稱為「尿板」。這類板材利用特殊聚合物表面，在較低平台溫度下也能提供很強的第一層抓附，適合想降低熱床耗能或處理容易翹起的平底作品。不過不同品牌的配方、清潔方式、適用材料與切片器對應設定可能不同；不能把所有低溫高黏板視為完全相同的產品。",
+        manga:{src:"../assets/advanced-a07/illustrations/polyurea-plate.webp",alt:"聚脲板低溫高黏、冷卻取件與材料相容性警告圖解",label:"GPT 教學圖解",caption:"高黏是工具也是風險：先查品牌說明，用小件測試，完全冷卻後再取件。",guides:[
+          {number:"1",title:"先確認產品名稱與塗層",text:"聚脲板是市場與社群常用分類；仍要以手上品牌的正式說明為準。"},
+          {number:"2",title:"不要自行套用固定溫度",text:"依產品、材料與機型說明設定，避免把別牌數值直接搬過來。"},
+          {number:"3",title:"高黏材料先查相容性",text:"TPU 等柔性材料可能黏得過強；未確認前不要直接做大面積列印。"},
+          {number:"4",title:"冷卻後再溫和取件",text:"先等平台和作品降溫，再依板材說明彎曲或剝離，避免扯傷塗層。"}
+        ]},
+        callout:"Bambu Cool Plate SuperTack 與第三方聚脲板都有低溫高黏用途，但官方未必宣稱採用相同化學配方。本課把它們列為相近使用情境，不把材料成分畫上等號。",
+        sources:[{label:"BIQU 官方：CryoGrip Pro 低溫高黏板",url:"https://biqu.equipment/products/biqu-panda-buildplate-cryogrip-pro"},{label:"Bambu Lab 官方：Cool Plate SuperTack",url:"https://jp.store.bambulab.com/products/bambu-cool-plate-supertack"}]
+      },
+      {
+        title:"依作品需求選：外觀、附著與取件一起考慮",
+        body:"底面不重要、需要耐用好取件時，可先從紋理 PEI 開始；底面要平整或保留細字時，考慮光滑 PEI；想要彩虹、鑽石或碳纖維視覺時，選相容的效果板並做小型平底試片；平底作品容易翹曲且產品支援該材料時，再考慮低溫高黏板。最後都要核對第一層、冷卻取件與板材保養成本。",
+        manga:{src:"../assets/advanced-a07/illustrations/adhesion-comparison.webp",alt:"從日常耐用、平整底面、特殊效果與抗翹曲需求選擇底板",label:"GPT 教學圖解",caption:"不要只比誰最黏。先選作品需要的底面，再確認材料相容、第一層與取件風險。",guides:[
+          {number:"1",title:"日常耐用",text:"底面可接受霧面紋理時，紋理 PEI 是容易建立基準的選項。"},
+          {number:"2",title:"平整或細節",text:"光滑 PEI 適合平坦底面，但更需要避免刮傷與油脂。"},
+          {number:"3",title:"裝飾效果",text:"效果板先用小面積確認圖案、方向與第一層完整度。"},
+          {number:"4",title:"低溫高黏",text:"確認品牌、材料與取件方式後，再用於容易翹曲的作品。"}
+        ]},
+        compareHeaders:["作品需求","優先候選","送出前確認"],
+        compare:[["日常模型、底面不展示","紋理 PEI","平台乾淨、可接受霧面紋理"],["底面要平整、細字或貼合","光滑 PEI","刮痕、清潔與材料相容"],["底面要彩虹、鑽石或碳纖維效果","效果板","平底試片、圖案方向、完整第一層"],["平底件易翹、希望較低熱床溫度","品牌支援的低溫高黏板","材料相容、產品設定、冷卻取件"]]
+      },
+      {
+        title:"口紅膠有兩個角色：增加附著，也能當隔離層",
+        body:"傳統固體膠棒因外形像口紅，常被稱為口紅膠。薄薄一層可在某些板材與材料組合中增加附著；另一個常被忽略的角色，是在黏得過強的材料與板面之間形成可清洗的隔離層，降低取件時撕傷表面的風險。要依底板與材料官方說明使用，不能把塗得越厚當成越安全。",
+        manga:{src:"../assets/advanced-a07/illustrations/glue-stick-roles.webp",alt:"口紅膠增加附著與形成隔離層的兩種用途，以及薄塗與厚塗比較",label:"GPT 教學圖解",caption:"同一支膠棒可能做相反方向的工作：需要時幫忙黏住，或避免材料直接咬死板面。",guides:[
+          {number:"1",title:"增加附著",text:"只在板材與材料說明建議時薄塗，讓第一層有較穩定的接觸。"},
+          {number:"2",title:"建立隔離層",text:"對可能黏得過強的組合，膠層可降低材料直接破壞板面的風險。"},
+          {number:"3",title:"薄而均勻",text:"厚塗會留下高低差、污染底面，也讓下一次結果更難比較。"},
+          {number:"4",title:"定期清洗重置",text:"殘膠堆積後依底板說明清潔，重新建立一致的薄層。"}
+        ]},
+        callout:"不要把口紅膠當成修復錯誤第一層的萬用答案。板材設定錯誤、表面有油、鋼片未貼平或噴嘴狀態異常時，先處理根本問題。",
+        sources:[{label:"Bambu Lab 官方：Glue Stick for Build Plate",url:"https://us.store.bambulab.com/products/glue-stick-for-build-plate"}]
+      },
+      {
+        title:"Bambu Studio 設定要和實際安裝的底板一致",
+        body:"送出列印前，先讀取實際底板上的名稱或產品說明，再在 Bambu Studio 選擇對應或該產品指定的底板類型。第三方板材有時要求選用既有的 Smooth PEI、High Temp Plate 等設定；這是產品相容指示，不代表兩者表面材料完全相同。切片後還要查看第一層預覽，確認模型接觸面、Brim 與板面範圍。",
+        manga:{src:"../assets/advanced-a07/illustrations/bambu-plate-setting.webp",alt:"實際底板、Bambu Studio 底板設定與第一層預覽三步驟核對",label:"GPT 教學圖解",caption:"正確流程是先看手上的板，再依原廠說明選設定，最後重新切片；不能只相信上一次留下的選項。",guides:[
+          {number:"1",title:"確認實際安裝",text:"看板面名稱、正反面和方向，底下不得夾有碎屑。"},
+          {number:"2",title:"選擇對應設定",text:"依 Bambu 或第三方產品說明選擇，不用外觀自行猜測。"},
+          {number:"3",title:"重新切片",text:"更換底板設定後重新切片，保存設定與預覽作為紀錄。"},
+          {number:"4",title:"核對第一層範圍",text:"確認模型、裙邊或 Brim 沒有超出可列印區。"}
+        ]},
+        steps:["確認機型、材料與實際底板名稱","依底板原廠說明選擇 Bambu Studio 對應設定","更換設定後重新切片","檢查第一層預覽、裙邊／Brim 與可列印範圍","用小型平底試片觀察第一層與冷卻取件"],
+        sources:[{label:"Bambu Studio 官方專案與目前版本功能",url:"https://github.com/bambulab/BambuStudio"},{label:"BIQU 官方：CryoGrip Pro 的切片器設定說明",url:"https://biqu.equipment/products/biqu-panda-buildplate-cryogrip-pro"}]
+      },
+      {
+        title:"用第一層與冷卻取件完成最後判斷",
+        body:"列印開始後觀察線條是否連續貼合、有沒有空隙、過度擠壓或局部翹起。若第一層異常，停止工作並先找原因，不靠提高黏著力掩蓋。列印完成後等待平台降溫，再握住把手取下鋼片並輕微彎曲；效果板與高黏板尤其要避免趁熱硬拉或用金屬工具刮傷表面。",
+        manga:{src:"../assets/advanced-a07/illustrations/first-layer-removal.webp",alt:"正常、過高、過低、未黏住的第一層狀態與冷卻取件流程",label:"GPT 教學圖解",caption:"底板選擇要用完整循環評估：第一層是否穩定、冷卻後是否好取、底面效果是否符合需求。",guides:[
+          {number:"1",title:"正常",text:"線條連續、彼此接合並穩定貼附，沒有明顯刮板或堆料。"},
+          {number:"2",title:"過高或未黏住",text:"線條呈圓弧、彼此有縫或被噴嘴拖走，先停止並檢查清潔和設定。"},
+          {number:"3",title:"過低",text:"線條被過度壓扁、表面刮擦或材料向兩側堆積時，不要繼續硬印。"},
+          {number:"4",title:"完全冷卻再取件",text:"確認工作完成、等待降溫、取下鋼片、輕微彎曲，再清潔板面。"}
+        ]},
+        callout:"刮刀不是初學者的優先方法。必須使用時依工具與場域規範操作，刀口不可朝向手掌，也不能在仍裝於機器上的底板用力撬件。",
+        sources:[{label:"Bambu Lab Wiki：第一層問題辨認",url:"https://wiki.bambulab.com/en/knowledge-sharing/identify-and-fix-first-layer-issues-with-a-test-print"},{label:"Bambu Lab Wiki：列印完成與安全取件",url:"https://wiki.bambulab.com/en/filament-acc/acc/print-finish-adv"}]
+      }
+    ],
+    task:{title:"完成一張底板比較卡",text:"固定同一台機器、同一捲材料、噴嘴、層高與小型平底試片，選兩種可相容的底板表面比較。記錄實際底板名稱、Bambu Studio 設定、是否薄塗口紅膠、第一層照片、冷卻後取件難度，以及作品底面的紋理或效果；只比較底板，不同時改其他參數。"},
+    checkpoint:"我能分清紋理 PEI、光滑 PEI、彩虹／鑽石／碳纖維效果板與聚脲類低溫高黏板，也知道口紅膠可用來增加附著或形成隔離層；送出前會核對實際底板、Bambu Studio 設定與第一層，冷卻後再安全取件。"
   }
 ];
 window.COURSES = window.ADVANCED_COURSES;

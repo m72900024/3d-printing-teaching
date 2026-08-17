@@ -116,7 +116,7 @@ test("publishes the anime homepage with beginner and active advanced paths", () 
   assert.match(home, /<strong>12<\/strong><span>堂初階課程<\/span>/);
   assert.match(home, /id="beginner-courses"/);
   assert.match(home, /初階課程[\s\S]*12 堂課/);
-  assert.match(home, /id="advanced-courses"[\s\S]*6 堂課已開放/);
+  assert.match(home, /id="advanced-courses"[\s\S]*7 堂課已開放/);
   assert.match(home, /href="advanced\/index\.html"/);
   assert.match(home, /材料、診斷與結構驗證/);
   assert.match(home, /受力方向[\s\S]*填充圖樣[\s\S]*單一變因測試/);
@@ -137,7 +137,7 @@ test("publishes the anime homepage with beginner and active advanced paths", () 
   assert.match(styles, /#beginner-courses,#advanced-courses,#about\{scroll-margin-top:/);
 });
 
-test("publishes six advanced courses with static art, official sources, and real examples", () => {
+test("publishes seven advanced courses with static art, official sources, and real examples", () => {
   const { outputDir, result } = buildTemporarySite("3d-course-advanced-path-");
   const overview = fs.readFileSync(path.join(outputDir, "advanced/index.html"), "utf8");
   const drying = fs.readFileSync(path.join(outputDir, "advanced/01-filament-drying.html"), "utf8");
@@ -146,8 +146,8 @@ test("publishes six advanced courses with static art, official sources, and real
   const filament = fs.readFileSync(path.join(outputDir, "advanced/04-filament-selection.html"), "utf8");
   const courseCss = fs.readFileSync(path.join(outputDir, "course.css"), "utf8");
 
-  assert.equal(result.advancedCourseCount, 6);
-  assert.equal(result.htmlCount, 20);
+  assert.equal(result.advancedCourseCount, 7);
+  assert.equal(result.htmlCount, 21);
   assert.match(overview, /A01[\s\S]*線材乾燥與保存/);
   assert.match(overview, /A02[\s\S]*品質問題診斷/);
   assert.match(overview, /A03[\s\S]*支撐與支撐介面設定/);
@@ -171,9 +171,9 @@ test("publishes six advanced courses with static art, official sources, and real
   assert.match(filament, /makerworld\.com\/en\/models\/721613/);
   assert.match(drying, /class="site-home-link" href="\.\.\/index\.html">[^<]*網站首頁/);
   assert.match(drying, /class="track-overview-link" href="index\.html">[^<]*進階課程總覽/);
-  assert.match(quality, /data-course-total="6"/);
-  assert.match(support, /data-course-total="6"/);
-  assert.match(filament, /data-course-total="6"/);
+  assert.match(quality, /data-course-total="7"/);
+  assert.match(support, /data-course-total="7"/);
+  assert.match(filament, /data-course-total="7"/);
   assert.equal((drying.match(/GPT 教學圖解/g) || []).length, 5);
   assert.equal((quality.match(/GPT 教學圖解/g) || []).length, 5);
   assert.equal((support.match(/GPT 教學圖解/g) || []).length, 5);
@@ -213,8 +213,8 @@ test("publishes the force direction course with ten annotated teaching figures",
     "preview-fracture-match.webp"
   ];
 
-  assert.equal(result.advancedCourseCount, 6);
-  assert.equal(result.htmlCount, 20);
+  assert.equal(result.advancedCourseCount, 7);
+  assert.equal(result.htmlCount, 21);
   assert.match(forceDirection, /受力方向與列印方向/);
   assert.match(forceDirection, /拉伸[\s\S]*壓縮[\s\S]*彎曲[\s\S]*剪切[\s\S]*扭轉/);
   assert.match(forceDirection, /XY[\s\S]*Z[\s\S]*層間/);
@@ -236,7 +236,7 @@ test("publishes the force direction course with ten annotated teaching figures",
   assert.match(forceDirection, /solutions\.covestro\.com[\s\S]*self-tapping-screws/);
   assert.equal((forceDirection.match(/GPT 教學圖解/g) || []).length, 10);
   assert.ok((forceDirection.match(/圖解步驟/g) || []).length >= 10);
-  assert.match(overview, /6 ADVANCED COURSES[\s\S]*A05[\s\S]*受力方向與列印方向/);
+  assert.match(overview, /7 ADVANCED COURSES[\s\S]*A05[\s\S]*受力方向與列印方向/);
   assert.match(home, /A05[\s\S]*受力方向與列印方向/);
   assert.match(forceDirection, /UltiMaker[\s\S]*Stratasys[\s\S]*Prusa[\s\S]*Bambu Studio/);
   for (const figure of figures) {
@@ -280,14 +280,51 @@ test("publishes the illustrated A06 infill selection course", () => {
   assert.match(infill, /起始值[\s\S]*起始值＋5%[\s\S]*起始值＋10%[\s\S]*單一變因/);
   assert.match(infill, /github\.com\/bambulab\/BambuStudio/);
   assert.match(infill, /help\.prusa3d\.com[\s\S]*ultimaker\.com/);
-  assert.match(overview, /6 ADVANCED COURSES[\s\S]*A06[\s\S]*依作品需求選擇填充/);
-  assert.match(home, /ADVANCED · 6 COURSES[\s\S]*A06[\s\S]*依作品需求選擇填充/);
+  assert.match(overview, /7 ADVANCED COURSES[\s\S]*A06[\s\S]*依作品需求選擇填充/);
+  assert.match(home, /ADVANCED · 7 COURSES[\s\S]*A06[\s\S]*依作品需求選擇填充/);
   assert.match(courseCss, /\.course-page\[data-course="A06"\] \.goal-summary-visual img/);
   assert.match(courseCss, /\.course-page\[data-course="A06"\] \.manga-figure img\[role="button"\]/);
-  assert.match(courseJs, /const usesLongCourseLayout = \["A05", "A06"\]\.includes\(course\.id\)/);
+  assert.match(courseJs, /const usesLongCourseLayout = \["A05", "A06", "A07"\]\.includes\(course\.id\)/);
   assert.ok((courseJs.match(/usesLongCourseLayout/g) || []).length >= 7);
   for (const figure of figures) {
     assert.ok(fs.existsSync(path.join(outputDir, "assets/advanced-a06/illustrations", figure)));
+  }
+});
+
+test("publishes A07 build plate selection with effect plates and glue guidance", () => {
+  const { outputDir, result } = buildTemporarySite("3d-course-build-plate-selection-");
+  const lesson = fs.readFileSync(path.join(outputDir, "advanced/07-build-plate-selection.html"), "utf8");
+  const overview = fs.readFileSync(path.join(outputDir, "advanced/index.html"), "utf8");
+  const home = fs.readFileSync(path.join(outputDir, "index.html"), "utf8");
+  const courseCss = fs.readFileSync(path.join(outputDir, "course.css"), "utf8");
+  const figures = [
+    "plate-anatomy.webp",
+    "textured-pei.webp",
+    "smooth-effect-plates.webp",
+    "polyurea-plate.webp",
+    "adhesion-comparison.webp",
+    "glue-stick-roles.webp",
+    "bambu-plate-setting.webp",
+    "first-layer-removal.webp"
+  ];
+
+  assert.equal(result.advancedCourseCount, 7);
+  assert.equal(result.htmlCount, 21);
+  assert.match(lesson, /<title>A07 依列印需求選擇底板｜3D 列印進階教室<\/title>/);
+  assert.match(lesson, /紋理 PEI[\s\S]*光滑 PEI[\s\S]*效果板[\s\S]*聚脲板[\s\S]*口紅膠/);
+  assert.match(lesson, /彩虹[\s\S]*鑽石[\s\S]*碳纖維/);
+  assert.match(lesson, /社群俗稱[「『]?尿板/);
+  assert.match(lesson, /增加附著[\s\S]*隔離層/);
+  assert.match(lesson, /Bambu Studio[\s\S]*實際安裝/);
+  assert.match(lesson, /data-course-total="7"/);
+  assert.match(overview, /7 ADVANCED COURSES[\s\S]*A07[\s\S]*依列印需求選擇底板/);
+  assert.match(home, /ADVANCED · 7 COURSES[\s\S]*A07[\s\S]*依列印需求選擇底板/);
+  assert.match(home, /7 堂課已開放/);
+  assert.match(courseCss, /\.course-page\[data-course="A07"\] \.goal-summary-visual img\{[^}]*width:100%[^}]*object-fit:contain/);
+
+  for (const figure of figures) {
+    assert.ok(fs.existsSync(path.join(outputDir, "assets/advanced-a07/illustrations", figure)));
+    assert.match(lesson, new RegExp(figure.replace(".", "\\.")));
   }
 });
 
