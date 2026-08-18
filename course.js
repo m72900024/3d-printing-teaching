@@ -2,7 +2,7 @@ const courseId = document.body.dataset.course;
 const courses = window.COURSES;
 const course = courses.find(item => item.id === courseId);
 if (!course) throw new Error(`Unknown course: ${courseId}`);
-const usesLongCourseLayout = ["A05", "A06"].includes(course.id);
+const usesLongCourseLayout = ["A05", "A06", "A07"].includes(course.id);
 
 const isAdvancedTrack = document.body.dataset.track === "advanced";
 const hierarchy = isAdvancedTrack

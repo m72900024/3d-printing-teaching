@@ -3,6 +3,7 @@
 .advanced-filament{background:linear-gradient(145deg,#ffe5bd,#f0e4ff 72%)}
 .advanced-force{background:linear-gradient(145deg,#d9ecff,#fff0c9 72%)}
 .advanced-infill{background:linear-gradient(145deg,#d8f5e5,#e9e1ff 72%)}
+.advanced-build-plate{background:linear-gradient(145deg,#fff0c9,#d9f7f0 72%)}
 @media(max-width:900px){.advanced-hero,.advanced-boundaries{grid-template-columns:1fr}.advanced-course-grid{grid-template-columns:1fr}.advanced-hero{min-height:0}.advanced-course-card{min-height:470px}}
 @media(max-width:600px){.advanced-header{padding:13px 16px}.advanced-header>a:last-child{font-size:0}.advanced-header>a:last-child::after{content:"← 首頁";font-size:12px}.advanced-hero,.advanced-course-section,.advanced-boundaries{padding:64px 20px}.advanced-hero h1{font-size:49px}.advanced-hero aside{padding:24px;box-shadow:7px 7px 0 #725fa8}.advanced-course-card{min-height:440px;padding:26px;box-shadow:6px 6px 0 #17131f}.advanced-course-card>span{font-size:56px}.advanced-course-card h3{margin-top:62px}.site-footer{align-items:flex-start;flex-direction:column}}
 @media(prefers-reduced-motion:reduce){.advanced-course-card{transition:none}.advanced-course-card:hover,.advanced-course-card:focus-visible{transform:none}}
