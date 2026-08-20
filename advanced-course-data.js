@@ -574,6 +574,80 @@ window.ADVANCED_COURSES = [
     ],
     task:{title:"完成一張底板比較卡",text:"固定同一台機器、同一捲材料、噴嘴、層高與小型平底試片，選兩種可相容的底板表面比較。記錄實際底板名稱、Bambu Studio 設定、是否薄塗口紅膠、第一層照片、冷卻後取件難度，以及作品底面的紋理或效果；只比較底板，不同時改其他參數。"},
     checkpoint:"我能分清紋理 PEI、光滑 PEI、彩虹／鑽石／碳纖維效果板與聚脲類低溫高黏板，也知道口紅膠可用來增加附著或形成隔離層；送出前會核對實際底板、Bambu Studio 設定與第一層，冷卻後再安全取件。"
+  },
+  {
+    id:"A08", slug:"08-flow-calibration.html", stage:"校正基準", stageNo:"B", duration:"40 分鐘", type:"判讀＋校正實作",
+    title:"流量校正與建立線材預設", subtitle:"先分清動態響應與穩態出料，再把結果保存成可追溯的材料基準。",
+    lead:"校正不是看到表面不漂亮就全部重做。Flow Dynamics 處理速度改變時熔料壓力跟不跟得上，Flow Rate 則修正穩定擠出時的材料量。本課先排除受潮、堵塞與錯誤預設，再依 Bambu Studio 流程完成兩種校正、保存線材預設，最後用同一小件比較校正前後。",
+    goals:["判斷現在是否真的需要重新校正","分辨 Flow Dynamics 與 Flow Rate 的功能","依測試線與測試片外觀選出候選結果","辨認過度擠出、擠出不足與較穩定出料","保存可追溯預設並用固定小件驗證"],
+    goalArt:[{src:"../assets/advanced-a08/illustrations/calibration-decision.webp",alt:"從線材狀態、材料預設、噴嘴與品質症狀判斷是否需要流量校正的流程圖"}],
+    sections:[
+      {
+        title:"校正前先判斷：現在真的需要校正嗎？",
+        body:"原廠線材搭配正確的官方預設且列印穩定時，不需要為了追求神奇數字反覆校正。更換第三方線材、品牌或材料配方，改用不同噴嘴，或在排除受潮、纏結、堵塞與錯誤材料預設後仍有一致的轉角或表面問題，才適合建立新的校正基準。",
+        manga:{src:"../assets/advanced-a08/illustrations/calibration-decision.webp",alt:"校正前依序檢查受潮、送料、材料預設、噴嘴與重複症狀的決策流程",label:"GPT 教學圖解",caption:"先排除會讓校正失真的條件。只有材料與設備狀態穩定，測試結果才值得保存。",guides:[
+          {number:"1",title:"確認線材狀態",text:"受潮、纏結或送料阻力會讓測試結果失去代表性。"},
+          {number:"2",title:"核對材料預設",text:"先確認材質、品牌或通用預設沒有選錯。"},
+          {number:"3",title:"記錄噴嘴條件",text:"噴嘴直徑、類型或磨耗狀態改變時要分開記錄。"},
+          {number:"4",title:"確認症狀可重複",text:"用相同小件重現問題後，再決定進入校正。"}
+        ]},
+        callout:"校正無法修復受潮、堵塞、平台未清潔、機構鬆動或錯誤溫度。這些狀況先回到 A01、A02 處理。",
+        sources:[{label:"內容參考：Bambu Lab Wiki｜Flow Dynamics Calibration",url:"https://wiki.bambulab.com/en/software/bambu-studio/calibration_pa"}]
+      },
+      {
+        title:"Flow Dynamics 與 Flow Rate 各自處理什麼？",
+        body:"噴頭加速、減速或轉彎時，熱端內的熔料壓力不會瞬間改變。Flow Dynamics 用 K 值補償這段動態落差，重點是轉角和線段起停；Flow Rate 則調整材料預設中的整體流量比例，重點是較穩定路徑上的填滿程度。兩者相關但不能互相取代，也不應同一輪一起猜。",
+        manga:{src:"../assets/advanced-a08/illustrations/dynamics-vs-flow.webp",alt:"Flow Dynamics 處理加減速轉角，Flow Rate 處理穩態出料量的左右對照",label:"GPT 教學圖解",caption:"左邊看速度變化時的壓力響應；右邊看連續表面是否填得剛好。先知道問題屬於哪一類，才知道要做哪個校正。"},
+        compareHeaders:["校正項目","主要觀察","結果保存"],
+        compare:[["Flow Dynamics","起停、加減速、轉角的粗細與鼓包","K 值／動態校正結果"],["Flow Rate","穩定路徑的線間空隙、堆料與表面手感","材料預設的流量比例"]],
+        callout:"K 值和流量比例都是特定機型、噴嘴、材料與測試條件的結果，不是通用數值。",
+        sources:[{label:"內容參考：Bambu Lab Wiki｜Flow Dynamics 的原理與流程",url:"https://wiki.bambulab.com/en/software/bambu-studio/calibration_pa"},{label:"功能依據：Bambu Studio 官方校正程式",url:"https://github.com/bambulab/BambuStudio/blob/master/src/slic3r/Utils/CalibUtils.cpp"}]
+      },
+      {
+        title:"Flow Dynamics：看速度改變時的轉角",
+        body:"在 Bambu Studio 的 Calibration 中選擇 Flow Dynamics，依目前版本與機型使用可用的自動或手動流程。手動判讀時要比較測試線或圖樣的轉角：補償不足常在加速後變細、轉折不完整；補償過度可能在轉角或減速處出現凹陷和不自然變化。選擇整體線寬較連續、轉角較乾淨的候選，而不是只盯著一個點。",
+        manga:{src:"../assets/advanced-a08/illustrations/dynamics-corners.webp",alt:"Flow Dynamics 補償不足、較穩定與補償過度的轉角線條比較",label:"GPT 教學圖解",caption:"沿著進料方向看完整轉角：線寬是否突然變細、鼓起或凹下。用多個相鄰區段共同判讀，不從單一瑕疵猜答案。"},
+        steps:["選擇正確機型、噴嘴與待測線材","依 Bambu Studio 當前介面啟動 Flow Dynamics 校正","等待列印完成並冷卻，不在運動中觸碰測試線","從多個相鄰轉角找線寬較連續的候選","把 K 值和機型、噴嘴、材料一起記錄"],
+        callout:"不同 Bambu Studio 版本與機型可用的自動／手動流程可能不同；以目前畫面與官方說明為準，不照抄舊影片的按鈕位置。",
+        sources:[{label:"操作參考：Bambu Lab Wiki｜Flow Dynamics Calibration",url:"https://wiki.bambulab.com/en/software/bambu-studio/calibration_pa"},{label:"版本確認：Bambu Studio 官方發行紀錄",url:"https://github.com/bambulab/BambuStudio/releases"}]
+      },
+      {
+        title:"Flow Rate：看穩態出料的表面",
+        body:"Flow Rate 校正通常以兩輪測試片縮小範圍。第一輪先選出接近正確的候選，再以第二輪做較細比較。觀察每片的完整表面，不只看中央：擠出不足常留下線間細縫、溝槽或不連續；過度擠出常見線條互相推擠、隆起或表面粗硬。較合適的候選會兼顧填滿、平整與一致性。",
+        manga:{src:"../assets/advanced-a08/illustrations/flow-rate-surfaces.webp",alt:"Flow Rate 第一輪粗選與第二輪細選的多片表面判讀流程",label:"GPT 教學圖解",caption:"先粗選、再細選。從低角度看反光與線間高低差，也用手指輕觸冷卻後表面；不要只挑最亮的一片。"},
+        detailFigures:[{src:"../assets/advanced-a08/illustrations/extrusion-cross-section.webp",alt:"擠出不足、適中與過度擠出的相鄰線條剖面比較",label:"GPT 教學圖解",caption:"剖面能解釋表面：料量不足留下空隙，適中時線條相接且高度穩定，過量時線條互相推擠並向上隆起。"}],
+        compareHeaders:["外觀","可能狀態","下一步"],
+        compare:[["線間有明顯細縫或溝槽","擠出不足候選","依流程往較高流量方向細選"],["線條相接、表面高度較一致","較穩定候選","保留編號進入第二輪或驗證"],["線條互相推擠、隆起或粗硬","過度擠出候選","依流程往較低流量方向細選"]],
+        callout:"測試片必須完全冷卻後再觸摸和取下。選到的是本次條件的候選結果，不代表其他顏色、噴嘴或材料批次。",
+        sources:[{label:"功能依據：Bambu Studio 官方 Flow Rate 兩階段校正程式",url:"https://github.com/bambulab/BambuStudio/blob/master/src/slic3r/Utils/CalibUtils.cpp"},{label:"版本確認：Bambu Studio 官方發行紀錄",url:"https://github.com/bambulab/BambuStudio/releases"}]
+      },
+      {
+        title:"保存可追溯的線材預設",
+        body:"完成校正後，不要只把結果寫在便條紙或直接覆蓋系統預設。建立自訂線材預設，名稱至少包含材料、品牌或系列、噴嘴條件和日期；紀錄顏色、乾燥狀態、Bambu Studio 版本及 Flow Dynamics、Flow Rate 結果。下次換線時才知道目前選到的是哪一組基準。",
+        manga:{src:"../assets/advanced-a08/illustrations/profile-naming.webp",alt:"以材料、品牌系列、噴嘴和日期命名線材預設並保存校正紀錄",label:"GPT 教學圖解",caption:"好名稱要能回答：什麼材料、哪一系列、哪種噴嘴、何時校正。把測試照片和結果放在同一份紀錄。",guides:[
+          {number:"1",title:"複製而不覆蓋",text:"保留系統預設，另存自訂線材基準。"},
+          {number:"2",title:"名稱帶條件",text:"例如材質、品牌系列、噴嘴與日期，避免只寫「新版」。"},
+          {number:"3",title:"補上材料狀態",text:"記錄顏色、乾燥與批次，讓差異可追查。"},
+          {number:"4",title:"連結測試證據",text:"保存校正片編號、照片與驗證小件結果。"}
+        ]},
+        callout:"若同名預設已存在，先比較條件再決定是否更新；不要在不知道舊結果用途時直接覆蓋。",
+        sources:[{label:"內容參考：Bambu Lab Wiki｜校正結果與材料管理",url:"https://wiki.bambulab.com/en/software/bambu-studio/calibration_pa"}]
+      },
+      {
+        title:"用固定小件驗證校正前後",
+        body:"校正片只能幫你選出候選，最後仍要回到實際作品。準備一個同時具有直線、轉角與平坦頂面的固定小件，保留模型、方向、層高、速度、溫度、底板與線材不變，分別使用校正前和校正後的材料預設。比較轉角、頂面、尺寸與是否出現新的缺陷，再決定要不要把新預設當作日常基準。",
+        manga:{src:"../assets/advanced-a08/illustrations/before-after-verification.webp",alt:"同一固定小件以校正前後兩個材料預設比較轉角、頂面與尺寸",label:"GPT 教學圖解",caption:"兩件只換材料預設：同角度拍照、同位置量測、同項目評分。改善必須能在實際小件上重複看見。",guides:[
+          {number:"1",title:"保存校正前基準",text:"先用原預設列印並拍攝轉角、頂面與側面。"},
+          {number:"2",title:"只換材料預設",text:"模型、方向與其他製程設定全部保持相同。"},
+          {number:"3",title:"比較相同位置",text:"記錄轉角一致性、頂面線隙、堆料與尺寸。"},
+          {number:"4",title:"接受或退回",text:"若沒有改善或產生新缺陷，保留舊預設並重新檢查原因。"}
+        ]},
+        callout:"單一測試成功不代表所有模型都改善。先用小件驗證，再逐步用於一般作品；不要直接拿未驗證預設列印安全關鍵零件。",
+        sources:[{label:"方法參考：Bambu Lab Wiki｜Flow Dynamics Calibration",url:"https://wiki.bambulab.com/en/software/bambu-studio/calibration_pa"}]
+      }
+    ],
+    task:{title:"完成一份線材校正履歷",text:"選一捲狀態穩定、已核對材料預設的線材，記錄機型、噴嘴、材料、顏色、乾燥狀態與 Bambu Studio 版本。依官方流程分別完成 Flow Dynamics 與 Flow Rate，保存測試片照片和候選結果；最後用同一固定小件比較校正前後，只替換材料預設，再決定是否採用新基準。"},
+    checkpoint:"我能先排除受潮、堵塞與錯誤預設，分辨 Flow Dynamics 和 Flow Rate，依測試外觀選出候選結果，保存可追溯的線材預設，並用單一變因小件驗證，而不是套用別人的通用數值。"
   }
 ];
 window.COURSES = window.ADVANCED_COURSES;
