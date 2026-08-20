@@ -200,6 +200,7 @@ test("publishes A08 flow calibration with seven functional illustrations", () =>
   const lesson = fs.readFileSync(path.join(outputDir, "advanced/08-flow-calibration.html"), "utf8");
   const overview = fs.readFileSync(path.join(outputDir, "advanced/index.html"), "utf8");
   const home = fs.readFileSync(path.join(outputDir, "index.html"), "utf8");
+  const courseCss = fs.readFileSync(path.join(outputDir, "course.css"), "utf8");
   const figures = [
     "calibration-decision.webp",
     "dynamics-vs-flow.webp",
@@ -220,6 +221,7 @@ test("publishes A08 flow calibration with seven functional illustrations", () =>
   assert.match(overview, /A08[\s\S]*流量校正與建立線材預設/);
   assert.match(home, /8 堂課已開放/);
   assert.match(lesson, /data-course-total="8"/);
+  assert.match(courseCss, /\.course-page\[data-course="A08"\] \.goal-summary-visual img\{[^}]*width:100%[^}]*object-fit:contain/);
 
   for (const file of figures) {
     assert.ok(fs.existsSync(path.join(outputDir, "assets/advanced-a08/illustrations", file)));
