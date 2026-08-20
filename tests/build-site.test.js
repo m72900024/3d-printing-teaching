@@ -195,6 +195,38 @@ test("publishes seven advanced courses with static art, official sources, and re
   }
 });
 
+test("publishes A08 flow calibration with seven functional illustrations", () => {
+  const { outputDir, result } = buildTemporarySite("3d-course-flow-calibration-");
+  const lesson = fs.readFileSync(path.join(outputDir, "advanced/08-flow-calibration.html"), "utf8");
+  const overview = fs.readFileSync(path.join(outputDir, "advanced/index.html"), "utf8");
+  const home = fs.readFileSync(path.join(outputDir, "index.html"), "utf8");
+  const figures = [
+    "calibration-decision.webp",
+    "dynamics-vs-flow.webp",
+    "dynamics-corners.webp",
+    "flow-rate-surfaces.webp",
+    "extrusion-cross-section.webp",
+    "profile-naming.webp",
+    "before-after-verification.webp"
+  ];
+
+  assert.equal(result.advancedCourseCount, 8);
+  assert.equal(result.htmlCount, 22);
+  assert.match(lesson, /流量校正與建立線材預設/);
+  assert.match(lesson, /Flow Dynamics[\s\S]*Flow Rate/);
+  assert.match(lesson, /不是通用數值/);
+  assert.match(lesson, /校正前[\s\S]*校正後/);
+  assert.match(lesson, /wiki\.bambulab\.com\/en\/software\/bambu-studio\/calibration_pa/);
+  assert.match(overview, /A08[\s\S]*流量校正與建立線材預設/);
+  assert.match(home, /8 堂課已開放/);
+  assert.match(lesson, /data-course-total="8"/);
+
+  for (const file of figures) {
+    assert.ok(fs.existsSync(path.join(outputDir, "assets/advanced-a08/illustrations", file)));
+    assert.match(lesson, new RegExp(file));
+  }
+});
+
 test("publishes the force direction course with ten annotated teaching figures", () => {
   const { outputDir, result } = buildTemporarySite("3d-course-force-direction-");
   const forceDirection = fs.readFileSync(path.join(outputDir, "advanced/05-force-direction.html"), "utf8");
