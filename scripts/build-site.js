@@ -139,14 +139,14 @@ function renderSection(section, index, options = {}) {
 }
 
 function renderLessonOutline(course) {
-  if (!["A05", "A06", "A07", "A08"].includes(course.id)) return "";
+  if (!["A05", "A06", "A07", "A08", "A09"].includes(course.id)) return "";
   return '<nav class="lesson-outline a05-lesson-outline" id="lessonOutline" aria-label="本課目錄"><strong>本課目錄</strong><div>' + course.sections.map((section, index) => {
     return '<a href="#lesson-section-' + (index + 1) + '"><span>' + String(index + 1).padStart(2, "0") + "</span>" + escapeHtml(section.title) + "</a>";
   }).join("") + "</div></nav>";
 }
 
 function renderStaticContent(course) {
-  const includeOutline = ["A05", "A06", "A07", "A08"].includes(course.id);
+  const includeOutline = ["A05", "A06", "A07", "A08", "A09"].includes(course.id);
   const sections = course.sections.map((section, index) => renderSection(section, index, { includeOutline })).join("");
   const realCase = course.realCase
     ? '<section class="real-case-section static-real-case"><div class="real-case-heading"><p>' + escapeHtml(course.realCase.eyebrow) + "</p><h2>" + escapeHtml(course.realCase.title) + '</h2></div><div class="real-case-copy"><p>' + escapeHtml(course.realCase.body) + "</p><p>" + escapeHtml(course.realCase.why) + "</p></div></section>"
@@ -156,7 +156,7 @@ function renderStaticContent(course) {
 }
 
 function renderCourseGoals(course) {
-  if (!["A05", "A06", "A07", "A08"].includes(course.id) || !Array.isArray(course.goalArt) || course.goalArt.length === 0) {
+  if (!["A05", "A06", "A07", "A08", "A09"].includes(course.id) || !Array.isArray(course.goalArt) || course.goalArt.length === 0) {
     return course.goals.map(goal => "<li>" + escapeHtml(goal) + "</li>").join("");
   }
   const summary = course.goalArt[0];
